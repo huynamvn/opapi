@@ -1,0 +1,731 @@
+openapi: 3.0.0
+servers:
+  - url:  https://api.cloudekyc.com/
+    description: 'Endtrypoint'
+
+info:
+  description: |
+
+    # INTRODUCTION
+    Most countries have well-established Know Your Customer (KYC) rules that specify identification, due diligence and risk assessment procedures for analyzing clients. However, many of these regulations are more appropriate for yesterday’s consumer.
+    Today’s digital savvy, mobile-first consumer expects to consume content and transact in real-time, therefore, requiring them to visit a retail store or branch to prove their identity in person will result in cart abandonment or loss of transaction to another merchant that can satisfy their expectations.
+    New KYC guidelines and regulations are required to keep pace with the reality of digital transactions. While modifying laws to make them more applicable is possible, many countries have established eKYC (electronic Know Your Customer) regulations for the digital and mobile realities of today.
+
+    # EKYC V3.1
+    API include [Face Verification](), [Ocr Recognition](). Verification is the foundation of Authentication.
+    The process is built out to increase the level of scrutiny applied to obtain the credential.
+    For instance, Authentication requires the user to provide information only known to that individual, like the answer to a predetermined question or details around recent transactions.
+    [Face Recognition]() the process computer software performs to make a positive identification of a face in a photo or video image against a pre-existing database of faces.
+
+    # EKYC V3.2
+    API include [Face Verification](), [Face Recognition](), [Face Register](), [Face Delete](), [Ocr Recognition]().A facial recognition system is a technology capable of identifying or verifying a person from a digital image or a video frame from a video source.
+    Verification is the foundation of Authentication.
+    The process is built out to increase the level of scrutiny applied to obtain the credential.
+    For instance, Authentication requires the user to provide information only known to that individual, like the answer to a predetermined question or details around recent transactions.
+    [Face Recognition]() the process computer software performs to make a positive identification of a face in a photo or video image against a pre-existing database of faces.
+
+    # AUTHENTICATION
+
+    Ekyc offers one forms of authentication:
+      - API Key
+
+
+
+  # version: 3.x.x
+  title: 'EKYC DOCUMENT API'
+
+  contact:
+    name: Contact support
+    email: duongngocthang@evgcorp.net
+    url: https://cloudekyc.com/
+  # x-logo:
+  #   url: 'http://localhost:3000/docs/redoc/extend-nam/img/ekyc7.png'
+  license:
+    name: EKYC 3.0
+    url: 'https://demo.cloudekyc.com/'
+
+
+externalDocs:
+  description: Wellcome to Everest Global
+  url: 'https://cloudekyc.com/'
+
+
+x-tagGroups:
+  - name: General
+    tags:
+      - API V3.1
+      - API V3.2
+
+paths:
+  /v3.1/faceid/verification:
+    parameters:
+      - name: Key
+        in: header
+        description: "Identify client"
+        required: true
+        schema:
+          type: string
+          default: api-key
+    post:
+      tags:
+        - API V3.1
+      summary: FACE VERIFICATION
+      description: 'Face verification is the task of comparing a candidate face to another, and verifying whether it is a match.
+      It is a one-to-one mapping: you have to check if this person is the correct one'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+                - image
+                - image_live
+              properties:
+                image:
+                  type: integer
+                  format: in64
+                  default: image type base 64
+                  description: 'Image of consumer, required format type bas64'
+                image_live:
+                  type: integer
+                  format: in64
+                  default: image type base 64
+                  description: 'Image of consumer, required format type bas64'
+                return_feature:
+                  type: integer
+                  default: 0 or 1
+                  description: '0 - face vector information no need return , 1 - face vector information need return '
+                request_id:
+                  type: integer
+                  format: in64
+                  default: ''
+                  description: 'Id unique used  to distinguish requests, serving request searches'
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                properties:
+                  verify_result:
+                    type: integer
+                    format: in64
+                    default: 0  or 1 or 2
+                    description: '0: not one person, 1: can one person, 2: one person'
+                  verify_result_text:
+                    type: string
+                    description: 'The result  describe as text'
+                  message:
+                    type: string
+                    default: 'object json: {
+                             "api_version": 1.0.4,
+                             "error_message": content,
+                             "error_code": code,
+                             "copy_right": "Copyright©2018-2019 Công Ty VVN Phát Triển. All rights reserved"}'
+                  sim:
+                    type: string
+                    description: 'Similarities of 2 photos'
+                  verification_time:
+                    type: string
+                    description: 'Time verify image'
+                  face_loc_cmt:
+                    type: string
+                    description: 'Location face [(left,top),(right,bottom)]'
+                  face1_angle:
+                    type: string
+                    description: 'Angle face'
+                  face_loc_live:
+                    type: string
+                    description: 'Location face [(left,top),(right,bottom)]'
+                  face2_angle:
+                    type: integer
+                    description: 'angle face'
+                  feature_vector_face_cmt:
+                    type: string
+                    default: 'IF return_feature==1'
+                    description: 'Information  vector face of image_cmt (512d vector)'
+                  live_image_status:
+                    type: integer
+                    format: in64
+                    default: ''
+                    description: 'id unique used  to distinguish requests, serving request searches'
+                  feature_vector_face_live:
+                    type: string
+                    default: 'IF return_feature==1'
+                    description: 'Information  vector face of image_cmt (512d vector)'
+                  face_anti_spoof_status:
+                    type: string
+                    default: 'IF return_feature==1'
+                    description: 'Notification status photo is Fake (Fake) or real photos (Real). The information returned looks like:
+                    {
+                     "status": "FAKE" (or "REAL"),
+                     "fake_score": 0.92,
+                     "fake_code": "FAKE" (or "REAL")
+                    }
+                    # fake_code:
+                    - FAKE: live image of the user that has been captured or does not match the ID image and the attached photos
+                    - REAL: real image of customers
+                    # fake_score: in range [0-1].
+                    1 - fake live photos
+                    0 - real live photos of customers
+                     According to our suggestion, with fake_score> = 0.63, this image is considered fake'
+
+
+  /v3.1/ocr/recognition:
+    parameters:
+      - name: Key
+        in: header
+        description: "identify client"
+        required: true
+        schema:
+          type: string
+          default: api-key
+
+    post:
+      tags:
+        - API V3.1
+      summary: OCR RECOGNITION
+      description: 'OCR (Optical Character Recognition) is the electronic conversion of scanned documents to machine-encoded text.'
+
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+                - image
+              properties:
+                image:
+                  type: integer
+                  format: in64
+                  required:
+                    - image
+                  default: image type base 64
+                  description: 'Image of consumer, required format type bas64'
+                request_id:
+                  type: integer
+                  format: in64
+                  default: ''
+                  description: 'Id unique used  to distinguish requests, serving request searches'
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                properties:
+                  server_name:
+                    type: integer
+                    description: 'Container id'
+                  province:
+                    type: string
+                  document:
+                    type: string
+                    default: 'Information describing the papers: : {
+                             "NEW ID ",
+                             "OLD ID",
+                             "PASSPORT",
+                             "DRIVER LICENSE"
+                             '
+                  server_ver:
+                    type: string
+                    description: 'Server version'
+                  id:
+                    type: string
+                  idconf:
+                    type: string
+                    description: 'Confident'
+                  id_logic:
+                    type: string
+                    description: '0 : check not OK, 1 check OK'
+                  id_logic_message:
+                    type: string
+                    description: 'Content logic test'
+                  id_check:
+                    type: string
+                    description: 'FAKE or REAL'
+                  name:
+                    type: string
+                    description: 'Name consumer'
+                  birthday:
+                    type: string
+                    description: 'Date time'
+                  sex:
+                    type: string
+                    default: 'Male and female'
+                    description: 'male and female'
+                  address:
+                    type: string
+                    description: 'Name address'
+                  precinct:
+                    type: string
+                  expiry:
+                    type: string
+                    description: 'Deadline of papers With BLX, there is an indefinite case'
+                  id_type:
+                    type: string
+                    description: 'Distinguish front / back:
+                                   "0": front
+                                   "1": back side'
+                  ethnicity:
+                    type: string
+                  religion:
+                    type: string
+                  issue_date:
+                    type: string
+                  issue_by:
+                    type: string
+                  country:
+                    type: string
+                    description: 'Value of type document passport'
+                  national:
+                    type: string
+                    description: 'Value of type document BLX, passport'
+                  class:
+                    type: string
+                    description: 'Value of type document BLX'
+        '500':
+          description: ERROR
+        '501':
+          description: NOT ACTIVE SERVER
+
+
+  /v3.2/faceid/verification:
+    parameters:
+      - name: Key
+        in: header
+        description: "identify client"
+        required: true
+        schema:
+          type: string
+          default: api-key
+
+    post:
+      tags:
+        - API V3.2
+      summary: FACE VERIFICATION
+      description: 'Face verification is the task of comparing a candidate face to another, and verifying whether it is a match.
+      It is a one-to-one mapping: you have to check if this person is the correct one'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+                - image
+                - image_live
+              properties:
+                image:
+                  type: integer
+                  format: in64
+                  default: image type base 64
+                  description: 'image of consumer, required format type bas64'
+                image_live:
+                  type: integer
+                  format: in64
+                  default: image type base 64
+                  description: 'image of consumer, required format type bas64'
+                image_live1:
+                  type: integer
+                  format: in64
+                  default: image type base 64
+                  description: 'These are photos that portraits attach  of users (at different angles) that increase the accuracy of
+                  face verification, request in Base64 encoding'
+                image_live2:
+                  type: integer
+                  format: in64
+                  default: image type base 64
+                  description: 'These are photos that portraits attach  of users (at different angles) that increase the accuracy of
+                  face verification, request in Base64 encoding'
+                image_live3:
+                  type: integer
+                  format: in64
+                  default: image type base 64
+                  description: 'These are photos that portraits attach  of users (at different angles) that increase the accuracy of face verification,
+                  request in Base64 encoding'
+                check_3_random_pose:
+                  type: integer
+                  default: 0 or 1
+                  description: 'Compare 3 random photos when customer liveness using SDK: turn left, right, smile.
+                   Also compare these 3 photos with the straight shot to see if it is the same person. Support 2 options:
+                    0 - Do not turn on this feature
+                    1 - Request turn on this feature. Conditions required to enter 3 images: image_live1, image_live2, image_live3'
+                check_3_straight_pose:
+                  type: integer
+                  default: 0 or 1
+                  description: 'Take 3 photos straight and compare with each other, then conclude whether customers have to take pictures from other devices or capture real people. This is anti-photographic technology from other devices. Support 2 options:
+                    0 - Do not turn on this feature
+                    1 - Request turn on this feature. Conditions required to enter 3 images: image_live1, image_live2, image_live3'
+                return_feature:
+                  type: integer
+                  default: 0 or 1
+                  description: '0 - face vector information no need return , 1 - face vector information need return'
+                request_id:
+                  type: integer
+                  format: in64
+                  default: ''
+                  description: 'id unique used  to distinguish requests, serving request searches'
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                properties:
+                  verify_result:
+                    type: integer
+                    format: in64
+                    default: 0  or 1 or 2
+                    description: '0: not one person, 1: can one person, 2: one person'
+                  verify_result_text:
+                    type: string
+                    description: 'the result  describe as text'
+                  message:
+                    type: array
+                    default: 'object json: {
+                             "api_version": 1.0.4,
+                             "error_message": content,
+                             "error_code": code,
+                             "copy_right": "Copyright©2018-2019 Công Ty VVN Phát Triển. All rights reserved"}'
+                  sim:
+                    type: string
+                    description: 'Similarities of 2 photos'
+                  verification_time:
+                    type: string
+                    description: 'Time verify image'
+                  face_loc_cmt:
+                    type: string
+                    description: 'Location face [(left,top),(right,bottom)]'
+                  face1_angle:
+                    type: string
+                    description: 'Angle face'
+                  face_loc_live:
+                    type: string
+                    description: 'Location face [(left,top),(right,bottom)]'
+                  face2_angle:
+                    type: integer
+                    description: 'Angle face'
+                  feature_vector_face_cmt:
+                    type: string
+                    default: 'IF return_feature==1'
+                    description: 'information  vector face of image_cmt (512d vector)'
+                  feature_vector_face_live:
+                    type: string
+                    default: 'IF return_feature==1'
+                    description: 'information  vector face of image_cmt (512d vector)'
+                  face_anti_spoof_status:
+                    type: string
+                    default: 'IF return_feature==1'
+                    description: 'Notification status photo is Fake (Fake) or real photos (Real). The information returned looks like:
+                    {
+                     "status": "FAKE" (or "REAL"),
+                     "fake_score": 0.92,
+                     "fake_code": "FAKE" (or "REAL")
+                    }
+                    # fake_code:
+                    - FAKE: live image of the user that has been captured or does not match the ID image and the attached photos
+                    - REAL: real image of customers
+                    # fake_score: in range [0-1].
+                    1 - fake live photos
+                    0 - real live photos of customers
+                     According to our suggestion, with fake_score> = 0.63, this image is considered fake'
+
+
+  /v3.2/ocr/recognition:
+    parameters:
+      - name: Key
+        in: header
+        description: "identify client"
+        required: true
+        schema:
+          type: string
+          default: api-key
+    post:
+      tags:
+        - API V3.2
+      summary: OCR RECOGNITION
+      description: 'OCR (Optical Character Recognition) is the electronic conversion of scanned documents to machine-encoded text.'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+                - image
+              properties:
+                image:
+                  type: integer
+                  format: in64
+                  default: image type base 64
+                  description: 'Image of consumer, required format type bas64'
+                request_id:
+                  type: integer
+                  format: in64
+                  default: ''
+                  description: 'Id unique used  to distinguish requests, serving request searches.
+                                "Note":"For the same type of paper with 2 sides (for example: Passport, ID card ..), request_id of the front and back of a customer must have the same value"
+                                '
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                properties:
+                  server_name:
+                    type: integer
+                    description: 'Container id'
+                  province:
+                    type: string
+                  document:
+                    type: string
+                    default: 'Information describing the papers: : {
+                             "NEW ID ",
+                             "OLD ID",
+                             "PASSPORT",
+                             "DRIVER LICENSE"
+                             '
+                  server_ver:
+                    type: string
+                    description: 'Server version'
+                  id:
+                    type: string
+                  idconf:
+                    type: string
+                    description: 'Confident'
+                  id_logic:
+                    type: string
+                    description: '0 : check not OK, 1 check OK'
+                  id_logic_message:
+                    type: string
+                    description: 'Content logic test'
+                  id_check:
+                    type: string
+                    description: 'FAKE or REAL'
+                  name:
+                    type: string
+                    description: 'Name consumer'
+                  birthday:
+                    type: string
+                    description: 'Date time'
+                  sex:
+                    type: string
+                    default: 'Male and female'
+                    description: 'male and female'
+                  address:
+                    type: string
+                    description: 'Name address'
+                  precinct:
+                    type: string
+                  expiry:
+                    type: string
+                    description: 'Deadline of papers With BLX, there is an indefinite case'
+                  id_type:
+                    type: string
+                    description: 'Distinguish front / back:
+                                   "0": front
+                                   "1": back side'
+                  ethnicity:
+                    type: string
+                  religion:
+                    type: string
+                  issue_date:
+                    type: string
+                  issue_by:
+                    type: string
+                  country:
+                    type: string
+                    description: 'Value of type document passport'
+                  national:
+                    type: string
+                    description: 'Value of type document BLX, passport'
+                  class:
+                    type: string
+                    description: 'Value of type document BLX'
+        '500':
+          description: ERROR
+        '501':
+          description: NOT ACTIVE SERVER
+
+
+  /v3.2/faceid/recognition:
+    parameters:
+      - name: Key
+        in: header
+        description: "identify client"
+        required: true
+        schema:
+          type: string
+          default: api-key
+    post:
+      tags:
+        - API V3.2
+      summary: FACE RECOGNITION
+      description: 'A facial recognition system is a technology capable of identifying or verifying a person from a digital image or a video frame from a video source.'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+                - image
+              properties:
+                image:
+                  type: integer
+                  format: in64
+                  default: image type base 64
+                  description: 'Image of consumer, required format type bas64'
+                request_id:
+                  type: integer
+                  format: in64
+                  default: ''
+                  description: 'Id unique used  to distinguish requests, serving request searches'
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    type: array
+                    description: '{
+                                  "copy_right": "Copyright",
+                                  "error_code": "000",
+                                  "error_message": "OK"
+                                }'
+                  recognition_result:
+                    type: array
+                    description: 'List of photos with faces similar to the one imported.
+                     The data is in the form of a list of Json Objects
+                     The format is described as below.:
+                        [{"face_loc": [x1, y1, x2, y2],
+                         "top_k": [
+                                  {"compare_score": 0.9193477926020832,
+                                  "face_id": "0002",
+                                  "person_name": "Ca sĩ Vân Quang Long",
+                                  "unique_name": "Ca_si_Vân Quang Long"
+                          }
+                         ,...,
+                        {}]
+                      }
+                    ,...,
+                    {}]'
+                  recognition_time:
+                    type: string
+                    description: 'Time handle request'
+
+
+  /v3.2/faceid/register:
+    parameters:
+      - name: Key
+        in: header
+        description: "identify client"
+        required: true
+        schema:
+          type: string
+          default: api-key
+    post:
+      tags:
+        - API V3.2
+      summary: FACE REGISTER
+      description: 'Register image of consumer into database. System can not  resgister if image is exist'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+                - image
+                - unique_name
+              properties:
+                image:
+                  type: integer
+                  format: in64
+                  required:
+                    - image
+                  default: image type base 64
+                  description: 'Image of consumer, required format type bas64'
+                unique_name:
+                  type: string
+                  format: in64
+                  default: image type base 64
+                  description: 'Customer is unique name. Used in case many customers have the same real name'
+                person_name:
+                  type: string
+                  description: 'name of consumer'
+                force:
+                  type: integer
+                  format: in64
+                  default: 'o or 1'
+                  description: 'Optional field,request system overrides customer registration. Used in case this photo or similar photo of the customer has been previously registered.
+                              - 0: Default registration is not required
+                              - 1: registration required
+                                '
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    type: array
+                    description: '{
+                                  "copy_right": "Copyright",
+                                  "error_code": "000",
+                                  "error_message": "OK"
+                                }'
+                  face_loc:
+                    type: string
+                    description: 'Position of faces in photos'
+                  face_angle:
+                    type: string
+                  unique_name:
+                    type: string
+                    description: 'Case: image exsit'
+                  face_id:
+                    type: integer
+                    description: 'ID of face register in database'
+
+
+  /v3.2/faceid/delete:
+    parameters:
+      - name: Key
+        in: header
+        description: "identify client"
+        required: true
+        schema:
+          type: string
+          default: api-key
+
+    post:
+      tags:
+        - API V3.2
+      summary: FACE DELETE
+      description: 'Delete infomation image of consumer registed database'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+                - unique_name
+              properties:
+                unique_name:
+                  type: string
+                  format: in64
+                  default: image type base 64
+                  description: 'Customer is unique name. Used in case many customers have the same real name'
+                face_id:
+                  type: string
+                  description: 'Customer is Face ID, returned in the result when registering a Customer is photo of the face in the system.
+                                If face_id is not provided, all customer photos with unique_name will be removed from the system'
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    type: array
+                    description: '{
+                                  "copy_right": "Copyright",
+                                  "error_code": "000",
+                                  "error_message": "OK"
+                                }'
+
