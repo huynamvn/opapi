@@ -85,7 +85,7 @@ info:
     email: duongngocthang@evgcorp.net
     url: https://cloudekyc.com/
   x-logo:
-     url: 'https://github.com/huynamvn/openapi/blob/master/extend-nam/img/ekyc7.png'
+     url: 'https://github.com/huynamvn/openapi/blob/master/extend-nam/img/evg.webp'
   license:
     name: EKYC 3.0
     url: 'https://demo.cloudekyc.com/'
