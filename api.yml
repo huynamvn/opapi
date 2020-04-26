@@ -84,8 +84,8 @@ info:
     name: Contact support
     email: duongngocthang@evgcorp.net
     url: https://cloudekyc.com/
-  # x-logo:
-  #   url: 'http://localhost:3000/docs/redoc/extend-nam/img/ekyc7.png'
+  x-logo:
+     url: 'https://github.com/huynamvn/openapi/blob/master/extend-nam/img/ekyc7.png'
   license:
     name: EKYC 3.0
     url: 'https://demo.cloudekyc.com/'
