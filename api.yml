@@ -208,12 +208,12 @@ paths:
                      "fake_code": "FAKE" (or "REAL")
                     }
                     # fake_code:
-                    - FAKE: live image of the user that has been captured or does not match the ID image and the attached photos
-                    - REAL: real image of customers
+                    - FAKE: live image of the user that has been captured or does not match the ID image and the attached photos
+                    - REAL: real image of customers
                     # fake_score: in range [0-1].
-                    1 - fake live photos
-                    0 - real live photos of customers
-                     According to our suggestion, with fake_score> = 0.63, this image is considered fake'
+                    1 - fake live photos
+                    0 - real live photos of customers
+                     According to our suggestion, with fake_score> = 0.63, this image is considered fake'
 
 
   /v3.1/ocr/recognition:

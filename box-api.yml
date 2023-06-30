@@ -1,0 +1,150 @@
+openapi: 3.0.0
+servers:
+  - url: https://api-logs-box.evgcdn.net/
+    description: 'Endtrypoint'
+
+info:
+  description: |
+
+    # INTRODUCTION
+    Api show logs of service box-studio
+
+    Ekyc offers one forms of authentication:
+      - API Key
+
+  # version: 3.x.x
+  title: 'EVG DOCUMENT API'
+
+  contact:
+    name: Contact support
+    email: duongngocthang@evgcorp.net
+    url: https://nextidc.vn/
+  x-logo:
+     url: 'https://raw.githubusercontent.com/huynamvn/openapi/master/extend-nam/img/evg.webp'
+  license:
+    name: API 1.0
+    url: 'https://nextidc.vn/'
+
+
+externalDocs:
+  description: Wellcome to Everest Global
+  url: 'https://nextidc.vn/'
+
+
+x-tagGroups:
+  - name: General
+    tags:
+      - API V1.0
+
+paths:
+  /:
+    parameters:
+      - name: Key
+        in: header
+        description: "Identify client"
+        required: true
+        schema:
+          type: string
+          default: apikey
+    post:
+      tags:
+        - API V3.1
+      summary: QUERY LOGS
+      description: 'Query logs'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+                - image
+                - image_live
+              properties:
+                fromTime:
+                  type: integer
+                  format: in64
+                  default: image type base 64
+                  description: 'Image of consumer, required format type bas64'
+                endTime:
+                  type: integer
+                  format: in64
+                  default: image type base 64
+                  description: 'Image of consumer, required format type bas64'
+                channelID:
+                  type: integer
+                  default: 0 or 1
+                  description: '0 - face vector information no need return , 1 - face vector information need return '
+                apikey:
+                  type: integer
+                  format: in64
+                  default: ''
+                  description: 'Id unique used  to distinguish requests, serving request searches'
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                properties:
+                  verify_result:
+                    type: integer
+                    format: in64
+                    default: 0  or 1 or 2
+                    description: '0: not one person, 1: can one person, 2: one person'
+                  verify_result_text:
+                    type: string
+                    description: 'The result  describe as text'
+                  message:
+                    type: string
+                    default: 'object json: {
+                             "api_version": 1.0.4,
+                             "error_message": content,
+                             "error_code": code,
+                             "copy_right": "Copyright©2018-2019 Công Ty VVN Phát Triển. All rights reserved"}'
+                  sim:
+                    type: string
+                    description: 'Similarities of 2 photos'
+                  verification_time:
+                    type: string
+                    description: 'Time verify image'
+                  face_loc_cmt:
+                    type: string
+                    description: 'Location face [(left,top),(right,bottom)]'
+                  face1_angle:
+                    type: string
+                    description: 'Angle face'
+                  face_loc_live:
+                    type: string
+                    description: 'Location face [(left,top),(right,bottom)]'
+                  face2_angle:
+                    type: integer
+                    description: 'angle face'
+                  feature_vector_face_cmt:
+                    type: string
+                    default: 'IF return_feature==1'
+                    description: 'Information  vector face of image_cmt (512d vector)'
+                  live_image_status:
+                    type: integer
+                    format: in64
+                    default: ''
+                    description: 'id unique used  to distinguish requests, serving request searches'
+                  feature_vector_face_live:
+                    type: string
+                    default: 'IF return_feature==1'
+                    description: 'Information  vector face of image_cmt (512d vector)'
+                  face_anti_spoof_status:
+                    type: string
+                    default: 'IF return_feature==1'
+                    description: 'Notification status photo is Fake (Fake) or real photos (Real). The information returned looks like:
+                    {
+                     "status": "FAKE" (or "REAL"),
+                     "fake_score": 0.92,
+                     "fake_code": "FAKE" (or "REAL")
+                    }
+                    # fake_code:
+                    - FAKE: live image of the user that has been captured or does not match the ID image and the attached photos
+                    - REAL: real image of customers
+                    # fake_score: in range [0-1].
+                    1 - fake live photos
+                    0 - real live photos of customers
+                     According to our suggestion, with fake_score> = 0.63, this image is considered fake'
+
