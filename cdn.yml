@@ -3,7 +3,10 @@
   "info": {
     "title": "CDN-VN",
     "description": "CDN-VN",
-    "version": "v1.0"
+    "version": "v1.0",
+    "x-logo": {
+      "url": "https://raw.githubusercontent.com/huynamvn/openapi/master/evglogo.png"
+    }
   },
   "servers": [
     {
@@ -39,7 +42,7 @@
                 "properties": {
                   "filter_time": {
                     "type": "string",
-                    "description": "This field define the time range you want to filter, format is %d/%m/%Y %H:%M:%S - %d/%m/%Y %H:%M:%S. Default - fromTime: now()-30mins, toTime:: now()",
+                    "description": "This field define the time range you want to filter, \nformat is %d/%m/%Y %H:%M:%S - %d/%m/%Y %H:%M:%S. Default - fromTime: now()-30mins, toTime:: now()",
                     "example": "01/08/2020 00:00:01 - 01/08/2020 23:59:59"
                   },
                   "group_id": {
