@@ -46,7 +46,7 @@
 
 openapi: 3.0.0
 servers:
-  - url:  https://api.cloudekyc.com/
+  - url:  https://api-cdn.evgcdn.net/
     description: 'Endtrypoint'
 
 info:

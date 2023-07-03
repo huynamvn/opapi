@@ -76,6 +76,8 @@ $black			: #000;
   opacity: 1;
   font-weight: 300; }
 
+
+
 :-ms-input-placeholder {
   /* Internet Explorer 10-11 */
   color: #777777;
@@ -85,6 +87,27 @@ $black			: #000;
   /* Microsoft Edge */
   color: #777777;
   font-weight: 300; }
+
+#header {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  transition: all 0.5s;
+  z-index: 997;
+  /* background-color: #a98b66; */
+  background: url(https://sso.evgcdn.net/resources/csck0/login/evgcdn/assets/images/bg-right.svg) no-repeat top right;
+}
+
+.main-menu {
+  padding: 20px 30px; 
+  background: url(https://sso.evgcdn.net/resources/csck0/login/evgcdn/assets/images/bg-right.svg) no-repeat top right;
+}
+
+/* #header {
+  background-color: #a98b66;
+  background: url(../images/bg-right.svg) no-repeat top right;
+} */
 
 body {
   color: #777777;
@@ -1654,16 +1677,8 @@ h1, h2, h3, h4, h5, h6 {
   background: #0093df;
   padding: 9px 26px; }
 
-.main-menu {
-  padding: 20px 30px; }
 
-#header {
-  position: fixed;
-  left: 0;
-  top: 0;
-  right: 0;
-  transition: all 0.5s;
-  z-index: 997; }
+
 
 #header.header-scrolled {
   transition: all 0.5s;

@@ -7,7 +7,7 @@
   },
   "servers": [
     {
-      "url": "https://reseller-api.evgcdn.net"
+      "url": "https://api-cdn.evgcdn.net"
     }
   ],
   "paths": {
