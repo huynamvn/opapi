@@ -5,7 +5,7 @@
     "description": "CDN-VN",
     "version": "v1.0",
     "x-logo": {
-      "url": "https://raw.githubusercontent.com/huynamvn/openapi/master/evglogo.png"
+      "url": "https://raw.githubusercontent.com/huynamvn/opapi/master/evglogo.png"
     }
   },
   "servers": [
