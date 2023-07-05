@@ -72,6 +72,19 @@ info:
 
     # AUTHENTICATION
 
+      | Mã lỗi | Mô tả                                                         |
+      |-------|--------------------------------------------------------------|
+      | 200   | OK - Yêu cầu đã hoàn thành thành công.                            |
+      | 400   | Bad Request - Thiếu tham số bắt buộc.                                |
+      | 401   | Unauthorized - Thông tin đăng nhập không hợp lệ hoặc mã thông báo API của bạn đã hết hạn. |
+      | 403   | Forbidden - Truy cập bị từ chối. Bạn không có đủ quyền truy cập.                 |
+      | 404   | Not Found - Mục được yêu cầu không tồn tại.                          |
+      | 429   | Too Many Requests - Bạn đã vượt quá số lượng yêu cầu cho tài nguyên của bạn.        |
+      | 503   | Service Unavailable - Bạn đã mắc lỗi trong các tham số yêu cầu hoặc dịch vụ hiện đang không khả dụng. |
+      | 500   | Lỗi máy chủ - Đã xảy ra sự cố từ phía chúng tôi.                               |
+      | 502   | Lỗi máy chủ - Đã xảy ra sự cố từ phía chúng tôi.                               |
+      | 504   | Lỗi máy chủ - Đã xảy ra sự cố từ phía chúng tôi.                               |
+
     Ekyc offers one forms of authentication:
       - API Key
 
