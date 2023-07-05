@@ -1448,7 +1448,7 @@
   cursor: pointer;
   color: ${e=>e.active?ky(e.depth,e,"activeTextColor"):e.theme.sidebar.textColor};
   margin: 0;
-  padding: 12.5px ${e=>4*e.theme.spacing.unit}px;
+  padding: 5.5px ${e=>4*e.theme.spacing.unit}px;
   ${({depth:e,type:t,theme:n})=>"section"===t&&e>1&&"padding-left: "+8*n.spacing.unit+"px;"||""}
   display: flex;
   justify-content: space-between;

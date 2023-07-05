@@ -1000,7 +1000,7 @@ openapi: 3.0.2
 externalDocs:
   description: |
     Welcome to CDN API documentation. The API documentation provides requests to manage CDN service and get statistics.
-  url: 'https://api-cdn.evgcdn.net'
+  url: 'https://api-cdn.evgcdn.net/docs/'
 paths:
   /api/v1.0/analytic/get-data:
     post:
