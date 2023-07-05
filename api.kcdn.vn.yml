@@ -3,10 +3,10 @@
   "info": {
     "title": "CDN-VN",
     "description": "CDN-VN",
-    "version": "v1.0"
-    # "x-logo": {
-    #   "url": "https://raw.githubusercontent.com/huynamvn/opapi/master/evglogo.png"
-    # }
+    "version": "v1.0",
+    "x-logo": {
+      "url": "https://kdata.vn/kdata/images/icon/logo-KDATA-vector.svg"
+    }
   },
   "servers": [
     {
