@@ -1111,8 +1111,8 @@ paths:
                   type: integer
                 list_files:
                   example:
-                  - https://167051323.e.cdneverest.net/storage20/hh247/images/1535173995o-long-vien-2018.jpg
-                  - https://167051323.e.cdneverest.net/storage20/hh247/images/1535173995o-long-vien-2019.jpg
+                  - https://167051323.example.com/storage20/hh247/images/1535173995o-long-vien-2018.jpg
+                  - https://167051323.example.com/storage20/hh247/images/1535173995o-long-vien-2019.jpg
                   items:
                     type: string
                   type: array
@@ -1172,8 +1172,8 @@ paths:
                   type: integer
                 list_files:
                   example:
-                  - https://167051323.e.cdneverest.net/storage20/hh247/images/1535173995o-long-vien-2018.jpg
-                  - https://167051323.e.cdneverest.net/storage20/hh247/images/1535173995o-long-vien-2019.jpg
+                  - https://167051323.example.com/storage20/hh247/images/1535173995o-long-vien-2018.jpg
+                  - https://167051323.example.com/storage20/hh247/images/1535173995o-long-vien-2019.jpg
                   items:
                     type: string
                   type: array
@@ -1230,7 +1230,7 @@ paths:
               properties:
                 file_url:
                   description: File url that you want to get verify result.
-                  example: https://167051323.e.cdneverest.net/storage20/hh247/images/1535173995o-long-vien-2018.jpg
+                  example: https://167051323.example.com/storage20/hh247/images/1535173995o-long-vien-2018.jpg
                   type: string
                 group_id:
                   description: Group ID that you want to get data from.
@@ -1293,8 +1293,8 @@ paths:
                   type: integer
                 list_files:
                   example:
-                  - https://167051323.e.cdneverest.net/storage20/hh247/images/1535173995o-long-vien-2018.jpg
-                  - https://167051323.e.cdneverest.net/storage20/hh247/images/1535173995o-long-vien-2019.jpg
+                  - https://167051323.example.com/storage20/hh247/images/1535173995o-long-vien-2018.jpg
+                  - https://167051323.example.com/storage20/hh247/images/1535173995o-long-vien-2019.jpg
                   items:
                     type: string
                   type: array
