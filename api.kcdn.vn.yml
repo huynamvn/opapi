@@ -982,16 +982,18 @@ info:
     # Responses
     The API uses HTTP response codes to show success or failure of an API request. In general, 2xx codes indicate success, 4xx codes indicate an error that resulted from the provided information (e.g. a required parameter is missing or invalid, etc.), and codes in the 5xx range indicate an error connected with our servers.
     # HTTP Status Code Summary
-     | Mã lỗi | Mô tả                                                         |
-      |-------|--------------------------------------------------------------|
-      | 200   | OK - Yêu cầu đã hoàn thành thành công.                            |
-      | 400   | Bad Request - Thiếu tham số bắt buộc.                                |
-      | 401   | Unauthorized - Thông tin đăng nhập không hợp lệ hoặc mã thông báo API của bạn đã hết hạn. |
-      | 403   | Forbidden - Truy cập bị từ chối. Bạn không có đủ quyền truy cập.                 |
-      | 404   | Not Found - Mục được yêu cầu không tồn tại.                          |
-      | 429   | Too Many Requests - Bạn đã vượt quá số lượng yêu cầu cho tài nguyên của bạn.        |
-      | 503   | Service Unavailable - Bạn đã mắc lỗi trong các tham số yêu cầu hoặc dịch vụ hiện đang không khả dụng. |
-      | 500 502 504   | Lỗi máy chủ - Đã xảy ra sự cố từ phía chúng tôi. |      
+    | Code | Description                                                 |
+    |------|-------------------------------------------------------------|
+    | 2xx  | OK - Request has been completed successfully.               |
+    | 400  | Bad Request - Required parameter is missing.                |
+    | 401  | Unauthorized - Provided credentials are invalid or your API token has expired. |
+    | 403  | Forbidden - Access denied. You do not have enough rights.   |
+    | 404  | Not Found - Requested item doesn't exist.                   |
+    | 429  | Too Many Requests - You have exceeded the number of allowed requests for your resources. |
+    | 503  | Service Unavailable - You have made a mistake in request parameters or the service is currently unavailable. |
+    | 500  | Server Error - Something went wrong on our end.             |
+    | 502  | Bad Gateway - The server received an invalid response from an upstream server. |
+    | 504  | Gateway Timeout - The server did not receive a timely response from an upstream server. |      
   title: CDN
   version: 1.0.0
   x-logo:
