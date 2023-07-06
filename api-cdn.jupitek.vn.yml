@@ -977,6 +977,7 @@ components:
       type: object
 info:
   description: |
+    Welcome to CDN API documentation. The API documentation provides requests to manage CDN service and get statistics.
     # Introduction
     Our API has predictable, resource-oriented URLs and uses HTTP response codes to indicate API errors. We use built-in HTTP features, such as HTTP authentication and HTTP terminology, which can be understood by HTTP clients. JSON will be returned in all responses from the API, including errors.
     # Responses
@@ -999,10 +1000,6 @@ info:
   x-logo:
     url: https://jupitek.vn/wp-content/uploads/2022/12/Logo-Jupitek-04-01.png.webp
 openapi: 3.0.2
-externalDocs:
-  description: |
-    Welcome to CDN API documentation. The API documentation provides requests to manage CDN service and get statistics.
-  url: 'https://api-cdn.jupitek.vn/docs/'
 paths:
   /api/v1.0/analytic/get-data:
     post:
