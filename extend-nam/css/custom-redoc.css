@@ -17,3 +17,8 @@
     padding-top: 0.5px !important;
     padding-bottom: 0.5px !important;
 }
+
+.redoc-logo {
+    cursor: pointer;
+}
+  

@@ -53,5 +53,14 @@
     
     <redoc spec-url='https://raw.githubusercontent.com/huynamvn/opapi/master/cdn.yml' hide-download-button no-auto-auth></redoc>
     <script src="./redoc.standalone.js"> </script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const logoElement = document.querySelector('.redoc-logo');
+        logoElement.addEventListener('click', function() {
+          window.location.href = 'https://api-cdn.evgcdn.net/docs'; // Thay thế bằng liên kết đích của bạn
+        });
+      });
+    </script>
+    
   </body>
 </html>
