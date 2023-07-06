@@ -977,6 +977,7 @@ components:
       type: object
 info:
   description: |
+    Welcome to CDN API documentation. The API documentation provides requests to manage CDN service and get statistics.
     # Introduction
     Our API has predictable, resource-oriented URLs and uses HTTP response codes to indicate API errors. We use built-in HTTP features, such as HTTP authentication and HTTP terminology, which can be understood by HTTP clients. JSON will be returned in all responses from the API, including errors.
     # Responses
@@ -998,11 +999,9 @@ info:
   version: 1.0.0
   x-logo:
     url: https://raw.githubusercontent.com/huynamvn/opapi/master/evglogo.png
+    altText: API
+    onclick: "window.location.href = 'https://api-cdn.evgcdn.net/docs/';"
 openapi: 3.0.2
-externalDocs:
-  description: |
-    Welcome to CDN API documentation. The API documentation provides requests to manage CDN service and get statistics.
-  url: 'https://api-cdn.evgcdn.net/docs/'
 paths:
   /api/v1.0/analytic/get-data:
     post:
