@@ -999,7 +999,7 @@ info:
   version: 1.0.0
   x-logo:
     url: https://raw.githubusercontent.com/huynamvn/opapi/master/evglogo.png
-    # href: https://api-cdn.evgcdn.net/docs
+    href: https://api-cdn.evgcdn.net/docs
 openapi: 3.0.2
 paths:
   /api/v1.0/analytic/get-data:
