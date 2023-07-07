@@ -57,10 +57,30 @@
       document.addEventListener('DOMContentLoaded', function() {
         const logoElement = document.querySelector('.redoc-logo');
         logoElement.addEventListener('click', function() {
-          window.location.href = 'https://api-cdn.evgcdn.net/docs'; // Thay thế bằng liên kết đích của bạn
+          window.location.href = 'https://google.com'; // Thay thế bằng liên kết đích của bạn
         });
+    
+        // Xóa x-logo hiện tại
+        const infoElement = document.querySelector('.redoc-info');
+        if (infoElement) {
+          const xLogoElement = infoElement.querySelector('.x-logo');
+          if (xLogoElement) {
+            xLogoElement.parentNode.removeChild(xLogoElement);
+          }
+        }
+    
+        // Tạo logo mới
+        const newLogoElement = document.createElement('div');
+        newLogoElement.classList.add('x-logo');
+        newLogoElement.innerHTML = '<img src="https://raw.githubusercontent.com/huynamvn/opapi/master/evglogo.png" alt="Logo">';
+    
+        // Thêm logo mới vào info
+        if (infoElement) {
+          infoElement.insertBefore(newLogoElement, infoElement.firstChild);
+        }
       });
     </script>
+    
     
   </body>
 </html>
