@@ -999,6 +999,7 @@ info:
   version: 1.0.0
   x-logo:
     url: https://jupitek.vn/wp-content/uploads/2022/12/Logo-Jupitek-04-01.png.webp
+    href: https://api-cdn.jupitek.vn/docs
 openapi: 3.0.2
 paths:
   /api/v1.0/analytic/get-data:

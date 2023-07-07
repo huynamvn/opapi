@@ -999,6 +999,7 @@ info:
   version: 1.0.0
   x-logo:
     url: https://sunteco.vn/wp-content/uploads/2023/03/sunteco-logo-slogan-light-h.svg
+    href: https://api-cdn.sunteco.vn/docs
 openapi: 3.0.2
 paths:
   /api/v1.0/analytic/get-data:

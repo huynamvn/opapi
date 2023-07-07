@@ -999,6 +999,7 @@ info:
   version: 1.0.0
   x-logo:
     url: https://kdata.vn/kdata/images/icon/logo-KDATA-vector.svg
+    href: https://api.kcdn.vn/docs
 openapi: 3.0.2
 paths:
   /api/v1.0/analytic/get-data:
