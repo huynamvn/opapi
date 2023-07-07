@@ -1000,7 +1000,7 @@ info:
   x-logo:
     url: https://raw.githubusercontent.com/huynamvn/opapi/master/evglogo.png
     altText: My Logo
-    href: https://api-cdn.evgcdn.net
+  x-href: https://api-cdn.evgcdn.net
 openapi: 3.0.2
 paths:
   /api/v1.0/analytic/get-data:
