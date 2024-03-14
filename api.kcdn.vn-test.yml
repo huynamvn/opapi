@@ -1609,6 +1609,10 @@ paths:
       responses:
         '200':
           description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CertInfoResult'
         '400':
           $ref: '#/components/responses/400'
         '401':
@@ -2482,6 +2486,20 @@ components:
             Set verify user, if this option is enabled then you can using
             service without submit ticket request.  Option: 1(on) / 0(off)
           example: 0
+    CertDeployment:
+      type: object
+      properties:
+        cert_id:
+          type: string
+          description: ID of SSL Certificate
+          example: fh45g-5fdsdb-4kiy7tb-lbnjg2255
+    CertInfoResult:
+      type: object
+      properties:
+        cert_id:
+          type: string
+          description: ID of SSL Certificate
+          example: fh45g-5fdsdb-4kiy7tb-lbnjg2255
     RequestCertForm:
       required:
         - cert_id
