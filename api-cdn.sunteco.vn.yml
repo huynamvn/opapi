@@ -25,7 +25,7 @@ openapi: 3.0.1
 externalDocs:
   description: |
     Welcome to CDN API documentation. The API documentation provides requests to manage CDN service and get statistics.
-  url: 'https://api-cdn.sunteco.vn'
+  url: 'https://api-api-cdn.sunteco.vn'
 paths:
   "/api/v1.0/analytic/get-data":
     post:
@@ -633,6 +633,22 @@ paths:
         explode: false
         schema:
           type: string
+      - name: offset
+        in: query
+        description: Pagination - offset
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+      - name: limit
+        in: query
+        description: Pagination - number of response records limitation
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
       responses:
         '200':
           description: Successful
