@@ -25,7 +25,7 @@ openapi: 3.0.1
 externalDocs:
   description: |
     Welcome to CDN API documentation. The API documentation provides requests to manage CDN service and get statistics.
-  url: 'https://api-api.kcdn.vn'
+  url: 'https://api.kcdn.vn'
 paths:
   "/api/v1.0/analytic/get-data":
     post:
