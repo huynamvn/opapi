@@ -20,12 +20,12 @@ info:
   title: CDN
   version: 1.0.0
   x-logo:
-    url: https://kdata.vn/kdata/images/icon/logo-KDATA-vector.svg
+    url: https://raw.githubusercontent.com/huynamvn/opapi/master/evglogo.png
 openapi: 3.0.1
 externalDocs:
   description: |
     Welcome to CDN API documentation. The API documentation provides requests to manage CDN service and get statistics.
-  url: 'https://api-api.kcdn.vn'
+  url: 'https://api-cdn.evgcdn.net'
 paths:
   "/api/v1.0/analytic/get-data":
     post:
@@ -3183,21 +3183,37 @@ components:
         GeoProtection:
           description: Setting blacklist countries. Any requests from these countries
             can not access your asset/media.
+          example:
+            geo_protection_countries: []
+            geo_protection_enable: 0
+            geo_protection_type: 1
           allOf:
           - "$ref": "#/components/schemas/GeoProtection"
         IPProtection:
           description: Setting your blacklist and whitelist by CIDR.
+          example:
+            ip_protection_cidr: []
+            ip_protection_enable: 0
+            ip_protection_type: 1
           allOf:
           - "$ref": "#/components/schemas/IPProtection"
         RateLimiting:
           description: Protect your site or API from malicious traffic by blocking
             client IP addresses that hit a URL pattern and exceed a threshold you
             define. Your existing Rate Limiting Rules are listed below.
+          example:
+            rate_limiting_enable: 0
+            rate_limiting_request: 1
+            rate_limiting_request_type: s
+            rate_limiting_type: 1
           allOf:
           - "$ref": "#/components/schemas/RateLimiting"
         TransferLimiting:
           description: Allows you to limit the transfer rate of individual client
             connections. The rate is expressed in Kilobits per second.
+          example:
+            enable_limit_rate: 0
+            limit_rate: 1
           allOf:
           - "$ref": "#/components/schemas/TransferLimiting"
     SiteFirewallSettingResult:
