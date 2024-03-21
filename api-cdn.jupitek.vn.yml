@@ -120,12 +120,12 @@ paths:
           type: string
       - name: site_id
         in: path
-        description: Numeric ID of the Site
+        description: ID of the Site
         required: true
         style: simple
         explode: false
         schema:
-          type: integer
+          type: string
       requestBody:
         content:
           application/json:
@@ -186,12 +186,12 @@ paths:
           type: string
       - name: site_id
         in: path
-        description: Numeric ID of the Site
+        description: ID of the Site
         required: true
         style: simple
         explode: false
         schema:
-          type: integer
+          type: string
       requestBody:
         content:
           application/json:
@@ -257,12 +257,12 @@ paths:
           type: string
       - name: site_id
         in: path
-        description: Numeric ID of the Site
+        description: ID of the Site
         required: true
         style: simple
         explode: false
         schema:
-          type: integer
+          type: string
       requestBody:
         content:
           application/json:
@@ -315,12 +315,12 @@ paths:
           type: string
       - name: site_id
         in: path
-        description: Numeric ID of the Site
+        description: ID of the Site
         required: true
         style: simple
         explode: false
         schema:
-          type: integer
+          type: string
       requestBody:
         content:
           application/json:
@@ -1621,6 +1621,60 @@ paths:
           "$ref": "#/components/responses/500"
       security:
       - jwt: []
+  "/api/v1.0/ssl/list/{group_id}":
+    get:
+      tags:
+      - SSLCertificationAPI
+      summary: Get List SSL Certification by Project
+      description: Get List SSL Certification by Project
+      parameters:
+      - name: X-Auth-Key
+        in: header
+        description: The API Authentication Key
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: group_id
+        in: path
+        description: ID of project, you can find it on api /group/list
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: offset
+        in: query
+        description: Pagination - offset
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+      - name: limit
+        in: query
+        description: Pagination - number of response records limitation
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/GroupListResult"
+        '400':
+          "$ref": "#/components/responses/400"
+        '401':
+          "$ref": "#/components/responses/401"
+        '500':
+          "$ref": "#/components/responses/500"
+      security:
+      - jwt: []
   "/api/v1.0/statistic/get-data":
     post:
       tags:
@@ -2403,6 +2457,25 @@ components:
         message:
           type: string
           description: Response's message
+    GeoProtection:
+      type: object
+      properties:
+        geo_protection_countries:
+          type: array
+          description: List of Country Codes. You can find from api /country/list
+          example:
+          - AD
+          - AE
+          items:
+            type: string
+        geo_protection_enable:
+          type: integer
+          description: 'Option: 1(on) / 0(off)'
+          example: 0
+        geo_protection_type:
+          type: integer
+          description: 'Option: 1(Whitelist) / 2(Blacklist)'
+          example: 1
     Group:
       type: object
       properties:
@@ -2430,6 +2503,25 @@ components:
         message:
           type: string
           description: Response's message
+    IPProtection:
+      type: object
+      properties:
+        ip_protection_cidr:
+          type: array
+          description: List of CIDR Address.
+          example:
+          - 192.168.129.23/17
+          - 10.0.0.0/24
+          items:
+            type: string
+        ip_protection_enable:
+          type: integer
+          description: 'Option: 1(on) / 0(off)'
+          example: 0
+        ip_protection_type:
+          type: integer
+          description: 'Option: 1(Whitelist) / 2(Blacklist)'
+          example: 1
     ListUserResult:
       required:
       - error_code
@@ -2457,6 +2549,25 @@ components:
           type: string
           description: CDN Package name
           example: ''
+    RateLimiting:
+      type: object
+      properties:
+        rate_limiting_enable:
+          type: integer
+          description: 'Option: 1(on) / 0(off)'
+          example: 0
+        rate_limiting_request:
+          type: integer
+          description: 'Number of requests. Values: 1-9999'
+          example: 1
+        rate_limiting_request_type:
+          type: string
+          description: 'Support 2 types: s (requests/second), m (requests/minute)'
+          example: s
+        rate_limiting_type:
+          type: integer
+          description: 'Option: 1(Limit by URI), 2(Limit by IP Address)'
+          example: 1
     RefererAccessRule:
       type: object
       properties:
@@ -2741,7 +2852,8 @@ components:
           description: 'Enable http2. Option: 1(on) / 0(off)'
         enable_redirect_http_to_https:
           type: integer
-          description: 'Enable redirect http to https. Option: 1(on) / 0(off)'
+          description: 'Enable redirect http to https (force to https). Option: 1(on)
+            / 0(off)'
         enable_secure_http_methods:
           type: integer
           description: 'Enable secure HTTP methods. Option: 1(on) / 0(off)'
@@ -2851,7 +2963,8 @@ components:
           example: 0
         enable_redirect_http_to_https:
           type: integer
-          description: 'Enable redirect http to https. Option: 1(on) / 0(off)'
+          description: 'Enable redirect http to https (force to https). Option: 1(on)
+            / 0(off)'
           example: 0
         enable_request_collapsing:
           type: integer
@@ -3032,7 +3145,8 @@ components:
           example: 0
         force_to_https:
           type: integer
-          description: 'Enable redirect http to https. Option: 1(on) / 0(off)'
+          description: 'Enable redirect http to https (force to https). Option: 1(on)
+            / 0(off)'
           example: 0
         ignore_set_cookie:
           type: integer
@@ -3066,69 +3180,42 @@ components:
     SiteFirewallSetting:
       type: object
       properties:
-        enable_limit_rate:
-          type: integer
-          description: 'Allows you to limit the transfer rate of individual client
-            connections. The rate is expressed in Kilobits per second. Option: 1(on)
-            / 0(off)'
-          example: 0
-        geo_protection_countries:
-          type: array
-          description: List of Country Codes. You can find from api /country/list
+        GeoProtection:
+          description: Setting blacklist countries. Any requests from these countries
+            can not access your asset/media.
           example:
-          - AD
-          - AE
-          items:
-            type: string
-        geo_protection_enable:
-          type: integer
-          description: 'Setting blacklist countries. Any requests from these countries
-            can not access your asset/media. Option: 1(on) / 0(off)'
-          example: 0
-        geo_protection_type:
-          type: integer
-          description: 'Option: 1(Whitelist) / 2(Blacklist)'
-          example: 1
-        ip_protection_cidr:
-          type: array
-          description: List of CIDR Address.
+            geo_protection_countries: []
+            geo_protection_enable: 0
+            geo_protection_type: 1
+          allOf:
+          - "$ref": "#/components/schemas/GeoProtection"
+        IPProtection:
+          description: Setting your blacklist and whitelist by CIDR.
           example:
-          - 192.168.129.23/17
-          - 10.0.0.0/24
-          items:
-            type: string
-        ip_protection_enable:
-          type: integer
-          description: 'Setting your blacklist and whitelist by CIDR. Option: 1(on)
-            / 0(off)'
-          example: 0
-        ip_protection_type:
-          type: integer
-          description: 'Option: 1(Whitelist) / 2(Blacklist)'
-          example: 1
-        limit_rate:
-          type: integer
-          description: 'Limit Rate Size by Kbps. Value from: 1 to 1048576'
-          example: 1
-        rate_limiting_enable:
-          type: integer
-          description: 'Protect your site or API from malicious traffic by blocking
+            ip_protection_cidr: []
+            ip_protection_enable: 0
+            ip_protection_type: 1
+          allOf:
+          - "$ref": "#/components/schemas/IPProtection"
+        RateLimiting:
+          description: Protect your site or API from malicious traffic by blocking
             client IP addresses that hit a URL pattern and exceed a threshold you
-            define. Your existing Rate Limiting Rules are listed below. Option: 1(on)
-            / 0(off)'
-          example: 0
-        rate_limiting_request:
-          type: integer
-          description: 'Number of requests. Values: 1-9999'
-          example: 1
-        rate_limiting_request_type:
-          type: string
-          description: 'Support 2 types: s (requests/second), m (requests/minute)'
-          example: s
-        rate_limiting_type:
-          type: integer
-          description: 'Option: 1(Limit by URI), 2(Limit by IP Address)'
-          example: 1
+            define. Your existing Rate Limiting Rules are listed below.
+          example:
+            rate_limiting_enable: 0
+            rate_limiting_request: 1
+            rate_limiting_request_type: s
+            rate_limiting_type: 1
+          allOf:
+          - "$ref": "#/components/schemas/RateLimiting"
+        TransferLimiting:
+          description: Allows you to limit the transfer rate of individual client
+            connections. The rate is expressed in Kilobits per second.
+          example:
+            enable_limit_rate: 0
+            limit_rate: 1
+          allOf:
+          - "$ref": "#/components/schemas/TransferLimiting"
     SiteFirewallSettingResult:
       required:
       - error_code
@@ -3338,6 +3425,17 @@ components:
           type: string
           description: 'Filter by source: ORIGIN or EDGE.'
           example: EDGE
+    TransferLimiting:
+      type: object
+      properties:
+        enable_limit_rate:
+          type: integer
+          description: 'Option: 1(on) / 0(off)'
+          example: 0
+        limit_rate:
+          type: integer
+          description: 'Limit Rate Size by Kbps. Value from: 1 to 1048576'
+          example: 1
     URLSetting:
       type: object
       properties:
