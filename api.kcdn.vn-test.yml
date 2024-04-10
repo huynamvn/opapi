@@ -20,28 +20,28 @@ info:
   title: CDN
   version: 1.0.0
   x-logo:
-    url: https://raw.githubusercontent.com/huynamvn/opapi/master/evglogo.png
+    url: https://kdata.vn/kdata/images/icon/logo-KDATA-vector.svg
 openapi: 3.0.1
 externalDocs:
   description: |
     Welcome to CDN API documentation. The API documentation provides requests to manage CDN service and get statistics.
-  url: 'https://api-cdn.evgcdn.net'
+  url: 'https://api.kcdn.vn'
 paths:
-  "/api/v1.0/analytic/get-data":
+  /api/v1.0/analytic/get-data:
     post:
       tags:
-      - AnalyticApi
+        - AnalyticApi
       summary: Get Analytics data by queries and filters
       description: Get Analytics data by queries and filters
       parameters:
-      - name: X-Auth-Key
-        in: header
-        description: The API Authentication Key
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
+        - name: X-Auth-Key
+          in: header
+          description: The API Authentication Key
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
@@ -50,31 +50,34 @@ paths:
               properties:
                 filter_time:
                   type: string
-                  description: 'This field define the time range you want to filter,
-                    format is %d/%m/%Y %H:%M:%S - %d/%m/%Y %H:%M:%S. Default - fromTime:
-                    now()-30mins, toTime:: now()'
-                  example: 01/08/2020 00:00:01 - 01/08/2020 23:59:59
+                  description: >-
+                    This field define the time range you want to filter, format
+                    is %d/%m/%Y %H:%M:%S - %d/%m/%Y %H:%M:%S. Default -
+                    fromTime: now()-30mins, toTime:: now()
+                  example: '01/08/2020 00:00:01 - 01/08/2020 23:59:59'
                 group_id:
                   type: string
                   description: Group ID that you want to get data from.
                   example: '1'
                 queries:
                   type: array
-                  description: 'Support items in this list: [''status_type_pie'',
-                    ''hitmiss_pie'', ''file_size_pie'', ''file_type_pie'', ''site'',
-                    ''referer'']'
+                  description: >-
+                    Support items in this list: ['status_type_pie',
+                    'hitmiss_pie', 'file_size_pie', 'file_type_pie', 'site',
+                    'referer']
                   example:
-                  - status_type_pie
-                  - hitmiss_pie
+                    - status_type_pie
+                    - hitmiss_pie
                   items:
                     type: string
                 site_ids:
                   type: array
-                  description: List Site ID that you want to get data. Default value
-                    is [] - get all sites that you've owned.
+                  description: >-
+                    List Site ID that you want to get data. Default value is []
+                    - get all sites that you've owned.
                   example:
-                  - 1
-                  - 2
+                    - '10001'
+                    - '10002'
                   items:
                     type: string
         required: true
@@ -85,7 +88,7 @@ paths:
             application/json:
               schema:
                 required:
-                - error_code
+                  - error_code
                 type: object
                 properties:
                   data:
@@ -96,36 +99,36 @@ paths:
                   message:
                     type: string
         '400':
-          "$ref": "#/components/responses/400"
+          $ref: '#/components/responses/400'
         '401':
-          "$ref": "#/components/responses/401"
+          $ref: '#/components/responses/401'
         '500':
-          "$ref": "#/components/responses/500"
+          $ref: '#/components/responses/500'
       security:
-      - jwt: []
-  "/api/v1.0/caching/prefetch/{site_id}":
+        - jwt: []
+  '/api/v1.0/caching/prefetch/{site_id}':
     post:
       tags:
-      - CachingApi
+        - CachingApi
       summary: Prefetch CDN caching by file urls
       description: Prefetch Cache
       parameters:
-      - name: X-Auth-Key
-        in: header
-        description: The API Authentication Key
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-      - name: site_id
-        in: path
-        description: ID of the Site
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
+        - name: X-Auth-Key
+          in: header
+          description: The API Authentication Key
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+        - name: site_id
+          in: path
+          description: ID of the Site
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
@@ -138,14 +141,17 @@ paths:
                   example: '1'
                 hotfix:
                   type: integer
-                  description: 'Value: 1(on)/0(off). This option allow user to run
-                    prefetch requests on the top priority. Note: limited 100 files/day'
+                  description: >-
+                    Value: 1(on)/0(off). This option allow user to run prefetch
+                    requests on the top priority. Note: limited 100 files/day
                   example: 0
                 list_files:
                   type: array
                   example:
-                  - https://167051323.e.cdneverest.net/storage20/hh247/images/1535173995o-long-vien-2018.jpg
-                  - https://167051323.e.cdneverest.net/storage20/hh247/images/1535173995o-long-vien-2019.jpg
+                    - >-
+                      https://167051323.e.cdneverest.net/storage20/hh247/images/1535173995o-long-vien-2018.jpg
+                    - >-
+                      https://167051323.e.cdneverest.net/storage20/hh247/images/1535173995o-long-vien-2019.jpg
                   items:
                     type: string
         required: true
@@ -162,36 +168,36 @@ paths:
                   message:
                     type: string
         '400':
-          "$ref": "#/components/responses/400"
+          $ref: '#/components/responses/400'
         '401':
-          "$ref": "#/components/responses/401"
+          $ref: '#/components/responses/401'
         '500':
-          "$ref": "#/components/responses/500"
+          $ref: '#/components/responses/500'
       security:
-      - jwt: []
-  "/api/v1.0/caching/purge/{site_id}":
+        - jwt: []
+  '/api/v1.0/caching/purge/{site_id}':
     post:
       tags:
-      - CachingApi
+        - CachingApi
       summary: Purge CDN caching by file urls
       description: Purge Cache
       parameters:
-      - name: X-Auth-Key
-        in: header
-        description: The API Authentication Key
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-      - name: site_id
-        in: path
-        description: ID of the Site
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
+        - name: X-Auth-Key
+          in: header
+          description: The API Authentication Key
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+        - name: site_id
+          in: path
+          description: ID of the Site
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
@@ -200,21 +206,26 @@ paths:
               properties:
                 group_id:
                   type: string
-                  description: Group ID that you want to get data from. You can get
-                    from api /list/group
+                  description: >-
+                    Group ID that you want to get data from. You can get from
+                    api /list/group
                   example: '1'
                 hotfix:
                   type: integer
-                  description: 'Value: 1(on)/0(off). This option allow user to run
-                    purge requests on the top priority. Note: limited 100 files/day'
+                  description: >-
+                    Value: 1(on)/0(off). This option allow user to run purge
+                    requests on the top priority. Note: limited 100 files/day
                   example: 0
                 list_files:
                   type: array
-                  description: List files that you want to remove from CDN. If you
-                    want to purge all, you should input this value ["*"]
+                  description: >-
+                    List files that you want to remove from CDN. If you want to
+                    purge all, you should input this value ["*"]
                   example:
-                  - https://167051323.e.cdneverest.net/storage20/hh247/images/1535173995o-long-vien-2018.jpg
-                  - https://167051323.e.cdneverest.net/storage20/hh247/images/1535173995o-long-vien-2019.jpg
+                    - >-
+                      https://167051323.e.cdneverest.net/storage20/hh247/images/1535173995o-long-vien-2018.jpg
+                    - >-
+                      https://167051323.e.cdneverest.net/storage20/hh247/images/1535173995o-long-vien-2019.jpg
                   items:
                     type: string
         required: true
@@ -231,38 +242,40 @@ paths:
                   message:
                     type: string
         '400':
-          "$ref": "#/components/responses/400"
+          $ref: '#/components/responses/400'
         '401':
-          "$ref": "#/components/responses/401"
+          $ref: '#/components/responses/401'
         '500':
-          "$ref": "#/components/responses/500"
+          $ref: '#/components/responses/500'
       security:
-      - jwt: []
-  "/api/v1.0/caching/verify-result/{site_id}":
+        - jwt: []
+  '/api/v1.0/caching/verify-result/{site_id}':
     post:
       tags:
-      - CachingApi
-      summary: This API is allow user to get result of request verify checksum cache
+        - CachingApi
+      summary: >-
+        This API is allow user to get result of request verify checksum cache
         cdn by url
-      description: This API is allow user to get result of request verify checksum
-        cache cdn by url
+      description: >-
+        This API is allow user to get result of request verify checksum cache
+        cdn by url
       parameters:
-      - name: X-Auth-Key
-        in: header
-        description: The API Authentication Key
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-      - name: site_id
-        in: path
-        description: ID of the Site
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
+        - name: X-Auth-Key
+          in: header
+          description: The API Authentication Key
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+        - name: site_id
+          in: path
+          description: ID of the Site
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
@@ -272,7 +285,8 @@ paths:
                 file_url:
                   type: string
                   description: File url that you want to get verify result.
-                  example: https://167051323.e.cdneverest.net/storage20/hh247/images/1535173995o-long-vien-2018.jpg
+                  example: >-
+                    https://167051323.e.cdneverest.net/storage20/hh247/images/1535173995o-long-vien-2018.jpg
                 group_id:
                   type: string
                   description: Group ID that you want to get data from.
@@ -291,36 +305,36 @@ paths:
                   verify_result:
                     type: string
         '400':
-          "$ref": "#/components/responses/400"
+          $ref: '#/components/responses/400'
         '401':
-          "$ref": "#/components/responses/401"
+          $ref: '#/components/responses/401'
         '500':
-          "$ref": "#/components/responses/500"
+          $ref: '#/components/responses/500'
       security:
-      - jwt: []
-  "/api/v1.0/caching/verify/{site_id}":
+        - jwt: []
+  '/api/v1.0/caching/verify/{site_id}':
     post:
       tags:
-      - CachingApi
+        - CachingApi
       summary: This API is allow user to verify checksum of cached files
       description: This API is allow user to verify checksum of cached files
       parameters:
-      - name: X-Auth-Key
-        in: header
-        description: The API Authentication Key
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-      - name: site_id
-        in: path
-        description: ID of the Site
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
+        - name: X-Auth-Key
+          in: header
+          description: The API Authentication Key
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+        - name: site_id
+          in: path
+          description: ID of the Site
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
@@ -334,8 +348,10 @@ paths:
                 list_files:
                   type: array
                   example:
-                  - https://167051323.e.cdneverest.net/storage20/hh247/images/1535173995o-long-vien-2018.jpg
-                  - https://167051323.e.cdneverest.net/storage20/hh247/images/1535173995o-long-vien-2019.jpg
+                    - >-
+                      https://167051323.e.cdneverest.net/storage20/hh247/images/1535173995o-long-vien-2018.jpg
+                    - >-
+                      https://167051323.e.cdneverest.net/storage20/hh247/images/1535173995o-long-vien-2019.jpg
                   items:
                     type: string
         required: true
@@ -352,44 +368,44 @@ paths:
                   message:
                     type: string
         '400':
-          "$ref": "#/components/responses/400"
+          $ref: '#/components/responses/400'
         '401':
-          "$ref": "#/components/responses/401"
+          $ref: '#/components/responses/401'
         '500':
-          "$ref": "#/components/responses/500"
+          $ref: '#/components/responses/500'
       security:
-      - jwt: []
-  "/api/v1.0/cname/add/{group_id}/{site_id}":
+        - jwt: []
+  '/api/v1.0/cname/add/{group_id}/{site_id}':
     post:
       tags:
-      - CNAMEApi
+        - CNAMEApi
       summary: add CNAME to CDN Site
       description: add CNAME to CDN Site
       parameters:
-      - name: X-Auth-Key
-        in: header
-        description: The API Authentication Key
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-      - name: group_id
-        in: path
-        description: ID of project, you can find it on our dashboard
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-      - name: site_id
-        in: path
-        description: ID of the Site.
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
+        - name: X-Auth-Key
+          in: header
+          description: The API Authentication Key
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+        - name: group_id
+          in: path
+          description: 'ID of project, you can find it on our dashboard'
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+        - name: site_id
+          in: path
+          description: ID of the Site.
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
@@ -407,51 +423,51 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/CNAMEInfoResult"
+                $ref: '#/components/schemas/CNAMEInfoResult'
         '400':
-          "$ref": "#/components/responses/400"
+          $ref: '#/components/responses/400'
         '401':
-          "$ref": "#/components/responses/401"
+          $ref: '#/components/responses/401'
         '500':
-          "$ref": "#/components/responses/500"
+          $ref: '#/components/responses/500'
       security:
-      - jwt: []
-  "/api/v1.0/cname/delete/{group_id}/{site_id}":
+        - jwt: []
+  '/api/v1.0/cname/delete/{group_id}/{site_id}':
     post:
       tags:
-      - CNAMEApi
+        - CNAMEApi
       summary: Delete CNAME
       description: Delete CNAME
       parameters:
-      - name: X-Auth-Key
-        in: header
-        description: The API Authentication Key
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-      - name: group_id
-        in: path
-        description: ID of project, you can find it on our dashboard
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-      - name: site_id
-        in: path
-        description: ID of the Site.
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
+        - name: X-Auth-Key
+          in: header
+          description: The API Authentication Key
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+        - name: group_id
+          in: path
+          description: 'ID of project, you can find it on our dashboard'
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+        - name: site_id
+          in: path
+          description: ID of the Site.
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/DomainForm"
+              $ref: '#/components/schemas/DomainForm'
         required: true
       responses:
         '200':
@@ -459,51 +475,51 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/GeneralResult"
+                $ref: '#/components/schemas/GeneralResult'
         '400':
-          "$ref": "#/components/responses/400"
+          $ref: '#/components/responses/400'
         '401':
-          "$ref": "#/components/responses/401"
+          $ref: '#/components/responses/401'
         '500':
-          "$ref": "#/components/responses/500"
+          $ref: '#/components/responses/500'
       security:
-      - jwt: []
-  "/api/v1.0/cname/info/{group_id}/{site_id}":
+        - jwt: []
+  '/api/v1.0/cname/info/{group_id}/{site_id}':
     post:
       tags:
-      - CNAMEApi
+        - CNAMEApi
       summary: Get Site's CNAME information
       description: Get Site's CNAME information
       parameters:
-      - name: X-Auth-Key
-        in: header
-        description: The API Authentication Key
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-      - name: group_id
-        in: path
-        description: ID of project, you can find it on our dashboard
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-      - name: site_id
-        in: path
-        description: ID of the Site.
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
+        - name: X-Auth-Key
+          in: header
+          description: The API Authentication Key
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+        - name: group_id
+          in: path
+          description: 'ID of project, you can find it on our dashboard'
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+        - name: site_id
+          in: path
+          description: ID of the Site.
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/DomainForm"
+              $ref: '#/components/schemas/DomainForm'
         required: true
       responses:
         '200':
@@ -511,97 +527,208 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/CNAMEInfoResult"
+                $ref: '#/components/schemas/CNAMEInfoResult'
         '400':
-          "$ref": "#/components/responses/400"
+          $ref: '#/components/responses/400'
         '401':
-          "$ref": "#/components/responses/401"
+          $ref: '#/components/responses/401'
         '500':
-          "$ref": "#/components/responses/500"
+          $ref: '#/components/responses/500'
       security:
-      - jwt: []
-  "/api/v1.0/cname/list/{group_id}/{site_id}":
+        - jwt: []
+  '/api/v1.0/cname/list-in-project/{group_id}':
     get:
       tags:
-      - CNAMEApi
+        - CNAMEApi
+      summary: List all CNAME in project
+      description: List all CNAME in project
+      parameters:
+        - name: X-Auth-Key
+          in: header
+          description: The API Authentication Key
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+        - name: group_id
+          in: path
+          description: 'ID of project, you can find it on our dashboard'
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+        - name: offset
+          in: query
+          description: Pagination - offset
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: integer
+        - name: limit
+          in: query
+          description: Pagination - number of response records limitation
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CNAMEListResult'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+      security:
+        - jwt: []
+  '/api/v1.0/cname/list/{group_id}/{site_id}':
+    get:
+      tags:
+        - CNAMEApi
       summary: List Site's CNAME in project
       description: List Site's CNAME in project
       parameters:
-      - name: X-Auth-Key
-        in: header
-        description: The API Authentication Key
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-      - name: group_id
-        in: path
-        description: ID of project, you can find it on our dashboard
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-      - name: site_id
-        in: path
-        description: ID of the Site.
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
+        - name: X-Auth-Key
+          in: header
+          description: The API Authentication Key
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+        - name: group_id
+          in: path
+          description: 'ID of project, you can find it on our dashboard'
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+        - name: site_id
+          in: path
+          description: ID of the Site.
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
       responses:
         '200':
           description: Successful
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/CNAMEListResult"
+                $ref: '#/components/schemas/CNAMEListResult'
         '400':
-          "$ref": "#/components/responses/400"
+          $ref: '#/components/responses/400'
         '401':
-          "$ref": "#/components/responses/401"
+          $ref: '#/components/responses/401'
         '500':
-          "$ref": "#/components/responses/500"
+          $ref: '#/components/responses/500'
       security:
-      - jwt: []
-  "/api/v1.0/cname/verify/{group_id}/{site_id}":
+        - jwt: []
+  '/api/v1.0/cname/remove-ssl/{group_id}/{site_id}':
     post:
       tags:
-      - CNAMEApi
+        - CNAMEApi
+      summary: Support remove cert on list CNAME
+      description: Support remove cert on CNAME
+      parameters:
+        - name: X-Auth-Key
+          in: header
+          description: The API Authentication Key
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+        - name: group_id
+          in: path
+          description: 'ID of project, you can find it on our dashboard'
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+        - name: site_id
+          in: path
+          description: ID of the Site.
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DomainForm'
+        required: true
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error_code:
+                    type: integer
+                  message:
+                    type: string
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+      security:
+        - jwt: []
+  '/api/v1.0/cname/verify/{group_id}/{site_id}':
+    post:
+      tags:
+        - CNAMEApi
       summary: Verify CNAME
       description: Verify CNAME
       parameters:
-      - name: X-Auth-Key
-        in: header
-        description: The API Authentication Key
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-      - name: group_id
-        in: path
-        description: ID of project, you can find it on our dashboard
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-      - name: site_id
-        in: path
-        description: ID of the Site.
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
+        - name: X-Auth-Key
+          in: header
+          description: The API Authentication Key
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+        - name: group_id
+          in: path
+          description: 'ID of project, you can find it on our dashboard'
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+        - name: site_id
+          in: path
+          description: ID of the Site.
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/DomainForm"
+              $ref: '#/components/schemas/DomainForm'
         required: true
       responses:
         '200':
@@ -609,81 +736,81 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/CNAMEInfoResult"
+                $ref: '#/components/schemas/CNAMEInfoResult'
         '400':
-          "$ref": "#/components/responses/400"
+          $ref: '#/components/responses/400'
         '401':
-          "$ref": "#/components/responses/401"
+          $ref: '#/components/responses/401'
         '500':
-          "$ref": "#/components/responses/500"
+          $ref: '#/components/responses/500'
       security:
-      - jwt: []
-  "/api/v1.0/group/list":
+        - jwt: []
+  /api/v1.0/group/list:
     get:
       tags:
-      - GroupApi
+        - GroupApi
       summary: Get Member's Groups list
       description: Get Member's Groups list
       parameters:
-      - name: X-Auth-Key
-        in: header
-        description: The API Authentication Key
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-      - name: offset
-        in: query
-        description: Pagination - offset
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: integer
-      - name: limit
-        in: query
-        description: Pagination - number of response records limitation
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: integer
+        - name: X-Auth-Key
+          in: header
+          description: The API Authentication Key
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+        - name: offset
+          in: query
+          description: Pagination - offset
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: integer
+        - name: limit
+          in: query
+          description: Pagination - number of response records limitation
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: integer
       responses:
         '200':
           description: Successful
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/GroupListResult"
+                $ref: '#/components/schemas/GroupListResult'
         '400':
-          "$ref": "#/components/responses/400"
+          $ref: '#/components/responses/400'
         '401':
-          "$ref": "#/components/responses/401"
+          $ref: '#/components/responses/401'
         '500':
-          "$ref": "#/components/responses/500"
+          $ref: '#/components/responses/500'
       security:
-      - jwt: []
-  "/api/v1.0/metric/get-traffic":
+        - jwt: []
+  /api/v1.0/metric/get-traffic:
     post:
       tags:
-      - MetricApi
-      summary: Get total Traffic data is transferred from EDGE, ORIGIN
-      description: Get total Traffic data is transferred from EDGE, ORIGIN
+        - MetricApi
+      summary: 'Get total Traffic data is transferred from EDGE, ORIGIN'
+      description: 'Get total Traffic data is transferred from EDGE, ORIGIN'
       parameters:
-      - name: X-Auth-Key
-        in: header
-        description: The API Authentication Key
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
+        - name: X-Auth-Key
+          in: header
+          description: The API Authentication Key
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/TrafficRequest"
+              $ref: '#/components/schemas/TrafficRequest'
         required: true
       responses:
         '200':
@@ -691,51 +818,51 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/TrafficDataResult"
+                $ref: '#/components/schemas/TrafficDataResult'
         '400':
-          "$ref": "#/components/responses/400"
+          $ref: '#/components/responses/400'
         '401':
-          "$ref": "#/components/responses/401"
+          $ref: '#/components/responses/401'
         '500':
-          "$ref": "#/components/responses/500"
+          $ref: '#/components/responses/500'
       security:
-      - jwt: []
-  "/api/v1.0/site-setting/edge-setting/{group_id}/{site_id}":
+        - jwt: []
+  '/api/v1.0/site-setting/edge-setting/{group_id}/{site_id}':
     post:
       tags:
-      - SiteSettingApi
+        - SiteSettingApi
       summary: Setup Site Edge Setting
       description: Setup Site Edge Setting
       parameters:
-      - name: X-Auth-Key
-        in: header
-        description: The API Authentication Key
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-      - name: group_id
-        in: path
-        description: ID of project, you can find it on our dashboard
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-      - name: site_id
-        in: path
-        description: ID of the Site.
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
+        - name: X-Auth-Key
+          in: header
+          description: The API Authentication Key
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+        - name: group_id
+          in: path
+          description: 'ID of project, you can find it on our dashboard'
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+        - name: site_id
+          in: path
+          description: ID of the Site.
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/SiteEdgeSettingForm"
+              $ref: '#/components/schemas/SiteEdgeSettingForm'
         required: true
       responses:
         '200':
@@ -743,51 +870,51 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/SiteEdgeSettingResult"
+                $ref: '#/components/schemas/SiteEdgeSettingResult'
         '400':
-          "$ref": "#/components/responses/400"
+          $ref: '#/components/responses/400'
         '401':
-          "$ref": "#/components/responses/401"
+          $ref: '#/components/responses/401'
         '500':
-          "$ref": "#/components/responses/500"
+          $ref: '#/components/responses/500'
       security:
-      - jwt: []
-  "/api/v1.0/site-setting/firewall-setting/{group_id}/{site_id}":
+        - jwt: []
+  '/api/v1.0/site-setting/firewall-setting/{group_id}/{site_id}':
     post:
       tags:
-      - SiteSettingApi
+        - SiteSettingApi
       summary: Setup Site Firewall Setting
       description: Setup Site Firewall Setting
       parameters:
-      - name: X-Auth-Key
-        in: header
-        description: The API Authentication Key
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-      - name: group_id
-        in: path
-        description: ID of project, you can find it on our dashboard
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-      - name: site_id
-        in: path
-        description: ID of the Site.
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
+        - name: X-Auth-Key
+          in: header
+          description: The API Authentication Key
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+        - name: group_id
+          in: path
+          description: 'ID of project, you can find it on our dashboard'
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+        - name: site_id
+          in: path
+          description: ID of the Site.
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/SiteFirewallSetting"
+              $ref: '#/components/schemas/SiteFirewallSetting'
         required: true
       responses:
         '200':
@@ -795,42 +922,42 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/SiteFirewallSettingResult"
+                $ref: '#/components/schemas/SiteFirewallSettingResult'
         '400':
-          "$ref": "#/components/responses/400"
+          $ref: '#/components/responses/400'
         '401':
-          "$ref": "#/components/responses/401"
+          $ref: '#/components/responses/401'
         '500':
-          "$ref": "#/components/responses/500"
+          $ref: '#/components/responses/500'
       security:
-      - jwt: []
-  "/api/v1.0/site-setting/update-cors":
+        - jwt: []
+  /api/v1.0/site-setting/update-cors:
     post:
       tags:
-      - SiteSettingApi
+        - SiteSettingApi
       summary: Update site cors header
       description: Update site cors header
       parameters:
-      - name: X-Auth-Key
-        in: header
-        description: The API Authentication Key
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-      - name: group_id
-        in: query
-        description: Numeric ID of the project that site is belong to.
-        required: true
-        style: form
-        explode: true
-      - name: site_id
-        in: query
-        description: Numeric ID of the Site.
-        required: true
-        style: form
-        explode: true
+        - name: X-Auth-Key
+          in: header
+          description: The API Authentication Key
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+        - name: group_id
+          in: query
+          description: Numeric ID of the project that site is belong to.
+          required: true
+          style: form
+          explode: true
+        - name: site_id
+          in: query
+          description: Numeric ID of the Site.
+          required: true
+          style: form
+          explode: true
       requestBody:
         content:
           application/json:
@@ -841,15 +968,16 @@ paths:
                   type: array
                   description: List cors header domains.
                   example:
-                  - "*.sport.net"
-                  - "*.space.net"
+                    - '*.sport.net'
+                    - '*.space.net'
                   items:
                     type: string
                 enable_cors:
                   type: integer
-                  description: 'Enable cors header. Option: 1(on) / 0(off). When CORS
-                    support is enabled, If you don''t set any domains, default value
-                    in header is ''Access-Control-Allow-Origin: *'''
+                  description: >-
+                    Enable cors header. Option: 1(on) / 0(off). When CORS
+                    support is enabled, If you don't set any domains, default
+                    value in header is 'Access-Control-Allow-Origin: *'
                   example: 1
         required: true
       responses:
@@ -858,42 +986,42 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/SiteSettingCorsHeaderResult"
+                $ref: '#/components/schemas/SiteSettingCorsHeaderResult'
         '400':
-          "$ref": "#/components/responses/400"
+          $ref: '#/components/responses/400'
         '401':
-          "$ref": "#/components/responses/401"
+          $ref: '#/components/responses/401'
         '500':
-          "$ref": "#/components/responses/500"
+          $ref: '#/components/responses/500'
       security:
-      - jwt: []
-  "/api/v1.0/site-setting/update-referer":
+        - jwt: []
+  /api/v1.0/site-setting/update-referer:
     post:
       tags:
-      - SiteSettingApi
+        - SiteSettingApi
       summary: Update site referer setting
       description: Update site referer setting
       parameters:
-      - name: X-Auth-Key
-        in: header
-        description: The API Authentication Key
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-      - name: group_id
-        in: query
-        description: Numeric ID of the project that site is belong to.
-        required: true
-        style: form
-        explode: true
-      - name: site_id
-        in: query
-        description: Numeric ID of the Site.
-        required: true
-        style: form
-        explode: true
+        - name: X-Auth-Key
+          in: header
+          description: The API Authentication Key
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+        - name: group_id
+          in: query
+          description: Numeric ID of the project that site is belong to.
+          required: true
+          style: form
+          explode: true
+        - name: site_id
+          in: query
+          description: Numeric ID of the Site.
+          required: true
+          style: form
+          explode: true
       requestBody:
         content:
           application/json:
@@ -904,8 +1032,8 @@ paths:
                   type: array
                   description: List Referer's domains.
                   example:
-                  - refer1.sport.net
-                  - refer2.sport.net
+                    - refer1.sport.net
+                    - refer2.sport.net
                   items:
                     type: string
                 secure_http_refer_allow_none:
@@ -914,15 +1042,14 @@ paths:
                   example: 0
                 secure_http_refer_enable:
                   type: integer
-                  description: 'Enable secure http referer option. Option: 1(on) /
-                    0(off)'
+                  description: 'Enable secure http referer option. Option: 1(on) / 0(off)'
                   example: 1
                 secure_http_refer_wildcard:
                   type: array
                   description: List Referer's wildcard domains.
                   example:
-                  - "*.sport.net"
-                  - "*.space.net"
+                    - '*.sport.net'
+                    - '*.space.net'
                   items:
                     type: string
         required: true
@@ -932,51 +1059,51 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/SiteSettingRefererResult"
+                $ref: '#/components/schemas/SiteSettingRefererResult'
         '400':
-          "$ref": "#/components/responses/400"
+          $ref: '#/components/responses/400'
         '401':
-          "$ref": "#/components/responses/401"
+          $ref: '#/components/responses/401'
         '500':
-          "$ref": "#/components/responses/500"
+          $ref: '#/components/responses/500'
       security:
-      - jwt: []
-  "/api/v1.0/site-url-setting/add/{group_id}/{site_id}":
+        - jwt: []
+  '/api/v1.0/site-url-setting/add/{group_id}/{site_id}':
     post:
       tags:
-      - UrlSettingApi
+        - UrlSettingApi
       summary: Add Site URL Setting
       description: Add Site URL Setting
       parameters:
-      - name: X-Auth-Key
-        in: header
-        description: The API Authentication Key
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-      - name: group_id
-        in: path
-        description: ID of project, you can find it on our dashboard
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-      - name: site_id
-        in: path
-        description: ID of the Site.
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
+        - name: X-Auth-Key
+          in: header
+          description: The API Authentication Key
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+        - name: group_id
+          in: path
+          description: 'ID of project, you can find it on our dashboard'
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+        - name: site_id
+          in: path
+          description: ID of the Site.
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/URLSettingForm"
+              $ref: '#/components/schemas/URLSettingForm'
         required: true
       responses:
         '200':
@@ -984,97 +1111,149 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/URLSettingAddResult"
+                $ref: '#/components/schemas/URLSettingAddResult'
         '400':
-          "$ref": "#/components/responses/400"
+          $ref: '#/components/responses/400'
         '401':
-          "$ref": "#/components/responses/401"
+          $ref: '#/components/responses/401'
         '500':
-          "$ref": "#/components/responses/500"
+          $ref: '#/components/responses/500'
       security:
-      - jwt: []
-  "/api/v1.0/site-url-setting/list/{group_id}/{site_id}":
+        - jwt: []
+  '/api/v1.0/site-url-setting/list/{group_id}/{site_id}':
     get:
       tags:
-      - UrlSettingApi
+        - UrlSettingApi
       summary: List Site in project
       description: List Site in project
       parameters:
-      - name: X-Auth-Key
-        in: header
-        description: The API Authentication Key
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-      - name: group_id
-        in: path
-        description: ID of project, you can find it on our dashboard
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-      - name: site_id
-        in: path
-        description: ID of the Site.
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
+        - name: X-Auth-Key
+          in: header
+          description: The API Authentication Key
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+        - name: group_id
+          in: path
+          description: 'ID of project, you can find it on our dashboard'
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+        - name: site_id
+          in: path
+          description: ID of the Site.
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
       responses:
         '200':
           description: Successful
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/URLSettingResult"
+                $ref: '#/components/schemas/URLSettingResult'
         '400':
-          "$ref": "#/components/responses/400"
+          $ref: '#/components/responses/400'
         '401':
-          "$ref": "#/components/responses/401"
+          $ref: '#/components/responses/401'
         '500':
-          "$ref": "#/components/responses/500"
+          $ref: '#/components/responses/500'
       security:
-      - jwt: []
-  "/api/v1.0/site-url-setting/update/{group_id}/{site_id}":
+        - jwt: []
+  '/api/v1.0/site-url-setting/remove/{group_id}/{site_id}':
     post:
       tags:
-      - UrlSettingApi
+        - UrlSettingApi
+      summary: Remove Site URL Setting
+      description: Remove Site URL Setting
+      parameters:
+        - name: X-Auth-Key
+          in: header
+          description: The API Authentication Key
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+        - name: group_id
+          in: path
+          description: 'ID of project, you can find it on our dashboard'
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+        - name: site_id
+          in: path
+          description: ID of the Site.
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/URLSettingDeleteForm'
+        required: true
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/URLSettingAddResult'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+      security:
+        - jwt: []
+  '/api/v1.0/site-url-setting/update/{group_id}/{site_id}':
+    post:
+      tags:
+        - UrlSettingApi
       summary: Update Site URL Setting
       description: Update Site URL Setting
       parameters:
-      - name: X-Auth-Key
-        in: header
-        description: The API Authentication Key
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-      - name: group_id
-        in: path
-        description: ID of project, you can find it on our dashboard
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-      - name: site_id
-        in: path
-        description: ID of the Site.
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
+        - name: X-Auth-Key
+          in: header
+          description: The API Authentication Key
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+        - name: group_id
+          in: path
+          description: 'ID of project, you can find it on our dashboard'
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+        - name: site_id
+          in: path
+          description: ID of the Site.
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/URLSettingUpdateForm"
+              $ref: '#/components/schemas/URLSettingUpdateForm'
         required: true
       responses:
         '200':
@@ -1082,43 +1261,43 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/URLSettingAddResult"
+                $ref: '#/components/schemas/URLSettingAddResult'
         '400':
-          "$ref": "#/components/responses/400"
+          $ref: '#/components/responses/400'
         '401':
-          "$ref": "#/components/responses/401"
+          $ref: '#/components/responses/401'
         '500':
-          "$ref": "#/components/responses/500"
+          $ref: '#/components/responses/500'
       security:
-      - jwt: []
-  "/api/v1.0/site/create/{group_id}":
+        - jwt: []
+  '/api/v1.0/site/create/{group_id}':
     post:
       tags:
-      - SiteApi
+        - SiteApi
       summary: Create CDN site
       description: Create CDN site
       parameters:
-      - name: X-Auth-Key
-        in: header
-        description: The API Authentication Key
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-      - name: group_id
-        in: path
-        description: ID of project, you can find it on our dashboard
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
+        - name: X-Auth-Key
+          in: header
+          description: The API Authentication Key
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+        - name: group_id
+          in: path
+          description: 'ID of project, you can find it on our dashboard'
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/SiteForm"
+              $ref: '#/components/schemas/SiteForm'
         required: true
       responses:
         '200':
@@ -1126,46 +1305,46 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/SiteInfoResult"
+                $ref: '#/components/schemas/SiteInfoResult'
         '400':
-          "$ref": "#/components/responses/400"
+          $ref: '#/components/responses/400'
         '401':
-          "$ref": "#/components/responses/401"
+          $ref: '#/components/responses/401'
         '500':
-          "$ref": "#/components/responses/500"
+          $ref: '#/components/responses/500'
       security:
-      - jwt: []
-  "/api/v1.0/site/delete/{group_id}/{site_id}":
+        - jwt: []
+  '/api/v1.0/site/delete/{group_id}/{site_id}':
     delete:
       tags:
-      - SiteApi
+        - SiteApi
       summary: Delete Site
       description: Delete Site
       parameters:
-      - name: X-Auth-Key
-        in: header
-        description: The API Authentication Key
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-      - name: group_id
-        in: path
-        description: ID of project, you can find it on our dashboard
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-      - name: site_id
-        in: path
-        description: ID of the Site.
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
+        - name: X-Auth-Key
+          in: header
+          description: The API Authentication Key
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+        - name: group_id
+          in: path
+          description: 'ID of project, you can find it on our dashboard'
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+        - name: site_id
+          in: path
+          description: ID of the Site.
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
       responses:
         '200':
           description: Successful
@@ -1173,7 +1352,7 @@ paths:
             application/json:
               schema:
                 required:
-                - error_code
+                  - error_code
                 type: object
                 properties:
                   error_code:
@@ -1181,44 +1360,44 @@ paths:
                   message:
                     type: string
         '400':
-          "$ref": "#/components/responses/400"
+          $ref: '#/components/responses/400'
         '401':
-          "$ref": "#/components/responses/401"
+          $ref: '#/components/responses/401'
         '500':
-          "$ref": "#/components/responses/500"
+          $ref: '#/components/responses/500'
       security:
-      - jwt: []
-  "/api/v1.0/site/disable-site/{group_id}/{site_id}":
+        - jwt: []
+  '/api/v1.0/site/disable-site/{group_id}/{site_id}':
     put:
       tags:
-      - SiteApi
+        - SiteApi
       summary: Disable an active Site
       description: Disable an active Site
       parameters:
-      - name: X-Auth-Key
-        in: header
-        description: The API Authentication Key
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-      - name: group_id
-        in: path
-        description: ID of project, you can find it on our dashboard
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-      - name: site_id
-        in: path
-        description: ID of the Site.
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
+        - name: X-Auth-Key
+          in: header
+          description: The API Authentication Key
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+        - name: group_id
+          in: path
+          description: 'ID of project, you can find it on our dashboard'
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+        - name: site_id
+          in: path
+          description: ID of the Site.
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
@@ -1231,7 +1410,7 @@ paths:
             application/json:
               schema:
                 required:
-                - error_code
+                  - error_code
                 type: object
                 properties:
                   error_code:
@@ -1239,44 +1418,44 @@ paths:
                   message:
                     type: string
         '400':
-          "$ref": "#/components/responses/400"
+          $ref: '#/components/responses/400'
         '401':
-          "$ref": "#/components/responses/401"
+          $ref: '#/components/responses/401'
         '500':
-          "$ref": "#/components/responses/500"
+          $ref: '#/components/responses/500'
       security:
-      - jwt: []
-  "/api/v1.0/site/enable-site/{group_id}/{site_id}":
+        - jwt: []
+  '/api/v1.0/site/enable-site/{group_id}/{site_id}':
     put:
       tags:
-      - SiteApi
+        - SiteApi
       summary: Enable inactivated Site
       description: Enable inactivated Site
       parameters:
-      - name: X-Auth-Key
-        in: header
-        description: The API Authentication Key
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-      - name: group_id
-        in: path
-        description: ID of project, you can find it on our dashboard
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-      - name: site_id
-        in: path
-        description: ID of the Site.
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
+        - name: X-Auth-Key
+          in: header
+          description: The API Authentication Key
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+        - name: group_id
+          in: path
+          description: 'ID of project, you can find it on our dashboard'
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+        - name: site_id
+          in: path
+          description: ID of the Site.
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
@@ -1289,7 +1468,7 @@ paths:
             application/json:
               schema:
                 required:
-                - error_code
+                  - error_code
                 type: object
                 properties:
                   error_code:
@@ -1297,133 +1476,133 @@ paths:
                   message:
                     type: string
         '400':
-          "$ref": "#/components/responses/400"
+          $ref: '#/components/responses/400'
         '401':
-          "$ref": "#/components/responses/401"
+          $ref: '#/components/responses/401'
         '500':
-          "$ref": "#/components/responses/500"
+          $ref: '#/components/responses/500'
       security:
-      - jwt: []
-  "/api/v1.0/site/info/{group_id}/{site_id}":
+        - jwt: []
+  '/api/v1.0/site/info/{group_id}/{site_id}':
     get:
       tags:
-      - SiteApi
+        - SiteApi
       summary: Get Site's metadata information
       description: Get Site's metadata information
       parameters:
-      - name: X-Auth-Key
-        in: header
-        description: The API Authentication Key
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-      - name: group_id
-        in: path
-        description: ID of project, you can find it on our dashboard
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-      - name: site_id
-        in: path
-        description: ID of the Site.
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
+        - name: X-Auth-Key
+          in: header
+          description: The API Authentication Key
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+        - name: group_id
+          in: path
+          description: 'ID of project, you can find it on our dashboard'
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+        - name: site_id
+          in: path
+          description: ID of the Site.
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
       responses:
         '200':
           description: Successful
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/SiteInfoResult"
+                $ref: '#/components/schemas/SiteInfoResult'
         '400':
-          "$ref": "#/components/responses/400"
+          $ref: '#/components/responses/400'
         '401':
-          "$ref": "#/components/responses/401"
+          $ref: '#/components/responses/401'
         '500':
-          "$ref": "#/components/responses/500"
+          $ref: '#/components/responses/500'
       security:
-      - jwt: []
-  "/api/v1.0/site/list/{group_id}":
+        - jwt: []
+  '/api/v1.0/site/list/{group_id}':
     get:
       tags:
-      - SiteApi
+        - SiteApi
       summary: List Site in project
       description: List Site in project
       parameters:
-      - name: X-Auth-Key
-        in: header
-        description: The API Authentication Key
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-      - name: group_id
-        in: path
-        description: ID of project, you can find it on our dashboard
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
+        - name: X-Auth-Key
+          in: header
+          description: The API Authentication Key
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+        - name: group_id
+          in: path
+          description: 'ID of project, you can find it on our dashboard'
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
       responses:
         '200':
           description: Successful
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/SiteListResult"
+                $ref: '#/components/schemas/SiteListResult'
         '400':
-          "$ref": "#/components/responses/400"
+          $ref: '#/components/responses/400'
         '401':
-          "$ref": "#/components/responses/401"
+          $ref: '#/components/responses/401'
         '500':
-          "$ref": "#/components/responses/500"
+          $ref: '#/components/responses/500'
       security:
-      - jwt: []
-  "/api/v1.0/site/site-setup/{group_id}/{site_id}":
+        - jwt: []
+  '/api/v1.0/site/site-setup/{group_id}/{site_id}':
     post:
       tags:
-      - SiteApi
+        - SiteApi
       summary: Setup CDN site
       description: Setup CDN site
       parameters:
-      - name: X-Auth-Key
-        in: header
-        description: The API Authentication Key
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-      - name: group_id
-        in: path
-        description: ID of project, you can find it on our dashboard
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-      - name: site_id
-        in: path
-        description: Numeric ID of the Site.
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
+        - name: X-Auth-Key
+          in: header
+          description: The API Authentication Key
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+        - name: group_id
+          in: path
+          description: 'ID of project, you can find it on our dashboard'
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+        - name: site_id
+          in: path
+          description: Numeric ID of the Site.
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/SiteSetupForm"
+              $ref: '#/components/schemas/SiteSetupForm'
         required: true
       responses:
         '200':
@@ -1431,43 +1610,43 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/SiteInfoResult"
+                $ref: '#/components/schemas/SiteInfoResult'
         '400':
-          "$ref": "#/components/responses/400"
+          $ref: '#/components/responses/400'
         '401':
-          "$ref": "#/components/responses/401"
+          $ref: '#/components/responses/401'
         '500':
-          "$ref": "#/components/responses/500"
+          $ref: '#/components/responses/500'
       security:
-      - jwt: []
-  "/api/v1.0/ssl/add-cert/{group_id}":
+        - jwt: []
+  '/api/v1.0/ssl/add-cert/{group_id}':
     post:
       tags:
-      - SSLCertificationAPI
+        - SSLCertificationAPI
       summary: Upload SSL Certificate
       description: Upload SSL Certificate
       parameters:
-      - name: X-Auth-Key
-        in: header
-        description: The API Authentication Key
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-      - name: group_id
-        in: path
-        description: ID of project, you can find it on our dashboard
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
+        - name: X-Auth-Key
+          in: header
+          description: The API Authentication Key
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+        - name: group_id
+          in: path
+          description: 'ID of project, you can find it on our dashboard'
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/AddCertForm"
+              $ref: '#/components/schemas/AddCertForm'
         required: true
       responses:
         '200':
@@ -1475,43 +1654,43 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/AddCertResult"
+                $ref: '#/components/schemas/AddCertResult'
         '400':
-          "$ref": "#/components/responses/400"
+          $ref: '#/components/responses/400'
         '401':
-          "$ref": "#/components/responses/401"
+          $ref: '#/components/responses/401'
         '500':
-          "$ref": "#/components/responses/500"
+          $ref: '#/components/responses/500'
       security:
-      - jwt: []
-  "/api/v1.0/ssl/deploy/{group_id}":
+        - jwt: []
+  '/api/v1.0/ssl/deploy/{group_id}':
     post:
       tags:
-      - SSLCertificationAPI
+        - SSLCertificationAPI
       summary: Support deploy cert on list CNAMES
       description: Support deploy cert on list CNAMES
       parameters:
-      - name: X-Auth-Key
-        in: header
-        description: The API Authentication Key
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-      - name: group_id
-        in: path
-        description: ID of project, you can find it on our dashboard
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
+        - name: X-Auth-Key
+          in: header
+          description: The API Authentication Key
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+        - name: group_id
+          in: path
+          description: 'ID of project, you can find it on our dashboard'
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/CertDeployment"
+              $ref: '#/components/schemas/CertDeployment'
         required: true
       responses:
         '200':
@@ -1526,41 +1705,41 @@ paths:
                   message:
                     type: string
         '400':
-          "$ref": "#/components/responses/400"
+          $ref: '#/components/responses/400'
         '401':
-          "$ref": "#/components/responses/401"
+          $ref: '#/components/responses/401'
         '500':
-          "$ref": "#/components/responses/500"
+          $ref: '#/components/responses/500'
       security:
-      - jwt: []
-  "/api/v1.0/ssl/generate-free-cert/{group_id}":
+        - jwt: []
+  '/api/v1.0/ssl/generate-free-cert/{group_id}':
     post:
       tags:
-      - SSLCertificationAPI
+        - SSLCertificationAPI
       summary: Generate LetsEncryption Cert
       description: Generate LetsEncryption Cert
       parameters:
-      - name: X-Auth-Key
-        in: header
-        description: The API Authentication Key
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-      - name: group_id
-        in: path
-        description: ID of project, you can find it on our dashboard
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
+        - name: X-Auth-Key
+          in: header
+          description: The API Authentication Key
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+        - name: group_id
+          in: path
+          description: 'ID of project, you can find it on our dashboard'
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/GenerateCertForm"
+              $ref: '#/components/schemas/GenerateCertForm'
         required: true
       responses:
         '200':
@@ -1568,43 +1747,43 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/GenerateCertResult"
+                $ref: '#/components/schemas/GenerateCertResult'
         '400':
-          "$ref": "#/components/responses/400"
+          $ref: '#/components/responses/400'
         '401':
-          "$ref": "#/components/responses/401"
+          $ref: '#/components/responses/401'
         '500':
-          "$ref": "#/components/responses/500"
+          $ref: '#/components/responses/500'
       security:
-      - jwt: []
-  "/api/v1.0/ssl/get-cert-info/{group_id}":
+        - jwt: []
+  '/api/v1.0/ssl/get-cert-info/{group_id}':
     post:
       tags:
-      - SSLCertificationAPI
+        - SSLCertificationAPI
       summary: Api get SSL Certificate information
       description: Api get SSL Certificate information
       parameters:
-      - name: X-Auth-Key
-        in: header
-        description: The API Authentication Key
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-      - name: group_id
-        in: path
-        description: ID of project, you can find it on our dashboard
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
+        - name: X-Auth-Key
+          in: header
+          description: The API Authentication Key
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+        - name: group_id
+          in: path
+          description: 'ID of project, you can find it on our dashboard'
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/RequestCertForm"
+              $ref: '#/components/schemas/RequestCertForm'
         required: true
       responses:
         '200':
@@ -1612,84 +1791,128 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/CertInfoResult"
+                $ref: '#/components/schemas/CertInfoResult'
         '400':
-          "$ref": "#/components/responses/400"
+          $ref: '#/components/responses/400'
         '401':
-          "$ref": "#/components/responses/401"
+          $ref: '#/components/responses/401'
         '500':
-          "$ref": "#/components/responses/500"
+          $ref: '#/components/responses/500'
       security:
-      - jwt: []
-  "/api/v1.0/ssl/list/{group_id}":
+        - jwt: []
+  '/api/v1.0/ssl/list/{group_id}':
     get:
       tags:
-      - SSLCertificationAPI
+        - SSLCertificationAPI
       summary: Get List SSL Certification by Project
       description: Get List SSL Certification by Project
       parameters:
-      - name: X-Auth-Key
-        in: header
-        description: The API Authentication Key
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-      - name: group_id
-        in: path
-        description: ID of project, you can find it on api /group/list
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-      - name: offset
-        in: query
-        description: Pagination - offset
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: integer
-      - name: limit
-        in: query
-        description: Pagination - number of response records limitation
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: integer
+        - name: X-Auth-Key
+          in: header
+          description: The API Authentication Key
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+        - name: group_id
+          in: path
+          description: 'ID of project, you can find it on api /group/list'
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+        - name: offset
+          in: query
+          description: Pagination - offset
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: integer
+        - name: limit
+          in: query
+          description: Pagination - number of response records limitation
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: integer
       responses:
         '200':
           description: Successful
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/GroupListResult"
+                $ref: '#/components/schemas/GroupListResult'
         '400':
-          "$ref": "#/components/responses/400"
+          $ref: '#/components/responses/400'
         '401':
-          "$ref": "#/components/responses/401"
+          $ref: '#/components/responses/401'
         '500':
-          "$ref": "#/components/responses/500"
+          $ref: '#/components/responses/500'
       security:
-      - jwt: []
-  "/api/v1.0/statistic/get-data":
+        - jwt: []
+  '/api/v1.0/ssl/remove-cert/{group_id}':
     post:
       tags:
-      - StatisticApi
+        - SSLCertificationAPI
+      summary: Api remove SSL Certificate
+      description: Api remove SSL Certificate
+      parameters:
+        - name: X-Auth-Key
+          in: header
+          description: The API Authentication Key
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+        - name: group_id
+          in: path
+          description: 'ID of project, you can find it on our dashboard'
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestCertForm'
+        required: true
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CertInfoResult'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+      security:
+        - jwt: []
+  /api/v1.0/statistic/get-data:
+    post:
+      tags:
+        - StatisticApi
       summary: Get Statistic data by queries and filters
       description: Get Statistic data by queries and filters
       parameters:
-      - name: X-Auth-Key
-        in: header
-        description: The API Authentication Key
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
+        - name: X-Auth-Key
+          in: header
+          description: The API Authentication Key
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
@@ -1698,21 +1921,23 @@ paths:
               properties:
                 filter_time:
                   type: string
-                  description: 'This field define the time range you want to filter,
-                    format is %d/%m/%Y %H:%M:%S - %d/%m/%Y %H:%M:%S. Default - fromTime:
-                    now()-30mins, toTime:: now()'
-                  example: 01/08/2020 00:00:01 - 01/08/2020 23:59:59
+                  description: >-
+                    This field define the time range you want to filter, format
+                    is %d/%m/%Y %H:%M:%S - %d/%m/%Y %H:%M:%S. Default -
+                    fromTime: now()-30mins, toTime:: now()
+                  example: '01/08/2020 00:00:01 - 01/08/2020 23:59:59'
                 group_id:
                   type: string
                   description: Group ID that you want to get data from.
-                  example: '1'
+                  example: 204fgfg5e1ddB5cbe808dfVVgY45Z
                 site_ids:
                   type: array
-                  description: List Site ID that you want to get data. Default value
-                    is [] - get all sites that you've owned.
+                  description: >-
+                    List Site ID that you want to get data. Default value is []
+                    - get all sites that you've owned.
                   example:
-                  - 1
-                  - 2
+                    - 0A7fC3Bda5e1ddB5cbe808dfVV8yZ
+                    - 204fgfg5e1ddB5cbe808dfVVgY45Z
                   items:
                     type: string
         required: true
@@ -1723,7 +1948,7 @@ paths:
             application/json:
               schema:
                 required:
-                - error_code
+                  - error_code
                 type: object
                 properties:
                   data:
@@ -1733,28 +1958,28 @@ paths:
                   message:
                     type: string
         '400':
-          "$ref": "#/components/responses/400"
+          $ref: '#/components/responses/400'
         '401':
-          "$ref": "#/components/responses/401"
+          $ref: '#/components/responses/401'
         '500':
-          "$ref": "#/components/responses/500"
+          $ref: '#/components/responses/500'
       security:
-      - jwt: []
-  "/api/v1.0/statistic/get-file-type-data":
+        - jwt: []
+  /api/v1.0/statistic/get-file-type-data:
     post:
       tags:
-      - StatisticApi
+        - StatisticApi
       summary: Get Statistic data group by file type.
       description: Get Statistic data group by file type.
       parameters:
-      - name: X-Auth-Key
-        in: header
-        description: The API Authentication Key
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
+        - name: X-Auth-Key
+          in: header
+          description: The API Authentication Key
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
@@ -1763,30 +1988,33 @@ paths:
               properties:
                 extensions:
                   type: array
-                  description: List of extensions that you want to get data. Default
-                    value is [] - get all extensions that your's sites served.
+                  description: >-
+                    List of extensions that you want to get data. Default value
+                    is [] - get all extensions that your's sites served.
                   example:
-                  - m3u8
-                  - mp4
+                    - m3u8
+                    - mp4
                   items:
                     type: string
                 filter_time:
                   type: string
-                  description: 'This field define the time range you want to filter,
-                    format is %d/%m/%Y %H:%M:%S - %d/%m/%Y %H:%M:%S. Default - fromTime:
-                    now()-30mins, toTime:: now()'
-                  example: 01/08/2020 00:00:01 - 01/08/2020 23:59:59
+                  description: >-
+                    This field define the time range you want to filter, format
+                    is %d/%m/%Y %H:%M:%S - %d/%m/%Y %H:%M:%S. Default -
+                    fromTime: now()-30mins, toTime:: now()
+                  example: '01/08/2020 00:00:01 - 01/08/2020 23:59:59'
                 group_id:
                   type: string
                   description: Group ID that you want to get data from.
-                  example: '1'
+                  example: 204fgfg5e1ddB5cbe808dfVVgY45Z
                 site_ids:
                   type: array
-                  description: List Site ID that you want to get data. Default value
-                    is [] - get all sites that you've owned.
+                  description: >-
+                    List Site ID that you want to get data. Default value is []
+                    - get all sites that you've owned.
                   example:
-                  - 1
-                  - 2
+                    - 0A7fC3Bda5e1ddB5cbe808dfVV8yZ
+                    - 204fgfg5e1ddB5cbe808dfVVgY45Z
                   items:
                     type: string
         required: true
@@ -1797,7 +2025,7 @@ paths:
             application/json:
               schema:
                 required:
-                - error_code
+                  - error_code
                 type: object
                 properties:
                   data:
@@ -1807,44 +2035,44 @@ paths:
                   message:
                     type: string
         '400':
-          "$ref": "#/components/responses/400"
+          $ref: '#/components/responses/400'
         '401':
-          "$ref": "#/components/responses/401"
+          $ref: '#/components/responses/401'
         '500':
-          "$ref": "#/components/responses/500"
+          $ref: '#/components/responses/500'
       security:
-      - jwt: []
-  "/api/v1.0/statistic/get-referer-data/{offset}/{limit}":
+        - jwt: []
+  /api/v1.0/statistic/get-referer-data:
     post:
       tags:
-      - StatisticApi
+        - StatisticApi
       summary: Get Analytics referer's data by Site
       description: Get Analytics referer's data by Site
       parameters:
-      - name: X-Auth-Key
-        in: header
-        description: The API Authentication Key
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-      - name: offset
-        in: path
-        description: Pagination - offset
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: integer
-      - name: limit
-        in: path
-        description: Pagination - number of response records limitation
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: integer
+        - name: X-Auth-Key
+          in: header
+          description: The API Authentication Key
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+        - name: offset
+          in: query
+          description: Pagination - offset
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: integer
+        - name: limit
+          in: query
+          description: Pagination - number of response records limitation
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: integer
       requestBody:
         content:
           application/json:
@@ -1853,21 +2081,23 @@ paths:
               properties:
                 filter_time:
                   type: string
-                  description: 'This field define the time range you want to filter,
-                    format is %d/%m/%Y %H:%M:%S - %d/%m/%Y %H:%M:%S. Default - fromTime:
-                    now()-30mins, toTime:: now()'
-                  example: 01/08/2020 00:00:01 - 01/08/2020 23:59:59
+                  description: >-
+                    This field define the time range you want to filter, format
+                    is %d/%m/%Y %H:%M:%S - %d/%m/%Y %H:%M:%S. Default -
+                    fromTime: now()-30mins, toTime:: now()
+                  example: '01/08/2020 00:00:01 - 01/08/2020 23:59:59'
                 group_id:
                   type: string
                   description: Group ID that you want to get data from.
-                  example: '1'
+                  example: 204fgfg5e1ddB5cbe808dfVVgY45Z
                 site_ids:
                   type: array
-                  description: List Site ID that you want to get data. Default value
-                    is [] - get all sites that you've owned.
+                  description: >-
+                    List Site ID that you want to get data. Default value is []
+                    - get all sites that you've owned.
                   example:
-                  - 1
-                  - 2
+                    - 0A7fC3Bda5e1ddB5cbe808dfVV8yZ
+                    - 204fgfg5e1ddB5cbe808dfVVgY45Z
                   items:
                     type: string
         required: true
@@ -1878,7 +2108,7 @@ paths:
             application/json:
               schema:
                 required:
-                - error_code
+                  - error_code
                 type: object
                 properties:
                   data:
@@ -1888,28 +2118,28 @@ paths:
                   message:
                     type: string
         '400':
-          "$ref": "#/components/responses/400"
+          $ref: '#/components/responses/400'
         '401':
-          "$ref": "#/components/responses/401"
+          $ref: '#/components/responses/401'
         '500':
-          "$ref": "#/components/responses/500"
+          $ref: '#/components/responses/500'
       security:
-      - jwt: []
-  "/api/v1.0/statistic/get-uri-data":
+        - jwt: []
+  /api/v1.0/statistic/get-uri-data:
     post:
       tags:
-      - StatisticApi
+        - StatisticApi
       summary: Get Statistic url data by referer
       description: Get Statistic url data by referer
       parameters:
-      - name: X-Auth-Key
-        in: header
-        description: The API Authentication Key
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
+        - name: X-Auth-Key
+          in: header
+          description: The API Authentication Key
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
@@ -1918,20 +2148,23 @@ paths:
               properties:
                 filter_time:
                   type: string
-                  description: 'This field define the time range you want to filter,
-                    format is %d/%m/%Y %H:%M:%S - %d/%m/%Y %H:%M:%S. Default - fromTime:
-                    now()-30mins, toTime:: now()'
-                  example: 01/08/2020 00:00:01 - 01/08/2020 23:59:59
+                  description: >-
+                    This field define the time range you want to filter, format
+                    is %d/%m/%Y %H:%M:%S - %d/%m/%Y %H:%M:%S. Default -
+                    fromTime: now()-30mins, toTime:: now()
+                  example: '01/08/2020 00:00:01 - 01/08/2020 23:59:59'
                 group_id:
                   type: string
                   description: Group ID that you want to get data from.
-                  example: '1'
+                  example: 204fgfg5e1ddB5cbe808dfVVgY45Z
                 referers:
                   type: array
-                  description: List referer domains that you get from api /statistic/get-referer-data
+                  description: >-
+                    List referer domains that you get from api
+                    /statistic/get-referer-data
                   example:
-                  - https://s1.evgcdn.net
-                  - https://s3.evgcdn.net
+                    - 'https://s1.evgcdn.net'
+                    - 'https://s3.evgcdn.net'
                   items:
                     type: string
         required: true
@@ -1942,7 +2175,7 @@ paths:
             application/json:
               schema:
                 required:
-                - error_code
+                  - error_code
                 type: object
                 properties:
                   data:
@@ -1952,33 +2185,33 @@ paths:
                   message:
                     type: string
         '400':
-          "$ref": "#/components/responses/400"
+          $ref: '#/components/responses/400'
         '401':
-          "$ref": "#/components/responses/401"
+          $ref: '#/components/responses/401'
         '500':
-          "$ref": "#/components/responses/500"
+          $ref: '#/components/responses/500'
       security:
-      - jwt: []
-  "/api/v1.0/user/active":
+        - jwt: []
+  /api/v1.0/user/active:
     put:
       tags:
-      - UserAPI
+        - UserAPI
       summary: Api active sub user.
       description: Api active sub user.
       parameters:
-      - name: X-Auth-Key
-        in: header
-        description: The API Authentication Key
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
+        - name: X-Auth-Key
+          in: header
+          description: The API Authentication Key
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/UserEmailForm"
+              $ref: '#/components/schemas/UserEmailForm'
         required: true
       responses:
         '200':
@@ -1993,33 +2226,33 @@ paths:
                   message:
                     type: string
         '400':
-          "$ref": "#/components/responses/400"
+          $ref: '#/components/responses/400'
         '401':
-          "$ref": "#/components/responses/401"
+          $ref: '#/components/responses/401'
         '500':
-          "$ref": "#/components/responses/500"
+          $ref: '#/components/responses/500'
       security:
-      - jwt: []
-  "/api/v1.0/user/change-user-password":
+        - jwt: []
+  /api/v1.0/user/change-user-password:
     post:
       tags:
-      - UserAPI
+        - UserAPI
       summary: Api change sub user password
       description: Api change sub user password
       parameters:
-      - name: X-Auth-Key
-        in: header
-        description: The API Authentication Key
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
+        - name: X-Auth-Key
+          in: header
+          description: The API Authentication Key
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/ChangePasswordForm"
+              $ref: '#/components/schemas/ChangePasswordForm'
         required: true
       responses:
         '200':
@@ -2034,33 +2267,33 @@ paths:
                   message:
                     type: string
         '400':
-          "$ref": "#/components/responses/400"
+          $ref: '#/components/responses/400'
         '401':
-          "$ref": "#/components/responses/401"
+          $ref: '#/components/responses/401'
         '500':
-          "$ref": "#/components/responses/500"
+          $ref: '#/components/responses/500'
       security:
-      - jwt: []
-  "/api/v1.0/user/create":
+        - jwt: []
+  /api/v1.0/user/create:
     post:
       tags:
-      - UserAPI
+        - UserAPI
       summary: Api create sub user
       description: Api create sub user
       parameters:
-      - name: X-Auth-Key
-        in: header
-        description: The API Authentication Key
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
+        - name: X-Auth-Key
+          in: header
+          description: The API Authentication Key
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/RegisterUserForm"
+              $ref: '#/components/schemas/RegisterUserForm'
         required: true
       responses:
         '200':
@@ -2068,37 +2301,39 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/UserResult"
+                $ref: '#/components/schemas/UserResult'
         '400':
-          "$ref": "#/components/responses/400"
+          $ref: '#/components/responses/400'
         '401':
-          "$ref": "#/components/responses/401"
+          $ref: '#/components/responses/401'
         '500':
-          "$ref": "#/components/responses/500"
+          $ref: '#/components/responses/500'
       security:
-      - jwt: []
-  "/api/v1.0/user/disable":
+        - jwt: []
+  /api/v1.0/user/disable:
     post:
       tags:
-      - UserAPI
-      summary: 'Api disable sub user. Warning: All sites of the project that owned
-        by this user have to disable before disable account.'
-      description: 'Api disable sub user. Warning: All sites of the project that owned
-        by this user have to disable before disable account.'
+        - UserAPI
+      summary: >-
+        Api disable sub user. Warning: All sites of the project that owned by
+        this user have to disable before disable account.
+      description: >-
+        Api disable sub user. Warning: All sites of the project that owned by
+        this user have to disable before disable account.
       parameters:
-      - name: X-Auth-Key
-        in: header
-        description: The API Authentication Key
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
+        - name: X-Auth-Key
+          in: header
+          description: The API Authentication Key
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/UserEmailForm"
+              $ref: '#/components/schemas/UserEmailForm'
         required: true
       responses:
         '200':
@@ -2113,63 +2348,63 @@ paths:
                   message:
                     type: string
         '400':
-          "$ref": "#/components/responses/400"
+          $ref: '#/components/responses/400'
         '401':
-          "$ref": "#/components/responses/401"
+          $ref: '#/components/responses/401'
         '500':
-          "$ref": "#/components/responses/500"
+          $ref: '#/components/responses/500'
       security:
-      - jwt: []
-  "/api/v1.0/user/list":
+        - jwt: []
+  /api/v1.0/user/list:
     get:
       tags:
-      - UserAPI
+        - UserAPI
       summary: Api list sub user
       description: Api list sub user
       parameters:
-      - name: X-Auth-Key
-        in: header
-        description: The API Authentication Key
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
+        - name: X-Auth-Key
+          in: header
+          description: The API Authentication Key
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
       responses:
         '200':
           description: Successful
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/ListUserResult"
+                $ref: '#/components/schemas/ListUserResult'
         '400':
-          "$ref": "#/components/responses/400"
+          $ref: '#/components/responses/400'
         '401':
-          "$ref": "#/components/responses/401"
+          $ref: '#/components/responses/401'
         '500':
-          "$ref": "#/components/responses/500"
+          $ref: '#/components/responses/500'
       security:
-      - jwt: []
-  "/api/v1.0/user/user-api-key":
+        - jwt: []
+  /api/v1.0/user/user-api-key:
     post:
       tags:
-      - UserAPI
+        - UserAPI
       summary: Get sub user API key
       description: Get sub user API key
       parameters:
-      - name: X-Auth-Key
-        in: header
-        description: The API Authentication Key
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
+        - name: X-Auth-Key
+          in: header
+          description: The API Authentication Key
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/UserEmailForm"
+              $ref: '#/components/schemas/UserEmailForm'
         required: true
       responses:
         '200':
@@ -2177,35 +2412,35 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/UserKeyResult"
+                $ref: '#/components/schemas/UserKeyResult'
         '400':
-          "$ref": "#/components/responses/400"
+          $ref: '#/components/responses/400'
         '401':
-          "$ref": "#/components/responses/401"
+          $ref: '#/components/responses/401'
         '500':
-          "$ref": "#/components/responses/500"
+          $ref: '#/components/responses/500'
       security:
-      - jwt: []
-  "/api/v1.0/user/user-info":
+        - jwt: []
+  /api/v1.0/user/user-info:
     post:
       tags:
-      - UserAPI
+        - UserAPI
       summary: Api get sub user info
       description: Api get sub user info
       parameters:
-      - name: X-Auth-Key
-        in: header
-        description: The API Authentication Key
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
+        - name: X-Auth-Key
+          in: header
+          description: The API Authentication Key
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/UserEmailForm"
+              $ref: '#/components/schemas/UserEmailForm'
         required: true
       responses:
         '200':
@@ -2213,21 +2448,21 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/UserResult"
+                $ref: '#/components/schemas/UserResult'
         '400':
-          "$ref": "#/components/responses/400"
+          $ref: '#/components/responses/400'
         '401':
-          "$ref": "#/components/responses/401"
+          $ref: '#/components/responses/401'
         '500':
-          "$ref": "#/components/responses/500"
+          $ref: '#/components/responses/500'
       security:
-      - jwt: []
+        - jwt: []
 components:
   schemas:
     AddCertForm:
       required:
-      - cert_crt
-      - cert_key
+        - cert_crt
+        - cert_key
       type: object
       properties:
         cert_crt:
@@ -2240,8 +2475,8 @@ components:
           example: base64_string
     AddCertResult:
       required:
-      - cert_id
-      - error_code
+        - cert_id
+        - error_code
       type: object
       properties:
         cert_id:
@@ -2267,9 +2502,9 @@ components:
           example: 1
         ssl_cert:
           description: CNAME SSL Certification info
-          example: "{}"
+          example: '{}'
           allOf:
-          - "$ref": "#/components/schemas/AddCertForm"
+            - $ref: '#/components/schemas/AddCertForm'
         status:
           type: string
           description: CNAME's status. (ACTIVE|UNVERIFIED|PROCESSING)
@@ -2280,11 +2515,11 @@ components:
           example: hkiG9w0BAQEFAASCBKYwggSiAg
     CNAMEInfoResult:
       required:
-      - error_code
+        - error_code
       type: object
       properties:
         data:
-          "$ref": "#/components/schemas/CNAME"
+          $ref: '#/components/schemas/CNAME'
         error_code:
           type: integer
           description: Error code from server
@@ -2293,13 +2528,13 @@ components:
           description: Response's message
     CNAMEListResult:
       required:
-      - error_code
+        - error_code
       type: object
       properties:
         data:
           type: array
           items:
-            "$ref": "#/components/schemas/CNAME"
+            $ref: '#/components/schemas/CNAME'
         error_code:
           type: integer
           description: Error code from server
@@ -2321,17 +2556,19 @@ components:
       properties:
         cache_query_specific_params:
           type: array
-          description: This option allows the user to enter additional parameters
-            in the query params to generate cache key on EDGE CDN.
+          description: >-
+            This option allows the user to enter additional parameters in the
+            query params to generate cache key on EDGE CDN.
           example:
-          - uid
-          - manifest
+            - uid
+            - manifest
           items:
             type: string
         enable_cached_query_string:
           type: integer
-          description: 'Enable cached query by params. Option: 0 (off) / 1 (cache
-            all query params) / 2 (cache by customized key)s'
+          description: >-
+            Enable cached query by params. Option: 0 (off) / 1 (cache all query
+            params) / 2 (cache by customized key)s
           example: 0
     CertDeployment:
       type: object
@@ -2344,17 +2581,17 @@ components:
           type: array
           description: List ID of CNAMEs that user want to deploy this cert.
           example:
-          - cname1.cdn.com
-          - cname2.cdn.com
+            - cname1.cdn.com
+            - cname2.cdn.com
           items:
             type: string
     CertInfoResult:
       required:
-      - error_code
+        - error_code
       type: object
       properties:
         data:
-          "$ref": "#/components/schemas/Certification"
+          $ref: '#/components/schemas/Certification'
         error_code:
           type: integer
           description: Error code from server
@@ -2367,7 +2604,7 @@ components:
         cert_crt:
           type: string
           description: CNAME SSL Certification CRT in BASE64 string
-          example: "-----BEGIN CERTIFICATE-----....-----END CERTIFICATE-----"
+          example: '-----BEGIN CERTIFICATE-----....-----END CERTIFICATE-----'
         cert_id:
           type: string
           description: ID of SSL Certificate
@@ -2375,7 +2612,7 @@ components:
         cert_key:
           type: string
           description: CNAME SSL Certification private key in BASE64 string
-          example: "-----BEGIN PRIVATE KEY-----....-----END PRIVATE KEY-----"
+          example: '-----BEGIN PRIVATE KEY-----....-----END PRIVATE KEY-----'
         cert_type:
           type: string
           description: 'SSL Certification type. We''re supporting 2 type: UserSSL|FreeSSL'
@@ -2402,8 +2639,8 @@ components:
           type: array
           description: List cors header domains.
           example:
-          - cors1.sport.com
-          - cors2.sport.com
+            - cors1.sport.com
+            - cors2.sport.com
           items:
             type: string
         enable_cors:
@@ -2425,7 +2662,7 @@ components:
           example: my-cname.sport.com
     GeneralResult:
       required:
-      - error_code
+        - error_code
       type: object
       properties:
         error_code:
@@ -2436,7 +2673,7 @@ components:
           description: Response's message
     GenerateCertForm:
       required:
-      - cname
+        - cname
       type: object
       properties:
         cname:
@@ -2445,7 +2682,7 @@ components:
           example: '1001'
     GenerateCertResult:
       required:
-      - error_code
+        - error_code
       type: object
       properties:
         data:
@@ -2464,8 +2701,8 @@ components:
           type: array
           description: List of Country Codes. You can find from api /country/list
           example:
-          - AD
-          - AE
+            - AD
+            - AE
           items:
             type: string
         geo_protection_enable:
@@ -2490,13 +2727,13 @@ components:
           description: Email of user
     GroupListResult:
       required:
-      - error_code
+        - error_code
       type: object
       properties:
         data:
           type: array
           items:
-            "$ref": "#/components/schemas/Group"
+            $ref: '#/components/schemas/Group'
         error_code:
           type: integer
           description: Error code from server
@@ -2510,8 +2747,8 @@ components:
           type: array
           description: List of CIDR Address.
           example:
-          - 192.168.129.23/17
-          - 10.0.0.0/24
+            - 192.168.129.23/17
+            - 10.0.0.0/24
           items:
             type: string
         ip_protection_enable:
@@ -2524,14 +2761,14 @@ components:
           example: 1
     ListUserResult:
       required:
-      - error_code
+        - error_code
       type: object
       properties:
         data:
           type: array
           description: Data information
           items:
-            "$ref": "#/components/schemas/UserInfo"
+            $ref: '#/components/schemas/UserInfo'
         error_code:
           type: integer
           description: Error code from server
@@ -2575,8 +2812,8 @@ components:
           type: array
           description: List Referer's domains.
           example:
-          - refer1.sport.com
-          - refer2.sport.com
+            - refer1.sport.com
+            - refer2.sport.com
           items:
             type: string
         secure_http_refer_allow_none:
@@ -2591,8 +2828,8 @@ components:
           type: array
           description: List Referer's wildcard domains.
           example:
-          - "*.sport.com"
-          - "*.football.com"
+            - '*.sport.com'
+            - '*.football.com'
           items:
             type: string
     RegisterUserForm:
@@ -2608,7 +2845,8 @@ components:
           example: Hoang Duong
         package_id:
           type: integer
-          description: User package id. You can get it from CDN dashboard or get from
+          description: >-
+            User package id. You can get it from CDN dashboard or get from
             package api.
           example: 1
         password:
@@ -2617,12 +2855,13 @@ components:
           example: ''
         verify:
           type: integer
-          description: 'Set verify user, if this option is enabled then you can using
-            service without submit ticket request.  Option: 1(on) / 0(off)'
+          description: >-
+            Set verify user, if this option is enabled then you can using
+            service without submit ticket request.  Option: 1(on) / 0(off)
           example: 0
     RequestCertForm:
       required:
-      - cert_id
+        - cert_id
       type: object
       properties:
         cert_id:
@@ -2647,15 +2886,15 @@ components:
           type: array
           description: Customize header items.
           example:
-          - x-customize: customize-value
+            - x-customize: customize-value
           items:
-            "$ref": "#/components/schemas/DefaultDict"
+            $ref: '#/components/schemas/DefaultDict'
         removed_headers_on_request:
           type: array
           description: Remove these header keys from Request's Headers to Origin Server
           example:
-          - Cache-Control
-          - Accept-Encoding
+            - Cache-Control
+            - Accept-Encoding
           items:
             type: string
         request_header_enable:
@@ -2669,21 +2908,22 @@ components:
           type: array
           description: Customized response header items.
           example:
-          - x-customize: customize-value
+            - x-customize: customize-value
           items:
-            "$ref": "#/components/schemas/DefaultDict"
+            $ref: '#/components/schemas/DefaultDict'
         removed_headers_on_response:
           type: array
           description: Remove these header keys from Response's Headers
           example:
-          - X-Cache
-          - X-Amz-Cf-Id
+            - X-Cache
+            - X-Amz-Cf-Id
           items:
             type: string
         response_header_enable:
           type: integer
-          description: 'This option allow to adding valid customized header on response.
-            Option: 1(on) / 0(off)'
+          description: >-
+            This option allow to adding valid customized header on response.
+            Option: 1(on) / 0(off)
           example: 0
     SecureHTTPMethods:
       type: object
@@ -2700,11 +2940,12 @@ components:
       properties:
         secure_cdn_link_additional_params:
           type: array
-          description: 'This option allows the user to enter additional parameters
-            in the query params to generate a secure token. Eg: uid'
+          description: >-
+            This option allows the user to enter additional parameters in the
+            query params to generate a secure token. Eg: uid
           example:
-          - uid
-          - manifest
+            - uid
+            - manifest
           items:
             type: string
         secure_cdn_link_by_ip:
@@ -2731,49 +2972,53 @@ components:
       type: object
       properties:
         CorsSupport:
-          description: 'Send a header to allow client browsers to integrate other
-            data and javascript from this domain, or from any domain. When CORS support
-            is enabled, If you don''t set any domains, default value in header is
-            ''Access-Control-Allow-Origin: *'''
+          description: >-
+            Send a header to allow client browsers to integrate other data and
+            javascript from this domain, or from any domain. When CORS support
+            is enabled, If you don't set any domains, default value in header is
+            'Access-Control-Allow-Origin: *'
           allOf:
-          - "$ref": "#/components/schemas/CorsSupport"
+            - $ref: '#/components/schemas/CorsSupport'
         FirewallSetting:
-          "$ref": "#/components/schemas/SiteFirewallSetting"
+          $ref: '#/components/schemas/SiteFirewallSetting'
         RefererAccessRule:
           description: The domain names that are in the allowlist to access CDN.
           allOf:
-          - "$ref": "#/components/schemas/RefererAccessRule"
+            - $ref: '#/components/schemas/RefererAccessRule'
         RequestCollapsing:
-          description: When this option is enable, What the CDN do is to take all
-            the requests and 'collapse' them into a single request. When the origin
-            responds with the file, the CDN delivers the file to all the clients that
-            requested it.
+          description: >-
+            When this option is enable, What the CDN do is to take all the
+            requests and 'collapse' them into a single request. When the origin
+            responds with the file, the CDN delivers the file to all the clients
+            that requested it.
           allOf:
-          - "$ref": "#/components/schemas/RequestCollapsing"
+            - $ref: '#/components/schemas/RequestCollapsing'
         RequestHeader:
-          description: This option allow to adding valid customized header on request
-            to origin.
+          description: >-
+            This option allow to adding valid customized header on request to
+            origin.
           allOf:
-          - "$ref": "#/components/schemas/RequestHeader"
+            - $ref: '#/components/schemas/RequestHeader'
         ResponseHeader:
           description: This option allow to adding valid customized header on response.
           allOf:
-          - "$ref": "#/components/schemas/ResponseHeader"
+            - $ref: '#/components/schemas/ResponseHeader'
         SecureHTTPMethods:
           description: List HTTP methods supporting.
           allOf:
-          - "$ref": "#/components/schemas/SecureHTTPMethods"
+            - $ref: '#/components/schemas/SecureHTTPMethods'
         SecureLink:
           description: The specific rules of Secure Link Authentication.
           allOf:
-          - "$ref": "#/components/schemas/SecureLink"
+            - $ref: '#/components/schemas/SecureLink'
         UrlSetting:
-          "$ref": "#/components/schemas/URLSetting"
+          $ref: '#/components/schemas/URLSetting'
         UserAgentProtection:
-          description: This option has been created to stop asset/media leakage by
-            blocking User-Agent that you not trust.
+          description: >-
+            This option has been created to stop asset/media leakage by blocking
+            User-Agent that you not trust.
           allOf:
-          - "$ref": "#/components/schemas/UserAgentProtection"
+            - $ref: '#/components/schemas/UserAgentProtection'
         backup_origin:
           type: string
           description: Origin backup. Domain or IP Address.
@@ -2782,15 +3027,17 @@ components:
           description: Origin backup port.
         cache_hit_number:
           type: integer
-          description: 'Define number of request to an asset or media before edge
-            perform cache these data. values: 1 to 100.'
+          description: >-
+            Define number of request to an asset or media before edge perform
+            cache these data. values: 1 to 100.
         cache_keys_zone_size:
           type: integer
           description: 'Allow none referer domain. Option: 1(on) / 0(off)'
         cache_max_size:
           type: integer
-          description: 'Set upper limit of the size cache on CDN. values: 1 to 10000.
-            Default: 200 GB'
+          description: >-
+            Set upper limit of the size cache on CDN. values: 1 to 10000.
+            Default: 200 GB
         cache_path_inactive_size:
           type: integer
           description: 'Allow none referer domain. Option: 1(on) / 0(off)'
@@ -2806,23 +3053,24 @@ components:
         cname:
           type: array
           items:
-            "$ref": "#/components/schemas/CName"
+            $ref: '#/components/schemas/CName'
         delivery_type:
           type: integer
-          description: 'Site''s delivery type. Value: 1(LIVE) | 2(VOD) | 3(STATIC
-            ASSET)'
+          description: 'Site''s delivery type. Value: 1(LIVE) | 2(VOD) | 3(STATIC ASSET)'
         dev_mode:
           type: integer
-          description: Dev mode for testing purpose. When this option is enable, cdn
+          description: >-
+            Dev mode for testing purpose. When this option is enable, cdn
             caching wil be disabled. 1(on) / 0(off)
         enable_backup:
           type: integer
           description: Enable backup origin. 1(on) / 0(off)
         enable_brotli:
           type: integer
-          description: 'Cache Brotli compressed assets from the origin server (Content-Encoding:
-            br). Only enable this feature if your origin supports Brotli compression.
-            Option: 1(on) / 0(off)'
+          description: >-
+            Cache Brotli compressed assets from the origin server
+            (Content-Encoding: br). Only enable this feature if your origin
+            supports Brotli compression. Option: 1(on) / 0(off)
         enable_cache_host_key:
           type: integer
           description: 'Allow none referer domain. Option: 1(on) / 0(off)'
@@ -2831,34 +3079,38 @@ components:
           description: 'Allow none referer domain. Option: 1(on) / 0(off)'
         enable_cached_query_params:
           type: integer
-          description: 'Enable cached query by params. Option: 0 (off) / 1 (cache
-            all query params) / 2 (cache by customized key)s'
+          description: >-
+            Enable cached query by params. Option: 0 (off) / 1 (cache all query
+            params) / 2 (cache by customized key)s
         enable_download_file:
           type: integer
           description: 'Enabled Download File. Option: 1(on) / 0(off)'
         enable_gzip:
           type: integer
-          description: 'GZIP compression is enabled by default on all sites. By default,
-            GZIP compresses txt, js, html, and css files, and the text/* mime type.
-            Option: 1(on) / 0(off)'
+          description: >-
+            GZIP compression is enabled by default on all sites. By default,
+            GZIP compresses txt, js, html, and css files, and the text/* mime
+            type. Option: 1(on) / 0(off)
         enable_host_header_forwarding:
           type: integer
-          description: 'If enabled, we will pass the host header used in the CDN request
-            when requesting the file from your origin domain. For this option to work,
-            your origin server must accept requests from the CDN URL/CNAME domains.
-            Option: 1(on) / 0(off)'
+          description: >-
+            If enabled, we will pass the host header used in the CDN request
+            when requesting the file from your origin domain. For this option to
+            work, your origin server must accept requests from the CDN URL/CNAME
+            domains. Option: 1(on) / 0(off)
         enable_http2:
           type: integer
           description: 'Enable http2. Option: 1(on) / 0(off)'
         enable_redirect_http_to_https:
           type: integer
-          description: 'Enable redirect http to https (force to https). Option: 1(on)
-            / 0(off)'
+          description: >-
+            Enable redirect http to https (force to https). Option: 1(on) /
+            0(off)
         enable_secure_http_methods:
           type: integer
           description: 'Enable secure HTTP methods. Option: 1(on) / 0(off)'
         group:
-          "$ref": "#/components/schemas/Group"
+          $ref: '#/components/schemas/Group'
         id:
           type: integer
           description: Id of site
@@ -2867,9 +3119,10 @@ components:
           description: 'Ignore set cookie. Option: 1(on) / 0(off)'
         max_age:
           type: integer
-          description: 'Set default browser expiration time for cached assets that
-            don''t already have an expiration time set on the origin. valid values
-            from: -1 to 31536000. Default: 25200 secs'
+          description: >-
+            Set default browser expiration time for cached assets that don't
+            already have an expiration time set on the origin. valid values
+            from: -1 to 31536000. Default: 25200 secs
         name:
           type: string
           description: Site's name
@@ -2884,57 +3137,64 @@ components:
           description: Site's status. (ACTIVE|DISABLED|PROCESSING)
         ttl:
           type: integer
-          description: 'Define when and for how long content is stored on the CDN
-            cache before it expires and is replaced with new content from your origin.
-            valid values from: 0 to 31536000. Default: 25200 secs'
+          description: >-
+            Define when and for how long content is stored on the CDN cache
+            before it expires and is replaced with new content from your origin.
+            valid values from: 0 to 31536000. Default: 25200 secs
     SiteEdgeSetting:
       type: object
       properties:
         cache_hit_number:
           type: integer
-          description: 'Define number of request to an asset or media before edge
-            perform cache these data. values: 1 to 100.'
+          description: >-
+            Define number of request to an asset or media before edge perform
+            cache these data. values: 1 to 100.
           example: 1
         cors_domains:
           type: array
           description: List cors header domains.
           example:
-          - cors1.sport.com
-          - cors2.sport.com
+            - cors1.sport.com
+            - cors2.sport.com
           items:
             type: string
         customize_header_enable:
           type: integer
-          description: 'This option allow to adding valid customized header on response.
-            Option: 1(on) / 0(off)'
+          description: >-
+            This option allow to adding valid customized header on response.
+            Option: 1(on) / 0(off)
           example: 0
         customize_header_items:
           type: array
           description: Customized response header items.
           example:
-          - x-customize: customize-value
+            - x-customize: customize-value
           items:
-            "$ref": "#/components/schemas/DefaultDict"
+            $ref: '#/components/schemas/DefaultDict'
         enable_aes:
           type: integer
-          description: 'Use Encryption to protect your asset/media over internet.
-            Option: 1(on) / 0(off)'
+          description: >-
+            Use Encryption to protect your asset/media over internet. Option:
+            1(on) / 0(off)
           example: 0
         enable_aes_refresh_token:
           type: integer
-          description: 'This makes your content more secure, as it cannot be easily
-            decoded by unauthorized users. Option: 1(on) / 0(off)'
+          description: >-
+            This makes your content more secure, as it cannot be easily decoded
+            by unauthorized users. Option: 1(on) / 0(off)
           example: 0
         enable_brotli:
           type: integer
-          description: 'Cache Brotli compressed assets from the origin server (Content-Encoding:
-            br). Only enable this feature if your origin supports Brotli compression.
-            Option: 1(on) / 0(off)'
+          description: >-
+            Cache Brotli compressed assets from the origin server
+            (Content-Encoding: br). Only enable this feature if your origin
+            supports Brotli compression. Option: 1(on) / 0(off)
           example: 0
         enable_cached_query_params:
           type: integer
-          description: 'Enable cached query by params. Option: 0 (off) / 1 (cache
-            all query params) / 2 (cache by customized key)s'
+          description: >-
+            Enable cached query by params. Option: 0 (off) / 1 (cache all query
+            params) / 2 (cache by customized key)s
           example: 0
         enable_cors:
           type: integer
@@ -2946,16 +3206,18 @@ components:
           example: 0
         enable_gzip:
           type: integer
-          description: 'GZIP compression is enabled by default on all sites. By default,
-            GZIP compresses txt, js, html, and css files, and the text/* mime type.
-            Option: 1(on) / 0(off)'
+          description: >-
+            GZIP compression is enabled by default on all sites. By default,
+            GZIP compresses txt, js, html, and css files, and the text/* mime
+            type. Option: 1(on) / 0(off)
           example: 0
         enable_host_header_forwarding:
           type: integer
-          description: 'If enabled, we will pass the host header used in the CDN request
-            when requesting the file from your origin domain. For this option to work,
-            your origin server must accept requests from the CDN URL/CNAME domains.
-            Option: 1(on) / 0(off)'
+          description: >-
+            If enabled, we will pass the host header used in the CDN request
+            when requesting the file from your origin domain. For this option to
+            work, your origin server must accept requests from the CDN URL/CNAME
+            domains. Option: 1(on) / 0(off)
           example: 0
         enable_http2:
           type: integer
@@ -2963,8 +3225,9 @@ components:
           example: 0
         enable_redirect_http_to_https:
           type: integer
-          description: 'Enable redirect http to https (force to https). Option: 1(on)
-            / 0(off)'
+          description: >-
+            Enable redirect http to https (force to https). Option: 1(on) /
+            0(off)
           example: 0
         enable_request_collapsing:
           type: integer
@@ -2980,9 +3243,10 @@ components:
           example: 0
         max_age:
           type: integer
-          description: 'Set default browser expiration time for cached assets that
-            don''t already have an expiration time set on the origin. valid values
-            from: -1 to 31536000. Default: 25200 secs'
+          description: >-
+            Set default browser expiration time for cached assets that don't
+            already have an expiration time set on the origin. valid values
+            from: -1 to 31536000. Default: 25200 secs
           example: 25200
         request_collapsing_timeout:
           type: integer
@@ -3008,16 +3272,16 @@ components:
           type: array
           description: List HTTP methods supporting.
           example:
-          - PURGE
-          - OPTION
+            - PURGE
+            - OPTION
           items:
             type: string
         secure_http_refer:
           type: array
           description: List Referer's domains.
           example:
-          - refer1.sport.com
-          - refer2.sport.com
+            - refer1.sport.com
+            - refer2.sport.com
           items:
             type: string
         secure_http_refer_allow_none:
@@ -3032,27 +3296,29 @@ components:
           type: array
           description: List Referer's wildcard domains.
           example:
-          - "*.sport.com"
-          - "*.football.com"
+            - '*.sport.com'
+            - '*.football.com'
           items:
             type: string
         ttl:
           type: integer
-          description: 'Define when and for how long content is stored on the CDN
-            cache before it expires and is replaced with new content from your origin.
-            valid values from: 0 to 31536000. Default: 25200 secs'
+          description: >-
+            Define when and for how long content is stored on the CDN cache
+            before it expires and is replaced with new content from your origin.
+            valid values from: 0 to 31536000. Default: 25200 secs
           example: 25200
         useragent_protection_enable:
           type: integer
-          description: 'This option has been created to stop asset/media leakage by
-            blocking User-Agent that you not trust. Option: 1(on) / 0(off)'
+          description: >-
+            This option has been created to stop asset/media leakage by blocking
+            User-Agent that you not trust. Option: 1(on) / 0(off)
           example: 0
         useragent_protection_list:
           type: array
           description: 'List allowed useragent. Eg: Chrome, Mozilla/5.0 ..'
           example:
-          - Chrome
-          - Mozilla/5.0
+            - Chrome
+            - Mozilla/5.0
           items:
             type: string
     SiteEdgeSettingForm:
@@ -3061,57 +3327,63 @@ components:
         CacheQuery:
           description: Allow user control CDN's cache key by using query params
           allOf:
-          - "$ref": "#/components/schemas/CacheQuery"
+            - $ref: '#/components/schemas/CacheQuery'
         CorsSupport:
-          description: 'Send a header to allow client browsers to integrate other
-            data and javascript from this domain, or from any domain. When CORS support
-            is enabled, If you don''t set any domains, default value in header is
-            ''Access-Control-Allow-Origin: *'''
+          description: >-
+            Send a header to allow client browsers to integrate other data and
+            javascript from this domain, or from any domain. When CORS support
+            is enabled, If you don't set any domains, default value in header is
+            'Access-Control-Allow-Origin: *'
           allOf:
-          - "$ref": "#/components/schemas/CorsSupport"
+            - $ref: '#/components/schemas/CorsSupport'
         RefererAccessRule:
           description: The domain names that are in the allowlist to access CDN.
           allOf:
-          - "$ref": "#/components/schemas/RefererAccessRule"
+            - $ref: '#/components/schemas/RefererAccessRule'
         RequestCollapsing:
-          description: When this option is enable, What the CDN do is to take all
-            the requests and 'collapse' them into a single request. When the origin
-            responds with the file, the CDN delivers the file to all the clients that
-            requested it.
+          description: >-
+            When this option is enable, What the CDN do is to take all the
+            requests and 'collapse' them into a single request. When the origin
+            responds with the file, the CDN delivers the file to all the clients
+            that requested it.
           allOf:
-          - "$ref": "#/components/schemas/RequestCollapsing"
+            - $ref: '#/components/schemas/RequestCollapsing'
         RequestHeader:
-          description: This option allow to adding valid customized header on request
-            to origin.
+          description: >-
+            This option allow to adding valid customized header on request to
+            origin.
           allOf:
-          - "$ref": "#/components/schemas/RequestHeader"
+            - $ref: '#/components/schemas/RequestHeader'
         ResponseHeader:
           description: This option allow to adding valid customized header on response.
           allOf:
-          - "$ref": "#/components/schemas/ResponseHeader"
+            - $ref: '#/components/schemas/ResponseHeader'
         SecureHTTPMethods:
           description: List HTTP methods supporting.
           allOf:
-          - "$ref": "#/components/schemas/SecureHTTPMethods"
+            - $ref: '#/components/schemas/SecureHTTPMethods'
         SecureLink:
           description: The specific rules of Secure Link Authentication.
           allOf:
-          - "$ref": "#/components/schemas/SecureLink"
+            - $ref: '#/components/schemas/SecureLink'
         UserAgentProtection:
-          description: This option has been created to stop asset/media leakage by
-            blocking User-Agent that you not trust.
+          description: >-
+            This option has been created to stop asset/media leakage by blocking
+            User-Agent that you not trust.
           allOf:
-          - "$ref": "#/components/schemas/UserAgentProtection"
+            - $ref: '#/components/schemas/UserAgentProtection'
         cache_hit_number:
           type: integer
-          description: 'Define number of request to an asset or media before edge
-            perform cache these data. values: 1 to 100.'
+          description: >-
+            Define number of request to an asset or media before edge perform
+            cache these data. values: 1 to 100.
           example: 1
         enable_brotli:
           type: integer
-          description: 'Cache Brotli compressed assets from the origin server (Content-Encoding:
-            br). Only enable this feature if your origin supports Brotli compression.
-            Option: 1(on) / 0(off)'
+          description: >-
+            Cache Brotli compressed assets from the origin server
+            (Content-Encoding: br). Only enable this feature if your origin
+            supports Brotli compression. Option: 1(on) / 0(off)
           example: 0
         enable_download_file:
           type: integer
@@ -3119,16 +3391,18 @@ components:
           example: 0
         enable_gzip:
           type: integer
-          description: 'GZIP compression is enabled by default on all sites. By default,
-            GZIP compresses txt, js, html, and css files, and the text/* mime type.
-            Option: 1(on) / 0(off)'
+          description: >-
+            GZIP compression is enabled by default on all sites. By default,
+            GZIP compresses txt, js, html, and css files, and the text/* mime
+            type. Option: 1(on) / 0(off)
           example: 0
         enable_host_header_forwarding:
           type: integer
-          description: 'If enabled, we will pass the host header used in the CDN request
-            when requesting the file from your origin domain. For this option to work,
-            your origin server must accept requests from the CDN URL/CNAME domains.
-            Option: 1(on) / 0(off)'
+          description: >-
+            If enabled, we will pass the host header used in the CDN request
+            when requesting the file from your origin domain. For this option to
+            work, your origin server must accept requests from the CDN URL/CNAME
+            domains. Option: 1(on) / 0(off)
           example: 0
         enable_http2:
           type: integer
@@ -3140,13 +3414,15 @@ components:
           example: 0
         enable_video_seeking:
           type: integer
-          description: 'Allows users to seek to a particular position in a video during
-            streaming. Option: 1(on) / 0(off)'
+          description: >-
+            Allows users to seek to a particular position in a video during
+            streaming. Option: 1(on) / 0(off)
           example: 0
         force_to_https:
           type: integer
-          description: 'Enable redirect http to https (force to https). Option: 1(on)
-            / 0(off)'
+          description: >-
+            Enable redirect http to https (force to https). Option: 1(on) /
+            0(off)
           example: 0
         ignore_set_cookie:
           type: integer
@@ -3154,23 +3430,25 @@ components:
           example: 0
         max_age:
           type: integer
-          description: 'Set default browser expiration time for cached assets that
-            don''t already have an expiration time set on the origin. valid values
-            from: -1 to 31536000. Default: 25200 secs'
+          description: >-
+            Set default browser expiration time for cached assets that don't
+            already have an expiration time set on the origin. valid values
+            from: -1 to 31536000. Default: 25200 secs
           example: 25200
         ttl:
           type: integer
-          description: 'Define when and for how long content is stored on the CDN
-            cache before it expires and is replaced with new content from your origin.
-            valid values from: 0 to 31536000. Default: 25200 secs'
+          description: >-
+            Define when and for how long content is stored on the CDN cache
+            before it expires and is replaced with new content from your origin.
+            valid values from: 0 to 31536000. Default: 25200 secs
           example: 25200
     SiteEdgeSettingResult:
       required:
-      - error_code
+        - error_code
       type: object
       properties:
         data:
-          "$ref": "#/components/schemas/SiteEdgeSetting"
+          $ref: '#/components/schemas/SiteEdgeSetting'
         error_code:
           type: integer
           description: Error code from server
@@ -3181,14 +3459,15 @@ components:
       type: object
       properties:
         GeoProtection:
-          description: Setting blacklist countries. Any requests from these countries
-            can not access your asset/media.
+          description: >-
+            Setting blacklist countries. Any requests from these countries can
+            not access your asset/media.
           example:
             geo_protection_countries: []
             geo_protection_enable: 0
             geo_protection_type: 1
           allOf:
-          - "$ref": "#/components/schemas/GeoProtection"
+            - $ref: '#/components/schemas/GeoProtection'
         IPProtection:
           description: Setting your blacklist and whitelist by CIDR.
           example:
@@ -3196,10 +3475,11 @@ components:
             ip_protection_enable: 0
             ip_protection_type: 1
           allOf:
-          - "$ref": "#/components/schemas/IPProtection"
+            - $ref: '#/components/schemas/IPProtection'
         RateLimiting:
-          description: Protect your site or API from malicious traffic by blocking
-            client IP addresses that hit a URL pattern and exceed a threshold you
+          description: >-
+            Protect your site or API from malicious traffic by blocking client
+            IP addresses that hit a URL pattern and exceed a threshold you
             define. Your existing Rate Limiting Rules are listed below.
           example:
             rate_limiting_enable: 0
@@ -3207,22 +3487,23 @@ components:
             rate_limiting_request_type: s
             rate_limiting_type: 1
           allOf:
-          - "$ref": "#/components/schemas/RateLimiting"
+            - $ref: '#/components/schemas/RateLimiting'
         TransferLimiting:
-          description: Allows you to limit the transfer rate of individual client
+          description: >-
+            Allows you to limit the transfer rate of individual client
             connections. The rate is expressed in Kilobits per second.
           example:
             enable_limit_rate: 0
             limit_rate: 1
           allOf:
-          - "$ref": "#/components/schemas/TransferLimiting"
+            - $ref: '#/components/schemas/TransferLimiting'
     SiteFirewallSettingResult:
       required:
-      - error_code
+        - error_code
       type: object
       properties:
         data:
-          "$ref": "#/components/schemas/SiteFirewallSetting"
+          $ref: '#/components/schemas/SiteFirewallSetting'
         error_code:
           type: integer
           description: Error code from server
@@ -3231,17 +3512,16 @@ components:
           description: Response's message
     SiteForm:
       required:
-      - delivery_type
-      - name
-      - origin
-      - origin_port
-      - origin_protocol
+        - delivery_type
+        - name
+        - origin
+        - origin_port
+        - origin_protocol
       type: object
       properties:
         delivery_type:
           type: string
-          description: 'Site''s delivery type. Value: 1(LIVE) | 2(VOD) | 3(STATIC
-            ASSET)'
+          description: 'Site''s delivery type. Value: 1(LIVE) | 2(VOD) | 3(STATIC ASSET)'
           example: '3'
         name:
           type: string
@@ -3261,11 +3541,11 @@ components:
           example: '1'
     SiteInfoResult:
       required:
-      - error_code
+        - error_code
       type: object
       properties:
         data:
-          "$ref": "#/components/schemas/Site"
+          $ref: '#/components/schemas/Site'
         error_code:
           type: integer
           description: Error code from server
@@ -3274,13 +3554,13 @@ components:
           description: Response's message
     SiteListResult:
       required:
-      - error_code
+        - error_code
       type: object
       properties:
         data:
           type: array
           items:
-            "$ref": "#/components/schemas/Site"
+            $ref: '#/components/schemas/Site'
         error_code:
           type: integer
           description: Error code from server
@@ -3297,16 +3577,17 @@ components:
             type: string
         enable_cors:
           type: integer
-          description: 'Enable cors header. Option: 1(on) / 0(off). When CORS support
-            is enabled, If you don''t set any domains, default value in header is
-            ''Access-Control-Allow-Origin: *'''
+          description: >-
+            Enable cors header. Option: 1(on) / 0(off). When CORS support is
+            enabled, If you don't set any domains, default value in header is
+            'Access-Control-Allow-Origin: *'
     SiteSettingCorsHeaderResult:
       required:
-      - error_code
+        - error_code
       type: object
       properties:
         data:
-          "$ref": "#/components/schemas/SiteSettingCorsHeaderData"
+          $ref: '#/components/schemas/SiteSettingCorsHeaderData'
         error_code:
           type: integer
           description: Error code from server
@@ -3334,11 +3615,11 @@ components:
             type: string
     SiteSettingRefererResult:
       required:
-      - error_code
+        - error_code
       type: object
       properties:
         data:
-          "$ref": "#/components/schemas/SiteSettingRefererData"
+          $ref: '#/components/schemas/SiteSettingRefererData'
         error_code:
           type: integer
           description: Error code from server
@@ -3347,13 +3628,13 @@ components:
           description: Response's message
     SiteSetupForm:
       required:
-      - backup_origin
-      - backup_origin_port
-      - cdn_protocols
-      - enable_backup
-      - origin
-      - origin_port
-      - origin_protocol
+        - backup_origin
+        - backup_origin_port
+        - cdn_protocols
+        - enable_backup
+        - origin
+        - origin_port
+        - origin_protocol
       type: object
       properties:
         backup_origin:
@@ -3386,7 +3667,7 @@ components:
           example: '1'
     TrafficDataResult:
       required:
-      - error_code
+        - error_code
       type: object
       properties:
         error_code:
@@ -3403,24 +3684,27 @@ components:
       properties:
         filter_time:
           type: string
-          description: 'This field define the time range you want to filter, format
-            is %d/%m/%Y %H:%M:%S - %d/%m/%Y %H:%M:%S. Default - fromTime: now()-30mins,
-            toTime:: now()'
-          example: 01/08/2020 00:00:01 - 01/08/2020 23:59:59
+          description: >-
+            This field define the time range you want to filter, format is
+            %d/%m/%Y %H:%M:%S - %d/%m/%Y %H:%M:%S. Default - fromTime:
+            now()-30mins, toTime:: now()
+          example: '01/08/2020 00:00:01 - 01/08/2020 23:59:59'
         group_id:
           type: integer
-          description: Group ID that you want to get data from. You could find available
+          description: >-
+            Group ID that you want to get data from. You could find available
             groups from api get list Group
           example: 100
         site_id:
           type: array
-          description: List Site ID that you want to get data. Default value is []
-            - get all sites that are available on Group. Max 50 sites are allowed.
+          description: >-
+            List Site ID that you want to get data. Default value is [] - get
+            all sites that are available on Group. Max 50 sites are allowed.
           example:
-          - 1001
-          - 1002
+            - '1001'
+            - '1002'
           items:
-            type: integer
+            type: string
         source_type:
           type: string
           description: 'Filter by source: ORIGIN or EDGE.'
@@ -3441,7 +3725,7 @@ components:
       properties:
         cache_hit_number:
           type: integer
-          description: Number of requests will be cached. Values [0-100]
+          description: 'Number of requests will be cached. Values [0-100]'
         cors_domains:
           type: array
           description: List cors header domains.
@@ -3449,9 +3733,10 @@ components:
             type: string
         enable_cache_cdn:
           type: integer
-          description: 'Define when and for how long content is stored on the CDN
-            cache before it expires and is replaced with new content from your origin.
-            Option: 1(on) / 0(off)'
+          description: >-
+            Define when and for how long content is stored on the CDN cache
+            before it expires and is replaced with new content from your origin.
+            Option: 1(on) / 0(off)
         enable_cache_query:
           type: integer
           description: 'Enable Cache Query String Param. Option: 1(on) / 0(off)'
@@ -3472,9 +3757,10 @@ components:
           description: Setting id
         max_age:
           type: integer
-          description: 'Set default browser expiration time for cached assets that
-            don''t already have an expiration time set on the origin. valid values
-            from: -1 to 31536000. Default: 25200 secs'
+          description: >-
+            Set default browser expiration time for cached assets that don't
+            already have an expiration time set on the origin. valid values
+            from: -1 to 31536000. Default: 25200 secs
           example: 2592000
         path:
           type: string
@@ -3484,12 +3770,13 @@ components:
           description: Site's status. (ACTIVE|DISABLED|PROCESSING)
         ttl:
           type: integer
-          description: 'Define when and for how long content is stored on the CDN
-            cache before it expires and is replaced with new content from your origin.
-            valid values from: 0 to 31536000. Default: 25200 secs'
+          description: >-
+            Define when and for how long content is stored on the CDN cache
+            before it expires and is replaced with new content from your origin.
+            valid values from: 0 to 31536000. Default: 25200 secs
     URLSettingAddResult:
       required:
-      - error_code
+        - error_code
       type: object
       properties:
         error_code:
@@ -3501,26 +3788,33 @@ components:
         message:
           type: string
           description: Response's message
+    URLSettingDeleteForm:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Setting id
     URLSettingForm:
       type: object
       properties:
         cache_hit_number:
           type: integer
-          description: Number of requests will be cached. Values [0-100]
+          description: 'Number of requests will be cached. Values [0-100]'
           example: 1
         cors_domains:
           type: array
           description: List cors header domains.
           example:
-          - domain1.com
-          - domain2.com
+            - domain1.com
+            - domain2.com
           items:
             type: string
         enable_cache_cdn:
           type: integer
-          description: 'Define when and for how long content is stored on the CDN
-            cache before it expires and is replaced with new content from your origin.
-            Option: 1(on) / 0(off)'
+          description: >-
+            Define when and for how long content is stored on the CDN cache
+            before it expires and is replaced with new content from your origin.
+            Option: 1(on) / 0(off)
           example: 0
         enable_cache_query:
           type: integer
@@ -3544,27 +3838,29 @@ components:
           example: 0
         max_age:
           type: integer
-          description: 'Set default browser expiration time for cached assets that
-            don''t already have an expiration time set on the origin. valid values
-            from: -1 to 31536000. Default: 25200 secs'
+          description: >-
+            Set default browser expiration time for cached assets that don't
+            already have an expiration time set on the origin. valid values
+            from: -1 to 31536000. Default: 25200 secs
           example: 2592000
         path:
           type: string
           description: URI path
-          example: "/path/static"
+          example: /path/static
         ttl:
           type: integer
-          description: 'Define when and for how long content is stored on the CDN
-            cache before it expires and is replaced with new content from your origin.
-            valid values from: 0 to 31536000. Default: 25200 secs'
+          description: >-
+            Define when and for how long content is stored on the CDN cache
+            before it expires and is replaced with new content from your origin.
+            valid values from: 0 to 31536000. Default: 25200 secs
           example: 2592000
     URLSettingResult:
       required:
-      - error_code
+        - error_code
       type: object
       properties:
         data:
-          "$ref": "#/components/schemas/URLSetting"
+          $ref: '#/components/schemas/URLSetting'
         error_code:
           type: integer
           description: Error code from server
@@ -3576,21 +3872,22 @@ components:
       properties:
         cache_hit_number:
           type: integer
-          description: Number of requests will be cached. Values [0-100]
+          description: 'Number of requests will be cached. Values [0-100]'
           example: 1
         cors_domains:
           type: array
           description: List cors header domains.
           example:
-          - domain1.com
-          - domain2.com
+            - domain1.com
+            - domain2.com
           items:
             type: string
         enable_cache_cdn:
           type: integer
-          description: 'Define when and for how long content is stored on the CDN
-            cache before it expires and is replaced with new content from your origin.
-            Option: 1(on) / 0(off)'
+          description: >-
+            Define when and for how long content is stored on the CDN cache
+            before it expires and is replaced with new content from your origin.
+            Option: 1(on) / 0(off)
           example: 0
         enable_cache_query:
           type: integer
@@ -3617,34 +3914,37 @@ components:
           description: Setting id
         max_age:
           type: integer
-          description: 'Set default browser expiration time for cached assets that
-            don''t already have an expiration time set on the origin. valid values
-            from: -1 to 31536000. Default: 25200 secs'
+          description: >-
+            Set default browser expiration time for cached assets that don't
+            already have an expiration time set on the origin. valid values
+            from: -1 to 31536000. Default: 25200 secs
           example: 2592000
         path:
           type: string
           description: URI path
-          example: "/path/static"
+          example: /path/static
         ttl:
           type: integer
-          description: 'Define when and for how long content is stored on the CDN
-            cache before it expires and is replaced with new content from your origin.
-            valid values from: 0 to 31536000. Default: 25200 secs'
+          description: >-
+            Define when and for how long content is stored on the CDN cache
+            before it expires and is replaced with new content from your origin.
+            valid values from: 0 to 31536000. Default: 25200 secs
           example: 2592000
     UserAgentProtection:
       type: object
       properties:
         useragent_protection_enable:
           type: integer
-          description: 'This option has been created to stop asset/media leakage by
-            blocking User-Agent that you not trust. Option: 1(on) / 0(off)'
+          description: >-
+            This option has been created to stop asset/media leakage by blocking
+            User-Agent that you not trust. Option: 1(on) / 0(off)
           example: 0
         useragent_protection_list:
           type: array
           description: 'List allowed useragent. Eg: Chrome, Mozilla/5.0 ..'
           example:
-          - Chrome
-          - Mozilla/5.0
+            - Chrome
+            - Mozilla/5.0
           items:
             type: string
     UserEmailForm:
@@ -3675,15 +3975,16 @@ components:
             id: 1
             name: Standard
           allOf:
-          - "$ref": "#/components/schemas/Package"
+            - $ref: '#/components/schemas/Package'
         verify:
           type: integer
-          description: 'Set verify user, if this option is enabled then you can using
-            service without submit ticket request.  Option: 1(on) / 0(off)'
+          description: >-
+            Set verify user, if this option is enabled then you can using
+            service without submit ticket request.  Option: 1(on) / 0(off)
           example: 0
     UserKeyResult:
       required:
-      - error_code
+        - error_code
       type: object
       properties:
         api_key:
@@ -3697,13 +3998,13 @@ components:
           description: Response's message
     UserResult:
       required:
-      - error_code
+        - error_code
       type: object
       properties:
         data:
           description: Data information
           allOf:
-          - "$ref": "#/components/schemas/UserInfo"
+            - $ref: '#/components/schemas/UserInfo'
         error_code:
           type: integer
           description: Error code from server
