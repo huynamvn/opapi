@@ -745,6 +745,78 @@ paths:
           $ref: '#/components/responses/500'
       security:
         - jwt: []
+  /api/v1.0/deposit/add:
+    post:
+      tags:
+        - DepositApi
+      summary: Deposit traffic for user
+      description: Deposit traffic for user
+      parameters:
+        - name: X-Auth-Key
+          in: header
+          description: The API Authentication Key
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DepositForm'
+        required: true
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DepositResult'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+      security:
+        - jwt: []
+  /api/v1.0/deposit/calculate:
+    post:
+      tags:
+        - DepositApi
+      summary: Calculate Deposit information
+      description: Calculate Deposit information
+      parameters:
+        - name: X-Auth-Key
+          in: header
+          description: The API Authentication Key
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CalculatedDepForm'
+        required: true
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CalculatedInfoResult'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+      security:
+        - jwt: []
   /api/v1.0/group/list:
     get:
       tags:
@@ -819,6 +891,74 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TrafficDataResult'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+      security:
+        - jwt: []
+  '/api/v1.0/package/info/{package_id}':
+    get:
+      tags:
+        - PackageApi
+      summary: Get Package's information
+      description: Get Package's information
+      parameters:
+        - name: X-Auth-Key
+          in: header
+          description: The API Authentication Key
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+        - name: package_id
+          in: path
+          description: ID of the Package.
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PackageInfoResult'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          $ref: '#/components/responses/500'
+      security:
+        - jwt: []
+  /api/v1.0/package/list:
+    get:
+      tags:
+        - PackageApi
+      summary: List Packages are available on CDN
+      description: List Packages are available on CDN
+      parameters:
+        - name: X-Auth-Key
+          in: header
+          description: The API Authentication Key
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PackageListInfoResult'
         '400':
           $ref: '#/components/responses/400'
         '401':
@@ -2489,6 +2629,30 @@ components:
         message:
           type: string
           description: Response's message
+    AddPackageForm:
+      required:
+        - default
+        - name
+        - on_demand
+        - type
+      type: object
+      properties:
+        default:
+          type: integer
+          description: Set default package when new user is created. 1(On)/0(Off)
+          example: 0
+        name:
+          type: string
+          description: Package's name
+          example: base64_string
+        on_demand:
+          type: integer
+          description: Package's name
+          example: 0
+        type:
+          type: string
+          description: 'Package''s type. Accept 2 options: POSTPAID/PREPAID'
+          example: base64_string
     CNAME:
       type: object
       properties:
@@ -2570,6 +2734,78 @@ components:
             Enable cached query by params. Option: 0 (off) / 1 (cache all query
             params) / 2 (cache by customized key)s
           example: 0
+    CalculateDepForm:
+      type: object
+      properties:
+        email:
+          type: string
+          description: User's email that you want to deposit.
+          format: email
+        expired_days:
+          type: integer
+          description: Number of days that these traffics expired.
+          example: 90
+        traffic:
+          type: integer
+          description: >-
+            Traffic that you want to deposit to user balance. Unit by GigaByte
+            (GB).
+          example: 0
+    CalculatedDesc:
+      type: object
+      properties:
+        charge:
+          type: integer
+          description: Total charged for this range.
+          example: 0
+        price:
+          type: integer
+          description: Price per GB
+          example: 0
+        traffic_lower_limit:
+          type: integer
+          description: >-
+            Set lower limit of traffic. Should start at 0 with the lowest
+            setting. (GB)
+          example: 0
+        traffic_upper_limit:
+          type: integer
+          description: Set upper limit of traffic. (GB)
+          example: 100
+    CalculatedInfo:
+      type: object
+      properties:
+        charge:
+          type: integer
+          description: Total charged for this range.
+          example: 0
+        desc:
+          type: array
+          items:
+            $ref: '#/components/schemas/CalculatedDesc'
+        expired_on:
+          type: string
+          description: The time that this deposit expired on.
+          example: '10-10-2025 10:10:10'
+        traffic:
+          type: integer
+          description: >-
+            Traffic that you want to deposit to user balance. Unit by GigaByte
+            (GB).
+          example: 90
+    CalculatedInfoResult:
+      required:
+        - error_code
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/CalculatedInfo'
+        error_code:
+          type: integer
+          description: Error code from server
+        message:
+          type: string
+          description: Response's message
     CertDeployment:
       type: object
       properties:
@@ -2653,6 +2889,40 @@ components:
         key:
           type: string
           example: value
+    DepositForm:
+      type: object
+      properties:
+        email:
+          type: string
+          description: User's email that you want to deposit.
+          format: email
+        expired_on:
+          type: string
+          description: The time that this deposit expired on.
+          example: '10-10-2025 10:10:10'
+        traffic:
+          type: integer
+          description: >-
+            Traffic that you want to deposit to user balance. Unit by GigaByte
+            (GB).
+          example: 0
+        type:
+          type: string
+          description: 'Price''s type. Accept 2 options: TRAFFIC/TRAFFIC-GLOBAL'
+          example: TRAFFIC
+    DepositResult:
+      required:
+        - error_code
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/UsageInfo'
+        error_code:
+          type: integer
+          description: Error code from server
+        message:
+          type: string
+          description: Response's message
     DomainForm:
       type: object
       properties:
@@ -2786,6 +3056,87 @@ components:
           type: string
           description: CDN Package name
           example: ''
+    PackageDetail:
+      type: object
+      properties:
+        default:
+          type: integer
+          description: Set default package when new user is created. 1(On)/0(Off)
+          example: 0
+        id:
+          type: string
+          description: ID of Package
+          example: id12345
+        on_demand:
+          type: integer
+          description: Package's name
+          example: 0
+        prices_info:
+          type: array
+          description: ''
+          items:
+            $ref: '#/components/schemas/PriceInfo'
+        type:
+          type: string
+          description: 'Package''s type. Accept 2 options: POSTPAID/PREPAID'
+          example: PREPAID
+    PackageInfoResult:
+      required:
+        - error_code
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/PackageDetail'
+        error_code:
+          type: integer
+          description: Error code from server
+        message:
+          type: string
+          description: Response's message
+    PackageListInfoResult:
+      required:
+        - error_code
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/PackageDetail'
+        error_code:
+          type: integer
+          description: Error code from server
+        message:
+          type: string
+          description: Response's message
+    PriceInfo:
+      type: object
+      properties:
+        items:
+          type: array
+          description: ''
+          items:
+            $ref: '#/components/schemas/PriceItem'
+        type:
+          type: string
+          description: 'Package''s type. Accept 2 options: POSTPAID/PREPAID'
+          example: TRAFFIC
+    PriceItem:
+      type: object
+      properties:
+        price:
+          type: integer
+          description: Set price per GB
+          example: 0
+        traffic_lower_limit:
+          type: integer
+          description: >-
+            Set lower limit of traffic. Should start at 0 with the lowest
+            setting.
+          example: 0
+        traffic_upper_limit:
+          type: integer
+          description: Set upper limit of traffic.
+          example: 100
     RateLimiting:
       type: object
       properties:
@@ -3665,20 +4016,47 @@ components:
           type: string
           description: 'Site origin protocol. Value: 0 (HTTP) | 1(HTTPS)'
           example: '1'
+    TrafficData:
+      type: object
+      properties:
+        detail:
+          type: array
+          description: Detail of site traffic.
+          items:
+            $ref: '#/components/schemas/TrafficDetail'
+        id:
+          type: string
+          description: ID of site.
+          example: id12345
     TrafficDataResult:
       required:
         - error_code
       type: object
       properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/TrafficData'
         error_code:
           type: integer
           description: Error code from server
         message:
           type: string
           description: Response's message
+        total_traffic:
+          type: integer
+          description: Total Bytes transfer over CDN by sites.
+    TrafficDetail:
+      type: object
+      properties:
+        domain:
+          type: string
+          description: Site domain/CNAME domain.
+          example: cname.cdn.com
         traffic:
           type: integer
           description: Total Bytes transfer over CDN by sites.
+          example: 0
     TrafficRequest:
       type: object
       properties:
@@ -3930,6 +4308,25 @@ components:
             before it expires and is replaced with new content from your origin.
             valid values from: 0 to 31536000. Default: 25200 secs
           example: 2592000
+    UsageInfo:
+      type: object
+      properties:
+        expired_on:
+          type: string
+          description: 'User''s usage expired time. Format: DD-MM-YYYY HH:mm:ss'
+          example: '10-10-2025 10:10:10'
+        total_traffic:
+          type: integer
+          description: User's usage total traffic in GB unit
+          example: 90
+        used_traffic:
+          type: integer
+          description: User's usage total used traffic in GB unit
+          example: 90
+        used_traffic_in_byte:
+          type: integer
+          description: User's usage total used traffic in Byte unit
+          example: 90
     UserAgentProtection:
       type: object
       properties:
