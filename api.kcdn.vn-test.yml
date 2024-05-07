@@ -37,9 +37,9 @@ paths:
       - name: "X-Auth-Key"
         in: "header"
         description: "The API Authentication Key"
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       requestBody: 
@@ -72,7 +72,7 @@ paths:
                   - "10002"
                   items: 
                     type: "string"
-        required: "true"
+        required: true
       responses: 
         200: 
           description: "Purge Successful"
@@ -85,7 +85,7 @@ paths:
                 properties: 
                   data: 
                     type: "object"
-                    additionalProperties: "true"
+                    additionalProperties: true
                   error_code: 
                     type: "integer"
                   message: 
@@ -98,7 +98,7 @@ paths:
           $ref: "#/components/responses/500"
       security: 
       -
-        jwt: 
+        jwt: [] 
   /api/v1.0/caching/prefetch/{site_id}: 
     post: 
       tags: 
@@ -109,17 +109,17 @@ paths:
       - name: "X-Auth-Key"
         in: "header"
         description: "The API Authentication Key"
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       - name: "site_id"
         in: "path"
         description: "ID of the Site"
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       requestBody: 
@@ -143,7 +143,7 @@ paths:
                   - "https://167051323.e.cdneverest.net/storage20/hh247/images/1535173995o-long-vien-2019.jpg"
                   items: 
                     type: "string"
-        required: "true"
+        required: true
       responses: 
         200: 
           description: "Prefetch Successful"
@@ -164,7 +164,7 @@ paths:
           $ref: "#/components/responses/500"
       security: 
       -
-        jwt: 
+        jwt: [] 
   /api/v1.0/caching/purge/{site_id}: 
     post: 
       tags: 
@@ -175,17 +175,17 @@ paths:
       - name: "X-Auth-Key"
         in: "header"
         description: "The API Authentication Key"
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       - name: "site_id"
         in: "path"
         description: "ID of the Site"
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       requestBody: 
@@ -204,13 +204,13 @@ paths:
                   example: "0"
                 list_files: 
                   type: "array"
-                  description: "List files that you want to remove from CDN. If you want to purge all, you should input this value ["*"]"
+                  description: "List files that you want to remove from CDN. If you want to purge all, you should input this value []"
                   example: 
                   - "https://167051323.e.cdneverest.net/storage20/hh247/images/1535173995o-long-vien-2018.jpg"
                   - "https://167051323.e.cdneverest.net/storage20/hh247/images/1535173995o-long-vien-2019.jpg"
                   items: 
                     type: "string"
-        required: "true"
+        required: true
       responses: 
         200: 
           description: "Purge Successful"
@@ -231,7 +231,7 @@ paths:
           $ref: "#/components/responses/500"
       security: 
       -
-        jwt: 
+        jwt: [] 
   /api/v1.0/caching/verify-result/{site_id}: 
     post: 
       tags: 
@@ -242,17 +242,17 @@ paths:
       - name: "X-Auth-Key"
         in: "header"
         description: "The API Authentication Key"
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       - name: "site_id"
         in: "path"
         description: "ID of the Site"
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       requestBody: 
@@ -269,7 +269,7 @@ paths:
                   type: "string"
                   description: "Group ID that you want to get data from."
                   example: "1"
-        required: "true"
+        required: true
       responses: 
         200: 
           description: "Get Verification Result Successful"
@@ -290,7 +290,7 @@ paths:
           $ref: "#/components/responses/500"
       security: 
       -
-        jwt: 
+        jwt: [] 
   /api/v1.0/caching/verify/{site_id}: 
     post: 
       tags: 
@@ -301,17 +301,17 @@ paths:
       - name: "X-Auth-Key"
         in: "header"
         description: "The API Authentication Key"
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       - name: "site_id"
         in: "path"
         description: "ID of the Site"
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       requestBody: 
@@ -331,7 +331,7 @@ paths:
                   - "https://167051323.e.cdneverest.net/storage20/hh247/images/1535173995o-long-vien-2019.jpg"
                   items: 
                     type: "string"
-        required: "true"
+        required: true
       responses: 
         200: 
           description: "Verify Successful"
@@ -352,7 +352,7 @@ paths:
           $ref: "#/components/responses/500"
       security: 
       -
-        jwt: 
+        jwt: [] 
   /api/v1.0/cname/add/{group_id}/{site_id}: 
     post: 
       tags: 
@@ -363,25 +363,25 @@ paths:
       - name: "X-Auth-Key"
         in: "header"
         description: "The API Authentication Key"
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       - name: "group_id"
         in: "path"
         description: "ID of project, you can find it on our dashboard"
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       - name: "site_id"
         in: "path"
         description: "ID of the Site."
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       requestBody: 
@@ -394,7 +394,7 @@ paths:
                   type: "string"
                   description: "CNAME domain."
                   example: "cdn.sport.com"
-        required: "true"
+        required: true
       responses: 
         200: 
           description: "Successful"
@@ -410,7 +410,7 @@ paths:
           $ref: "#/components/responses/500"
       security: 
       -
-        jwt: 
+        jwt: [] 
   /api/v1.0/cname/delete/{group_id}/{site_id}: 
     post: 
       tags: 
@@ -421,25 +421,25 @@ paths:
       - name: "X-Auth-Key"
         in: "header"
         description: "The API Authentication Key"
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       - name: "group_id"
         in: "path"
         description: "ID of project, you can find it on our dashboard"
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       - name: "site_id"
         in: "path"
         description: "ID of the Site."
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       requestBody: 
@@ -447,7 +447,7 @@ paths:
           application/json: 
             schema: 
               $ref: "#/components/schemas/DomainForm"
-        required: "true"
+        required: true
       responses: 
         200: 
           description: "Successful"
@@ -463,7 +463,7 @@ paths:
           $ref: "#/components/responses/500"
       security: 
       -
-        jwt: 
+        jwt: [] 
   /api/v1.0/cname/info/{group_id}/{site_id}: 
     post: 
       tags: 
@@ -474,25 +474,25 @@ paths:
       - name: "X-Auth-Key"
         in: "header"
         description: "The API Authentication Key"
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       - name: "group_id"
         in: "path"
         description: "ID of project, you can find it on our dashboard"
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       - name: "site_id"
         in: "path"
         description: "ID of the Site."
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       requestBody: 
@@ -500,7 +500,7 @@ paths:
           application/json: 
             schema: 
               $ref: "#/components/schemas/DomainForm"
-        required: "true"
+        required: true
       responses: 
         200: 
           description: "Successful"
@@ -516,7 +516,7 @@ paths:
           $ref: "#/components/responses/500"
       security: 
       -
-        jwt: 
+        jwt: [] 
   /api/v1.0/cname/list-in-project/{group_id}: 
     get: 
       tags: 
@@ -527,33 +527,33 @@ paths:
       - name: "X-Auth-Key"
         in: "header"
         description: "The API Authentication Key"
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       - name: "group_id"
         in: "path"
         description: "ID of project, you can find it on our dashboard"
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       - name: "offset"
         in: "query"
         description: "Pagination - offset"
-        required: "false"
+        required: false
         style: "form"
-        explode: "true"
+        explode: true
         schema: 
           type: "integer"
       - name: "limit"
         in: "query"
         description: "Pagination - number of response records limitation"
-        required: "false"
+        required: false
         style: "form"
-        explode: "true"
+        explode: true
         schema: 
           type: "integer"
       responses: 
@@ -571,7 +571,7 @@ paths:
           $ref: "#/components/responses/500"
       security: 
       -
-        jwt: 
+        jwt: [] 
   /api/v1.0/cname/list/{group_id}/{site_id}: 
     get: 
       tags: 
@@ -582,25 +582,25 @@ paths:
       - name: "X-Auth-Key"
         in: "header"
         description: "The API Authentication Key"
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       - name: "group_id"
         in: "path"
         description: "ID of project, you can find it on our dashboard"
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       - name: "site_id"
         in: "path"
         description: "ID of the Site."
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       responses: 
@@ -618,7 +618,7 @@ paths:
           $ref: "#/components/responses/500"
       security: 
       -
-        jwt: 
+        jwt: [] 
   /api/v1.0/cname/remove-ssl/{group_id}/{site_id}: 
     post: 
       tags: 
@@ -629,25 +629,25 @@ paths:
       - name: "X-Auth-Key"
         in: "header"
         description: "The API Authentication Key"
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       - name: "group_id"
         in: "path"
         description: "ID of project, you can find it on our dashboard"
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       - name: "site_id"
         in: "path"
         description: "ID of the Site."
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       requestBody: 
@@ -655,7 +655,7 @@ paths:
           application/json: 
             schema: 
               $ref: "#/components/schemas/DomainForm"
-        required: "true"
+        required: true
       responses: 
         200: 
           description: "Successful"
@@ -676,7 +676,7 @@ paths:
           $ref: "#/components/responses/500"
       security: 
       -
-        jwt: 
+        jwt: [] 
   /api/v1.0/cname/verify/{group_id}/{site_id}: 
     post: 
       tags: 
@@ -687,25 +687,25 @@ paths:
       - name: "X-Auth-Key"
         in: "header"
         description: "The API Authentication Key"
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       - name: "group_id"
         in: "path"
         description: "ID of project, you can find it on our dashboard"
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       - name: "site_id"
         in: "path"
         description: "ID of the Site."
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       requestBody: 
@@ -713,7 +713,7 @@ paths:
           application/json: 
             schema: 
               $ref: "#/components/schemas/DomainForm"
-        required: "true"
+        required: true
       responses: 
         200: 
           description: "Successful"
@@ -729,7 +729,7 @@ paths:
           $ref: "#/components/responses/500"
       security: 
       -
-        jwt: 
+        jwt: [] 
   /api/v1.0/deposit/add: 
     post: 
       tags: 
@@ -740,9 +740,9 @@ paths:
       - name: "X-Auth-Key"
         in: "header"
         description: "The API Authentication Key"
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       requestBody: 
@@ -750,7 +750,7 @@ paths:
           application/json: 
             schema: 
               $ref: "#/components/schemas/DepositForm"
-        required: "true"
+        required: true
       responses: 
         200: 
           description: "Successful"
@@ -766,7 +766,7 @@ paths:
           $ref: "#/components/responses/500"
       security: 
       -
-        jwt: 
+        jwt: [] 
   /api/v1.0/deposit/calculate: 
     post: 
       tags: 
@@ -777,9 +777,9 @@ paths:
       - name: "X-Auth-Key"
         in: "header"
         description: "The API Authentication Key"
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       requestBody: 
@@ -787,7 +787,7 @@ paths:
           application/json: 
             schema: 
               $ref: "#/components/schemas/CalculateDepForm"
-        required: "true"
+        required: true
       responses: 
         200: 
           description: "Successful"
@@ -803,7 +803,7 @@ paths:
           $ref: "#/components/responses/500"
       security: 
       -
-        jwt: 
+        jwt: [] 
   /api/v1.0/group/list: 
     get: 
       tags: 
@@ -814,25 +814,25 @@ paths:
       - name: "X-Auth-Key"
         in: "header"
         description: "The API Authentication Key"
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       - name: "offset"
         in: "query"
         description: "Pagination - offset"
-        required: "false"
+        required: false
         style: "form"
-        explode: "true"
+        explode: true
         schema: 
           type: "integer"
       - name: "limit"
         in: "query"
         description: "Pagination - number of response records limitation"
-        required: "false"
+        required: false
         style: "form"
-        explode: "true"
+        explode: true
         schema: 
           type: "integer"
       responses: 
@@ -850,7 +850,7 @@ paths:
           $ref: "#/components/responses/500"
       security: 
       -
-        jwt: 
+        jwt: [] 
   /api/v1.0/metric/get-traffic: 
     post: 
       tags: 
@@ -861,9 +861,9 @@ paths:
       - name: "X-Auth-Key"
         in: "header"
         description: "The API Authentication Key"
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       requestBody: 
@@ -871,7 +871,7 @@ paths:
           application/json: 
             schema: 
               $ref: "#/components/schemas/TrafficRequest"
-        required: "true"
+        required: true
       responses: 
         200: 
           description: "Successful"
@@ -887,7 +887,7 @@ paths:
           $ref: "#/components/responses/500"
       security: 
       -
-        jwt: 
+        jwt: [] 
   /api/v1.0/package/info/{package_id}: 
     get: 
       tags: 
@@ -898,17 +898,17 @@ paths:
       - name: "X-Auth-Key"
         in: "header"
         description: "The API Authentication Key"
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       - name: "package_id"
         in: "path"
         description: "ID of the Package."
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       responses: 
@@ -926,7 +926,7 @@ paths:
           $ref: "#/components/responses/500"
       security: 
       -
-        jwt: 
+        jwt: [] 
   /api/v1.0/package/list: 
     get: 
       tags: 
@@ -937,9 +937,9 @@ paths:
       - name: "X-Auth-Key"
         in: "header"
         description: "The API Authentication Key"
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       responses: 
@@ -957,7 +957,7 @@ paths:
           $ref: "#/components/responses/500"
       security: 
       -
-        jwt: 
+        jwt: [] 
   /api/v1.0/site-setting/edge-setting/{group_id}/{site_id}: 
     post: 
       tags: 
@@ -968,25 +968,25 @@ paths:
       - name: "X-Auth-Key"
         in: "header"
         description: "The API Authentication Key"
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       - name: "group_id"
         in: "path"
         description: "ID of project, you can find it on our dashboard"
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       - name: "site_id"
         in: "path"
         description: "ID of the Site."
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       requestBody: 
@@ -994,7 +994,7 @@ paths:
           application/json: 
             schema: 
               $ref: "#/components/schemas/SiteEdgeSettingForm"
-        required: "true"
+        required: true
       responses: 
         200: 
           description: "Successful"
@@ -1010,7 +1010,7 @@ paths:
           $ref: "#/components/responses/500"
       security: 
       -
-        jwt: 
+        jwt: [] 
   /api/v1.0/site-setting/firewall-setting/{group_id}/{site_id}: 
     post: 
       tags: 
@@ -1021,25 +1021,25 @@ paths:
       - name: "X-Auth-Key"
         in: "header"
         description: "The API Authentication Key"
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       - name: "group_id"
         in: "path"
         description: "ID of project, you can find it on our dashboard"
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       - name: "site_id"
         in: "path"
         description: "ID of the Site."
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       requestBody: 
@@ -1047,7 +1047,7 @@ paths:
           application/json: 
             schema: 
               $ref: "#/components/schemas/SiteFirewallSetting"
-        required: "true"
+        required: true
       responses: 
         200: 
           description: "Successful"
@@ -1063,7 +1063,7 @@ paths:
           $ref: "#/components/responses/500"
       security: 
       -
-        jwt: 
+        jwt: [] 
   /api/v1.0/site-setting/update-cors: 
     post: 
       tags: 
@@ -1074,23 +1074,23 @@ paths:
       - name: "X-Auth-Key"
         in: "header"
         description: "The API Authentication Key"
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       - name: "group_id"
         in: "query"
         description: "Numeric ID of the project that site is belong to."
-        required: "true"
+        required: true
         style: "form"
-        explode: "true"
+        explode: true
       - name: "site_id"
         in: "query"
         description: "Numeric ID of the Site."
-        required: "true"
+        required: true
         style: "form"
-        explode: "true"
+        explode: true
       requestBody: 
         content: 
           application/json: 
@@ -1109,7 +1109,7 @@ paths:
                   type: "integer"
                   description: "Enable cors header. Option: 1(on) / 0(off). When CORS support is enabled, If you don't set any domains, default value in header is 'Access-Control-Allow-Origin: *'"
                   example: "1"
-        required: "true"
+        required: true
       responses: 
         200: 
           description: "Successful"
@@ -1125,7 +1125,7 @@ paths:
           $ref: "#/components/responses/500"
       security: 
       -
-        jwt: 
+        jwt: [] 
   /api/v1.0/site-setting/update-referer: 
     post: 
       tags: 
@@ -1136,23 +1136,23 @@ paths:
       - name: "X-Auth-Key"
         in: "header"
         description: "The API Authentication Key"
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       - name: "group_id"
         in: "query"
         description: "Numeric ID of the project that site is belong to."
-        required: "true"
+        required: true
         style: "form"
-        explode: "true"
+        explode: true
       - name: "site_id"
         in: "query"
         description: "Numeric ID of the Site."
-        required: "true"
+        required: true
         style: "form"
-        explode: "true"
+        explode: true
       requestBody: 
         content: 
           application/json: 
@@ -1183,7 +1183,7 @@ paths:
                   - "*.space.net"
                   items: 
                     type: "string"
-        required: "true"
+        required: true
       responses: 
         200: 
           description: "Successful"
@@ -1199,7 +1199,7 @@ paths:
           $ref: "#/components/responses/500"
       security: 
       -
-        jwt: 
+        jwt: [] 
   /api/v1.0/site-url-setting/add/{group_id}/{site_id}: 
     post: 
       tags: 
@@ -1210,25 +1210,25 @@ paths:
       - name: "X-Auth-Key"
         in: "header"
         description: "The API Authentication Key"
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       - name: "group_id"
         in: "path"
         description: "ID of project, you can find it on our dashboard"
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       - name: "site_id"
         in: "path"
         description: "ID of the Site."
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       requestBody: 
@@ -1236,7 +1236,7 @@ paths:
           application/json: 
             schema: 
               $ref: "#/components/schemas/URLSettingForm"
-        required: "true"
+        required: true
       responses: 
         200: 
           description: "Successful"
@@ -1252,7 +1252,7 @@ paths:
           $ref: "#/components/responses/500"
       security: 
       -
-        jwt: 
+        jwt: [] 
   /api/v1.0/site-url-setting/list/{group_id}/{site_id}: 
     get: 
       tags: 
@@ -1263,25 +1263,25 @@ paths:
       - name: "X-Auth-Key"
         in: "header"
         description: "The API Authentication Key"
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       - name: "group_id"
         in: "path"
         description: "ID of project, you can find it on our dashboard"
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       - name: "site_id"
         in: "path"
         description: "ID of the Site."
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       responses: 
@@ -1299,7 +1299,7 @@ paths:
           $ref: "#/components/responses/500"
       security: 
       -
-        jwt: 
+        jwt: [] 
   /api/v1.0/site-url-setting/remove/{group_id}/{site_id}: 
     post: 
       tags: 
@@ -1310,25 +1310,25 @@ paths:
       - name: "X-Auth-Key"
         in: "header"
         description: "The API Authentication Key"
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       - name: "group_id"
         in: "path"
         description: "ID of project, you can find it on our dashboard"
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       - name: "site_id"
         in: "path"
         description: "ID of the Site."
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       requestBody: 
@@ -1336,7 +1336,7 @@ paths:
           application/json: 
             schema: 
               $ref: "#/components/schemas/URLSettingDeleteForm"
-        required: "true"
+        required: true
       responses: 
         200: 
           description: "Successful"
@@ -1352,7 +1352,7 @@ paths:
           $ref: "#/components/responses/500"
       security: 
       -
-        jwt: 
+        jwt: [] 
   /api/v1.0/site-url-setting/update/{group_id}/{site_id}: 
     post: 
       tags: 
@@ -1363,25 +1363,25 @@ paths:
       - name: "X-Auth-Key"
         in: "header"
         description: "The API Authentication Key"
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       - name: "group_id"
         in: "path"
         description: "ID of project, you can find it on our dashboard"
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       - name: "site_id"
         in: "path"
         description: "ID of the Site."
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       requestBody: 
@@ -1389,7 +1389,7 @@ paths:
           application/json: 
             schema: 
               $ref: "#/components/schemas/URLSettingUpdateForm"
-        required: "true"
+        required: true
       responses: 
         200: 
           description: "Successful"
@@ -1405,7 +1405,7 @@ paths:
           $ref: "#/components/responses/500"
       security: 
       -
-        jwt: 
+        jwt: [] 
   /api/v1.0/site/create/{group_id}: 
     post: 
       tags: 
@@ -1416,17 +1416,17 @@ paths:
       - name: "X-Auth-Key"
         in: "header"
         description: "The API Authentication Key"
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       - name: "group_id"
         in: "path"
         description: "ID of project, you can find it on our dashboard"
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       requestBody: 
@@ -1434,7 +1434,7 @@ paths:
           application/json: 
             schema: 
               $ref: "#/components/schemas/SiteForm"
-        required: "true"
+        required: true
       responses: 
         200: 
           description: "Successful"
@@ -1450,7 +1450,7 @@ paths:
           $ref: "#/components/responses/500"
       security: 
       -
-        jwt: 
+        jwt: [] 
   /api/v1.0/site/delete/{group_id}/{site_id}: 
     delete: 
       tags: 
@@ -1461,25 +1461,25 @@ paths:
       - name: "X-Auth-Key"
         in: "header"
         description: "The API Authentication Key"
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       - name: "group_id"
         in: "path"
         description: "ID of project, you can find it on our dashboard"
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       - name: "site_id"
         in: "path"
         description: "ID of the Site."
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       responses: 
@@ -1504,7 +1504,7 @@ paths:
           $ref: "#/components/responses/500"
       security: 
       -
-        jwt: 
+        jwt: [] 
   /api/v1.0/site/disable-site/{group_id}/{site_id}: 
     put: 
       tags: 
@@ -1515,25 +1515,25 @@ paths:
       - name: "X-Auth-Key"
         in: "header"
         description: "The API Authentication Key"
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       - name: "group_id"
         in: "path"
         description: "ID of project, you can find it on our dashboard"
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       - name: "site_id"
         in: "path"
         description: "ID of the Site."
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       requestBody: 
@@ -1563,7 +1563,7 @@ paths:
           $ref: "#/components/responses/500"
       security: 
       -
-        jwt: 
+        jwt: [] 
   /api/v1.0/site/enable-site/{group_id}/{site_id}: 
     put: 
       tags: 
@@ -1574,25 +1574,25 @@ paths:
       - name: "X-Auth-Key"
         in: "header"
         description: "The API Authentication Key"
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       - name: "group_id"
         in: "path"
         description: "ID of project, you can find it on our dashboard"
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       - name: "site_id"
         in: "path"
         description: "ID of the Site."
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       requestBody: 
@@ -1622,7 +1622,7 @@ paths:
           $ref: "#/components/responses/500"
       security: 
       -
-        jwt: 
+        jwt: [] 
   /api/v1.0/site/info/{group_id}/{site_id}: 
     get: 
       tags: 
@@ -1633,25 +1633,25 @@ paths:
       - name: "X-Auth-Key"
         in: "header"
         description: "The API Authentication Key"
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       - name: "group_id"
         in: "path"
         description: "ID of project, you can find it on our dashboard"
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       - name: "site_id"
         in: "path"
         description: "ID of the Site."
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       responses: 
@@ -1669,7 +1669,7 @@ paths:
           $ref: "#/components/responses/500"
       security: 
       -
-        jwt: 
+        jwt: [] 
   /api/v1.0/site/list/{group_id}: 
     get: 
       tags: 
@@ -1680,17 +1680,17 @@ paths:
       - name: "X-Auth-Key"
         in: "header"
         description: "The API Authentication Key"
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       - name: "group_id"
         in: "path"
         description: "ID of project, you can find it on our dashboard"
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       responses: 
@@ -1708,7 +1708,7 @@ paths:
           $ref: "#/components/responses/500"
       security: 
       -
-        jwt: 
+        jwt: [] 
   /api/v1.0/site/site-setup/{group_id}/{site_id}: 
     post: 
       tags: 
@@ -1719,25 +1719,25 @@ paths:
       - name: "X-Auth-Key"
         in: "header"
         description: "The API Authentication Key"
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       - name: "group_id"
         in: "path"
         description: "ID of project, you can find it on our dashboard"
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       - name: "site_id"
         in: "path"
         description: "Numeric ID of the Site."
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       requestBody: 
@@ -1745,7 +1745,7 @@ paths:
           application/json: 
             schema: 
               $ref: "#/components/schemas/SiteSetupForm"
-        required: "true"
+        required: true
       responses: 
         200: 
           description: "Successful"
@@ -1761,7 +1761,7 @@ paths:
           $ref: "#/components/responses/500"
       security: 
       -
-        jwt: 
+        jwt: [] 
   /api/v1.0/ssl/add-cert/{group_id}: 
     post: 
       tags: 
@@ -1772,17 +1772,17 @@ paths:
       - name: "X-Auth-Key"
         in: "header"
         description: "The API Authentication Key"
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       - name: "group_id"
         in: "path"
         description: "ID of project, you can find it on our dashboard"
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       requestBody: 
@@ -1790,7 +1790,7 @@ paths:
           application/json: 
             schema: 
               $ref: "#/components/schemas/AddCertForm"
-        required: "true"
+        required: true
       responses: 
         200: 
           description: "Successful"
@@ -1806,7 +1806,7 @@ paths:
           $ref: "#/components/responses/500"
       security: 
       -
-        jwt: 
+        jwt: [] 
   /api/v1.0/ssl/deploy/{group_id}: 
     post: 
       tags: 
@@ -1817,17 +1817,17 @@ paths:
       - name: "X-Auth-Key"
         in: "header"
         description: "The API Authentication Key"
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       - name: "group_id"
         in: "path"
         description: "ID of project, you can find it on our dashboard"
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       requestBody: 
@@ -1835,7 +1835,7 @@ paths:
           application/json: 
             schema: 
               $ref: "#/components/schemas/CertDeployment"
-        required: "true"
+        required: true
       responses: 
         200: 
           description: "Successful"
@@ -1856,7 +1856,7 @@ paths:
           $ref: "#/components/responses/500"
       security: 
       -
-        jwt: 
+        jwt: [] 
   /api/v1.0/ssl/generate-free-cert/{group_id}: 
     post: 
       tags: 
@@ -1867,17 +1867,17 @@ paths:
       - name: "X-Auth-Key"
         in: "header"
         description: "The API Authentication Key"
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       - name: "group_id"
         in: "path"
         description: "ID of project, you can find it on our dashboard"
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       requestBody: 
@@ -1885,7 +1885,7 @@ paths:
           application/json: 
             schema: 
               $ref: "#/components/schemas/GenerateCertForm"
-        required: "true"
+        required: true
       responses: 
         200: 
           description: "Successful"
@@ -1901,7 +1901,7 @@ paths:
           $ref: "#/components/responses/500"
       security: 
       -
-        jwt: 
+        jwt: [] 
   /api/v1.0/ssl/get-cert-info/{group_id}: 
     post: 
       tags: 
@@ -1912,17 +1912,17 @@ paths:
       - name: "X-Auth-Key"
         in: "header"
         description: "The API Authentication Key"
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       - name: "group_id"
         in: "path"
         description: "ID of project, you can find it on our dashboard"
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       requestBody: 
@@ -1930,7 +1930,7 @@ paths:
           application/json: 
             schema: 
               $ref: "#/components/schemas/RequestCertForm"
-        required: "true"
+        required: true
       responses: 
         200: 
           description: "Successful"
@@ -1946,7 +1946,7 @@ paths:
           $ref: "#/components/responses/500"
       security: 
       -
-        jwt: 
+        jwt: [] 
   /api/v1.0/ssl/list/{group_id}: 
     get: 
       tags: 
@@ -1957,33 +1957,33 @@ paths:
       - name: "X-Auth-Key"
         in: "header"
         description: "The API Authentication Key"
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       - name: "group_id"
         in: "path"
         description: "ID of project, you can find it on api /group/list"
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       - name: "offset"
         in: "query"
         description: "Pagination - offset"
-        required: "false"
+        required: false
         style: "form"
-        explode: "true"
+        explode: true
         schema: 
           type: "integer"
       - name: "limit"
         in: "query"
         description: "Pagination - number of response records limitation"
-        required: "false"
+        required: false
         style: "form"
-        explode: "true"
+        explode: true
         schema: 
           type: "integer"
       responses: 
@@ -2001,7 +2001,7 @@ paths:
           $ref: "#/components/responses/500"
       security: 
       -
-        jwt: 
+        jwt: [] 
   /api/v1.0/ssl/remove-cert/{group_id}: 
     post: 
       tags: 
@@ -2012,17 +2012,17 @@ paths:
       - name: "X-Auth-Key"
         in: "header"
         description: "The API Authentication Key"
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       - name: "group_id"
         in: "path"
         description: "ID of project, you can find it on our dashboard"
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       requestBody: 
@@ -2030,7 +2030,7 @@ paths:
           application/json: 
             schema: 
               $ref: "#/components/schemas/RequestCertForm"
-        required: "true"
+        required: true
       responses: 
         200: 
           description: "Successful"
@@ -2046,7 +2046,7 @@ paths:
           $ref: "#/components/responses/500"
       security: 
       -
-        jwt: 
+        jwt: [] 
   /api/v1.0/statistic/get-data: 
     post: 
       tags: 
@@ -2057,9 +2057,9 @@ paths:
       - name: "X-Auth-Key"
         in: "header"
         description: "The API Authentication Key"
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       requestBody: 
@@ -2084,7 +2084,7 @@ paths:
                   - "204fgfg5e1ddB5cbe808dfVVgY45Z"
                   items: 
                     type: "string"
-        required: "true"
+        required: true
       responses: 
         200: 
           description: "Purge Successful"
@@ -2109,7 +2109,7 @@ paths:
           $ref: "#/components/responses/500"
       security: 
       -
-        jwt: 
+        jwt: [] 
   /api/v1.0/statistic/get-file-type-data: 
     post: 
       tags: 
@@ -2120,9 +2120,9 @@ paths:
       - name: "X-Auth-Key"
         in: "header"
         description: "The API Authentication Key"
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       requestBody: 
@@ -2155,7 +2155,7 @@ paths:
                   - "204fgfg5e1ddB5cbe808dfVVgY45Z"
                   items: 
                     type: "string"
-        required: "true"
+        required: true
       responses: 
         200: 
           description: "Purge Successful"
@@ -2180,7 +2180,7 @@ paths:
           $ref: "#/components/responses/500"
       security: 
       -
-        jwt: 
+        jwt: [] 
   /api/v1.0/statistic/get-referer-data: 
     post: 
       tags: 
@@ -2191,25 +2191,25 @@ paths:
       - name: "X-Auth-Key"
         in: "header"
         description: "The API Authentication Key"
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       - name: "offset"
         in: "query"
         description: "Pagination - offset"
-        required: "false"
+        required: false
         style: "form"
-        explode: "true"
+        explode: true
         schema: 
           type: "integer"
       - name: "limit"
         in: "query"
         description: "Pagination - number of response records limitation"
-        required: "false"
+        required: false
         style: "form"
-        explode: "true"
+        explode: true
         schema: 
           type: "integer"
       requestBody: 
@@ -2234,7 +2234,7 @@ paths:
                   - "204fgfg5e1ddB5cbe808dfVVgY45Z"
                   items: 
                     type: "string"
-        required: "true"
+        required: true
       responses: 
         200: 
           description: "Purge Successful"
@@ -2259,7 +2259,7 @@ paths:
           $ref: "#/components/responses/500"
       security: 
       -
-        jwt: 
+        jwt: [] 
   /api/v1.0/statistic/get-uri-data: 
     post: 
       tags: 
@@ -2270,9 +2270,9 @@ paths:
       - name: "X-Auth-Key"
         in: "header"
         description: "The API Authentication Key"
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       requestBody: 
@@ -2297,7 +2297,7 @@ paths:
                   - "https://s3.evgcdn.net"
                   items: 
                     type: "string"
-        required: "true"
+        required: true
       responses: 
         200: 
           description: "Purge Successful"
@@ -2322,7 +2322,7 @@ paths:
           $ref: "#/components/responses/500"
       security: 
       -
-        jwt: 
+        jwt: [] 
   /api/v1.0/user/active: 
     put: 
       tags: 
@@ -2333,9 +2333,9 @@ paths:
       - name: "X-Auth-Key"
         in: "header"
         description: "The API Authentication Key"
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       requestBody: 
@@ -2343,7 +2343,7 @@ paths:
           application/json: 
             schema: 
               $ref: "#/components/schemas/UserEmailForm"
-        required: "true"
+        required: true
       responses: 
         200: 
           description: "Successful"
@@ -2364,7 +2364,7 @@ paths:
           $ref: "#/components/responses/500"
       security: 
       -
-        jwt: 
+        jwt: [] 
   /api/v1.0/user/change-user-password: 
     post: 
       tags: 
@@ -2375,9 +2375,9 @@ paths:
       - name: "X-Auth-Key"
         in: "header"
         description: "The API Authentication Key"
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       requestBody: 
@@ -2385,7 +2385,7 @@ paths:
           application/json: 
             schema: 
               $ref: "#/components/schemas/ChangePasswordForm"
-        required: "true"
+        required: true
       responses: 
         200: 
           description: "Successful"
@@ -2406,7 +2406,7 @@ paths:
           $ref: "#/components/responses/500"
       security: 
       -
-        jwt: 
+        jwt: [] 
   /api/v1.0/user/create: 
     post: 
       tags: 
@@ -2417,9 +2417,9 @@ paths:
       - name: "X-Auth-Key"
         in: "header"
         description: "The API Authentication Key"
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       requestBody: 
@@ -2427,7 +2427,7 @@ paths:
           application/json: 
             schema: 
               $ref: "#/components/schemas/RegisterUserForm"
-        required: "true"
+        required: true
       responses: 
         200: 
           description: "Successful"
@@ -2443,7 +2443,7 @@ paths:
           $ref: "#/components/responses/500"
       security: 
       -
-        jwt: 
+        jwt: [] 
   /api/v1.0/user/disable: 
     post: 
       tags: 
@@ -2454,9 +2454,9 @@ paths:
       - name: "X-Auth-Key"
         in: "header"
         description: "The API Authentication Key"
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       requestBody: 
@@ -2464,7 +2464,7 @@ paths:
           application/json: 
             schema: 
               $ref: "#/components/schemas/UserEmailForm"
-        required: "true"
+        required: true
       responses: 
         200: 
           description: "Successful"
@@ -2485,7 +2485,7 @@ paths:
           $ref: "#/components/responses/500"
       security: 
       -
-        jwt: 
+        jwt: [] 
   /api/v1.0/user/list: 
     get: 
       tags: 
@@ -2496,9 +2496,9 @@ paths:
       - name: "X-Auth-Key"
         in: "header"
         description: "The API Authentication Key"
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       responses: 
@@ -2516,7 +2516,7 @@ paths:
           $ref: "#/components/responses/500"
       security: 
       -
-        jwt: 
+        jwt: [] 
   /api/v1.0/user/user-api-key: 
     post: 
       tags: 
@@ -2527,9 +2527,9 @@ paths:
       - name: "X-Auth-Key"
         in: "header"
         description: "The API Authentication Key"
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       requestBody: 
@@ -2537,7 +2537,7 @@ paths:
           application/json: 
             schema: 
               $ref: "#/components/schemas/UserEmailForm"
-        required: "true"
+        required: true
       responses: 
         200: 
           description: "Successful"
@@ -2553,7 +2553,7 @@ paths:
           $ref: "#/components/responses/500"
       security: 
       -
-        jwt: 
+        jwt: [] 
   /api/v1.0/user/user-info: 
     post: 
       tags: 
@@ -2564,9 +2564,9 @@ paths:
       - name: "X-Auth-Key"
         in: "header"
         description: "The API Authentication Key"
-        required: "true"
+        required: true
         style: "simple"
-        explode: "false"
+        explode: false
         schema: 
           type: "string"
       requestBody: 
@@ -2574,7 +2574,7 @@ paths:
           application/json: 
             schema: 
               $ref: "#/components/schemas/UserEmailForm"
-        required: "true"
+        required: true
       responses: 
         200: 
           description: "Successful"
@@ -2590,7 +2590,7 @@ paths:
           $ref: "#/components/responses/500"
       security: 
       -
-        jwt: 
+        jwt: [] 
 components: 
   schemas: 
     AddCertForm: 
